@@ -1,18 +1,38 @@
 body{
     background-image: url(recursos/background.jpg);
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-left: 10%;
+    margin-right: 10%;
+
+}
+header{
+    display: inline-block;
+    justify-content: space-around;
 }
 header img{
     width: 100%;
 }
-nav img{
+nav{
+    background-color: gray;
     width: 100%;
 }
+td{
+    padding: 10px;
+    color: white;
+}
 main{
-    margin-left: 10%;
-    margin-right: 10%;
-    left: 10%;
     background-color: white;
+}
+#main {
+    width: 60%;
+}
+#s1 {
+    float: left; /* Hacer que la imagen flote a la izquierda del texto */
+    max-width: 50%; /* Establecer un ancho máximo para la imagen */
+}
+#s1 img{
+    display: block;
+    margin: 10%;
 }
 footer img{
     width: 100%;
