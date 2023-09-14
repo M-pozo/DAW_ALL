@@ -1,0 +1,19 @@
+body{
+    background-image: url(recursos/background.jpg);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+header img{
+    width: 100%;
+}
+nav img{
+    width: 100%;
+}
+main{
+    margin-left: 10%;
+    margin-right: 10%;
+    left: 10%;
+    background-color: white;
+}
+footer img{
+    width: 100%;
+}
