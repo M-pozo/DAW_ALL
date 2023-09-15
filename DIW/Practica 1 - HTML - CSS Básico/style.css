@@ -1,8 +1,8 @@
 body{
     background-image: url(recursos/background.jpg);
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 20%;
+    margin-right: 20%;
 }
 header{
     width: 100%;
@@ -36,7 +36,7 @@ section div {
     text-align: justify;
 }
 div img {
-    width: 60%;
+    width: 90%;
 }
 .s1 {
     display: flex;
