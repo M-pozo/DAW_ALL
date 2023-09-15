@@ -3,9 +3,9 @@ body{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     margin-left: 10%;
     margin-right: 10%;
-
 }
 header{
+    width: 100%;
     display: inline-block;
     justify-content: space-around;
 }
@@ -21,18 +21,33 @@ td{
     color: white;
 }
 main{
+    width: 100%;
     background-color: white;
 }
-#main {
+section div {
+    flex: 1;
+}
+.d1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.d2{
+    text-align: justify;
+}
+div img {
     width: 60%;
 }
-#s1 {
-    float: left; /* Hacer que la imagen flote a la izquierda del texto */
-    max-width: 50%; /* Establecer un ancho máximo para la imagen */
+.s1 {
+    display: flex;
+    padding-right: 5%;
+    padding-left: 15%;
+    padding-top: 15%;
+    padding-bottom: 5%;
 }
-#s1 img{
-    display: block;
-    margin: 10%;
+.s2{
+    padding-left: 15%;
+    padding-bottom: 30%;
 }
 footer img{
     width: 100%;
