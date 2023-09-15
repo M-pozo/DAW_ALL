@@ -6,7 +6,7 @@ body{
 }
 header{
     width: 100%;
-    display: inline-block;
+    display: grid;
     justify-content: space-around;
 }
 header img{
@@ -28,7 +28,6 @@ section div {
     flex: 1;
 }
 .d1 {
-    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -52,3 +51,4 @@ div img {
 footer img{
     width: 100%;
 }
+
