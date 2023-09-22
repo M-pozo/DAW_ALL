@@ -23,13 +23,27 @@
         </a>
 
         <ul class="nav nav-pills">
-            <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">INICIO</a></li>
+            <li class="nav-item">
+                <a href="#" 
+                    class="nav-link
+                        <?php echo ($_SERVER['SCRIPT_NAME']=="/index.php") ? "active" : "" ?>
+                    "
+                    aria-current="page">INICIO    
+                </a>
+            </li>
             <li class="nav-item">
                     <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true">
                         CATEGORÍAS
                         <span class="caret"></span>
                     </a>        
             </li>
-            <li class="nav-item"><a href="#" class="nav-link">CONTACTO</a></li>
+            <li class="nav-item">
+                <a href="#" 
+                    class="nav-link
+                        <?php echo ($_SERVER['SCRIPT_NAME']=="/contacto.php") ? "active" : "" ?>
+                    "
+                    >CONTACTO
+                </a>
+            </li>
         </ul>
     </header>
