@@ -7,9 +7,8 @@
 </head>
 <body>
     <?php 
-        echo "<h1>Miguel Pozo</h1>";
-        echo "<h1>2ºW DAW</h1>";
-        echo "<h1>PHP</h1>";
+        // Muestro por pantalla el contenido
+        echo "Miguel Pozo 2ºW DAW PHP";
     ?>
 </body>
 </html>
