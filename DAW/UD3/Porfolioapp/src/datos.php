@@ -4,7 +4,7 @@ $proyectos = [
         "clave" => "proyecto1",
         "titulo" => "b",
         "descripcion" => "Descripción proyecto 1",
-        "imagen" => "static/images/proyecto1.jpg"
+        "imagen" => ""
         ],
     [
         "clave" => "proyecto2",
