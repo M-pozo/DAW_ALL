@@ -1,4 +1,6 @@
 <?php include("templates/header.php"); ?>
+<?php include("datos.php"); ?>
+
 
 <div class="container">
     <h2 class="mb-5">Contacto</h2>
@@ -7,7 +9,8 @@
             <img src="static/images/businessman.png" class="img-fluid rounded">
         </div>
         <div class="col-md">
-            <h3>Nombre y apellidos</h3>
+            <!-- UD3.1.c -->
+            <h3><?php echo $nombre['nombre']?></h3>
             <p>Ciclo Superior DAW.</p>
             <p>Apasionado del mundo de la programación en general, y de las tecnologías web en
             particular.</p>

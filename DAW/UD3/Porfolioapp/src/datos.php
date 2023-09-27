@@ -28,4 +28,12 @@ $categoria = [
     "css" => "CSS",
     "python" => "Python"
 ];
-?>
+
+//UD3.1.c
+$nombre = [
+    "nombre" => "Miguel Pozo"
+];
+
+
+//UD3.1.e
+$loggedln = true;

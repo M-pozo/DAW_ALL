@@ -1,3 +1,4 @@
+<?php include("datos.php"); ?>
 <!--DOCTYPE html -->
 <html>
 <head>
@@ -24,18 +25,22 @@
 
         <ul class="nav nav-pills">
             <li class="nav-item">
+                <!-- UD3.2.a BEGIN-->
                 <a href="#" 
                     class="nav-link
                         <?php echo ($_SERVER['SCRIPT_NAME']=="/index.php") ? "active" : "" ?>
                     "
-                    aria-current="page">INICIO    
+                    aria-current="page" src="./index.php">INICIO    
                 </a>
+                <!-- UD3.2.a END-->
             </li>
             <li class="nav-item">
+                    <!-- UD3.2.b BEGIN-->
                     <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true">
                         CATEGORÍAS
                         <span class="caret"></span>
-                    </a>        
+                    </a>
+                    <!-- UD3.2.b END-->     
             </li>
             <li class="nav-item">
                 <a href="#" 
@@ -45,5 +50,10 @@
                     >CONTACTO
                 </a>
             </li>
+            <!-- UD3.2.e BEGIN -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link"><?php if($loggedln = true) echo "ADMINISTRACION" ;?></a>
+                </li>
+            <!-- UD3.2.e END -->
         </ul>
     </header>
