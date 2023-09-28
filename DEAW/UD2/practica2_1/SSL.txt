@@ -1,0 +1,11 @@
+ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/apache-selfsigned.key -out /etc/ssl/certs/apache-selfsigned.crt
+
+ sudo nano /etc/nginx/site-available/nombre-servidor
+https://www.swhosting.com/en/comunidad/manual/how-to-install-ssl-certificate-in-nginx
+
+redireccionamiento de puerto
+server {
+ listen 80;
+ server_name noviello.it www.noviello.it;
+ return 301 https://noviello.com$request_uri;
+ }
