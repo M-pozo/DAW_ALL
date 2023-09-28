@@ -26,24 +26,24 @@
         <ul class="nav nav-pills">
             <li class="nav-item">
                 <!-- UD3.2.a BEGIN-->
-                <a href="#" 
+                <a href="./index.php" 
                     class="nav-link
                         <?php echo ($_SERVER['SCRIPT_NAME']=="/index.php") ? "active" : "" ?>
                     "
-                    aria-current="page" src="./index.php">INICIO    
+                    aria-current="page">INICIO    
                 </a>
                 <!-- UD3.2.a END-->
             </li>
             <li class="nav-item">
                     <!-- UD3.2.b BEGIN-->
-                    <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true">
+                    <a class="nav-link dropdown-toggle"id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true">
                         CATEGORÍAS
                         <span class="caret"></span>
                     </a>
                     <!-- UD3.2.b END-->     
             </li>
             <li class="nav-item">
-                <a href="#" 
+                <a href="./contacto.php" 
                     class="nav-link
                         <?php echo ($_SERVER['SCRIPT_NAME']=="/contacto.php") ? "active" : "" ?>
                     "

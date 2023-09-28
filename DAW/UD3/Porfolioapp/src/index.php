@@ -1,13 +1,19 @@
 <?php include("templates/header.php"); ?>
 <?php include("datos.php"); ?>
 <?php include("utiles.php"); ?>
+<!--UD3.2.f BEGIN-->
+<a href="?sort=-1"><button href=""type="button" class="btn btn-outline-secondary">Descendente</button></a>
+<a href="?sort=1"><button href=""type="button" class="btn btn-outline-secondary">Ascendente</button></a>
 
 <?php
 $sort = $_GET['sort'];
 if(isset($_GET['sort']) && $_GET['sort'] == "-1"){
     usort($proyectos, 'ordenaTituloProyectoDesc');
+}else{
+    usort($proyectos, 'ordenaTituloProyectoAsc');
 };
 ?>
+<!--UD3.2.f END-->
 <div class="container mb-5">
     <div class="row">
         <?php foreach($proyectos as $proyecto): ?>
