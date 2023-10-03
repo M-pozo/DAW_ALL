@@ -1,22 +1,19 @@
 <?php include("templates/header.php"); ?>
 <?php include("datos.php"); ?>
-<?php include_once("utiles.php"); ?>
 
 
 
 <?php
-//UD3.2.f
-$sort = $_GET['sort'];
-if (isset($_GET['sort'])) {
-    if ($_GET['sort'] == "-1") {
-        usort($proyecto_filtrado, 'ordenaTituloProyectoDesc');
-    } else if ($_GET['sort'] == "1") {
-        usort($proyecto_filtrado, 'ordenaTituloProyectoAsc');
-    }
-}
 //UD3.3.f
 if (isset($_GET['categoria'])) {
     $proyecto_filtrado = array_filter($proyecto_filtrado, 'buscadorCategoria');
+};
+//UD3.2.f
+$sort = $_GET['sort'];
+if (isset($_GET['sort']) && $_GET['sort'] == "-1") {
+    usort($proyecto_filtrado, 'ordenaTituloProyectoDesc');
+} else {
+    usort($proyecto_filtrado, 'ordenaTituloProyectoAsc');
 };
 //UD3.3.h
 if (isset($_GET['delete']) == "true") {
@@ -24,9 +21,9 @@ if (isset($_GET['delete']) == "true") {
 };
 //UD3.5.c
 /*if (isset($_GET['sort_date']) && $_GET['sort_date'] == "-1") {
-    usort($proyectos, 'ordenaFechaProyectoDesc');
+    usort($proyecto_filtrado, 'ordenaFechaProyectoDesc');
 } else {
-    usort($proyectos, 'ordenaFechaProyectoAsc');
+    usort($proyecto_filtrado, 'ordenaFechaProyectoAsc');
 };*/
 ?>
 <div class="container mb-5">

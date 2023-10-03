@@ -4,7 +4,7 @@
         "titulo" : "Juego 2D",
         "descripcion" : "Juego web 2D de plataformas",
         "imagen" : "static/images/juego2d.png",
-        "fecha" : "29/12/2022",
+        "fecha" : "2020-11-14",
         "categorias" : ["php", "javascript"]
     },
     {
@@ -12,7 +12,7 @@
         "titulo" : "Ropa",
         "descripcion" : "Venta de ropa de segunda mano",
         "imagen" : "static/images/ropa.png",
-        "fecha" : "16/04/2020",
+        "fecha" : "2019-11-14",
         "categorias" : ["php", "javascript"] 
     }
 ]

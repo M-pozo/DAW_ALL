@@ -4,7 +4,7 @@
         "titulo" : "Porfolio",
         "descripcion" : "Mostrar todos mis proyectos",
         "imagen" : "",
-        "fecha" : "24/09/2022",
+        "fecha" : "2021-11-15",
         "categorias" : ["css", "javascript"]
     },
     {
@@ -12,7 +12,7 @@
         "titulo" : "Torneo",
         "descripcion" : "Utilizar la API de un juego para coguer los datos de los participantes",
         "imagen" : "static/images/torneo.png",
-        "fecha" : "14/02/2023",
+        "fecha" : "2022-11-14",
         "categorias" : ["php", "javascript"]
     },
     {
@@ -20,7 +20,7 @@
         "titulo" : "MyFilms",
         "descripcion" : "Almacenar y categorizar peliculas segun mis reseñas",
         "imagen" : "static/images/pelicula.png",
-        "fecha" : "12/11/2021",
+        "fecha" : "2023-11-14",
         "categorias" : ["php", "javascript"]
     }
 ]
