@@ -12,7 +12,7 @@ if (isset($_GET['sort']) && $_GET['sort'] == "-1") {
     usort($proyectos, 'ordenaTituloProyectoAsc');
 };
 //UD3.3.h
-if (isset($_GET['delete']) === true) {
+if (isset($_GET['delete']) && $_GET['delete'] == "true") {
     array_pop($categorias);
 };
 ?>
