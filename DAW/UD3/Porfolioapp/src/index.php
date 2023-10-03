@@ -6,7 +6,7 @@
 <?php
 //UD3.2.f
 $sort = $_GET['sort'];
-if (isset($_GET['sort']) == "-1") {
+if (isset($_GET['sort']) && $_GET['sort'] == "-1") {
     usort($proyecto_filtrado, 'ordenaTituloProyectoDesc');
 } else {
     usort($proyecto_filtrado, 'ordenaTituloProyectoAsc');
