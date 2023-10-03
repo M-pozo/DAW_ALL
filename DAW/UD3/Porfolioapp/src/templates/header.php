@@ -1,4 +1,5 @@
 <?php include("datos.php"); ?>
+<!--?php include("utiles.php"); ?-->
 <!--DOCTYPE html -->
 <html>
 <head>
@@ -26,24 +27,29 @@
 
         <ul class="nav nav-pills">
             <li class="nav-item">
-                <!-- UD3.2.a BEGIN-->
+                <!-- UD3.2.a-->
                 <a href="./index.php" 
                     class="nav-link
                         <?php echo ($_SERVER['SCRIPT_NAME']=="/index.php") ? "active" : "" ?>
                     "
                     aria-current="page">INICIO    
                 </a>
-                <!-- UD3.2.a END-->
             </li>
-            <li class="nav-item">
-                    <!-- UD3.2.b BEGIN-->
-                    <a class="nav-link dropdown-toggle"id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true">
-                        CATEGORÍAS
-                        <span class="caret"></span>
-                    </a>
-                    <!-- UD3.2.b END-->     
+            <!-- UD3.3.e BEGIN-->
+            <li class="nav-item" >
+                <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-bs-toggle="dropdown" ariahaspopup="true">
+                    CATEGORÍAS
+                <span class="caret"></span>
+                </a> 
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <?php foreach($categorias as $categoria) :
+                        echo '<a class="dropdown-item" href="//localhost/index.php?categoria="clavecategoria">'.$categoria.'</a>';
+                    endforeach; ?>
+                </div> 
             </li>
+            <!-- UD3.3.e END-->
             <li class="nav-item">
+                <!--UD3.2.b-->
                 <a href="./contacto.php" 
                     class="nav-link
                         <?php echo ($_SERVER['SCRIPT_NAME']=="/contacto.php") ? "active" : "" ?>
@@ -53,7 +59,7 @@
             </li>
             <!-- UD3.2.e BEGIN -->
                 <li class="nav-item">
-                    <a href="#" class="nav-link"><?php if($loggedln = true) echo "ADMINISTRACION" ;?></a>
+                    <a href="#" class="nav-link"><?php if($loggedln == true) echo "ADMINISTRACION" ;?></a>
                 </li>
             <!-- UD3.2.e END -->
         </ul>

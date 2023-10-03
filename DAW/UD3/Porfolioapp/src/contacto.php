@@ -9,7 +9,7 @@
             <img src="static/images/businessman.png" class="img-fluid rounded">
         </div>
         <div class="col-md">
-            <!-- UD3.1.c -->
+            <!-- UD3.2.c -->
             <h3><?php echo $nombre['nombre']?></h3>
             <p>Ciclo Superior DAW.</p>
             <p>Apasionado del mundo de la programación en general, y de las tecnologías web en

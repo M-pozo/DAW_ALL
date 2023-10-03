@@ -7,6 +7,6 @@
     }
     //UD3.5.a
     function anyoActual() {
-        return date('F');
+        echo date('Y');
     }
 ?>

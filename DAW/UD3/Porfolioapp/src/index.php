@@ -2,8 +2,14 @@
 <?php include("datos.php"); ?>
 <?php include("utiles.php"); ?>
 
-<!--UD3.2.f BEGIN -->
+
 <?php
+//UD3.3.h
+if (isset($_GET['delete']) && $_GET['delete'] == "true") {
+    array_pop($categorias);
+}
+//UD3.3.h END
+//UD3.2.f BEGIN
 $sort = $_GET['sort'];
 if (isset($_GET['sort']) && $_GET['sort'] == "-1") {
     usort($proyectos, 'ordenaTituloProyectoDesc');
@@ -21,20 +27,23 @@ if (isset($_GET['sort']) && $_GET['sort'] == "-1") {
         <?php foreach ($proyectos as $proyecto) : ?>
             <div class="col-sm-3">
                 <!-- UD3.3.d-->
-                <a href="localhost/proyecto?id=<?php echo $proyecto["clave"] ?>" class="m-5">
+                <!-- Poner // al principio para que se sobrescriba la url-->
+                <a href="//localhost:8080/proyecto.php?id=<?php echo $proyecto["clave"] ?>" class="m-5">
                     <div clss="card">
                         <!-- UD3.2.c -->
                         <img class="card-img-top" style="height: 10rem;" src="<?php echo $proyecto['imagen'] == '' ? 'static/images/default.png' : $proyecto['imagen'] ?>" alt="<?php echo $proyecto['titulo'] ?>">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $proyecto['titulo'] ?></h5>
-                            <p class="card-text"><?php echo $proyecto['descripcion'] ?></p>
-                            <!-- UD3.3.c-->
+                            <p class="card-text"><?php /* UD3.3.d*/ echo nl2br($proyecto['descripcion']); ?></p>
+                            <!-- UD3.3.c BEGIN-->
                             <p class="card-text">
-                                <?php foreach ($proyecto['categorias'] as $categoria) :
-                                    echo array_key_exists($categoria, $categorias) ? $categorias[$categoria] : "";
-                                endforeach; ?>
+                                <?php foreach ($proyecto['categorias'] as $categoria) : ?>
+                                    <button class="btn btn-outline-secondary">
+                                        <?php echo array_key_exists($categoria, $categorias) ? $categorias[$categoria] : ""; ?>
+                                    </button>
+                                <?php endforeach; ?>
+                                <!-- UD3.3.c END-->
                             </p>
-
                         </div>
                     </div>
                 </a>

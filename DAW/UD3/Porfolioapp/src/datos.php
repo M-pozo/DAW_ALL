@@ -53,11 +53,11 @@ $categorias = [
     "python" => "Python"
 ];
 
-//UD3.1.c
+//UD3.2.c
 $nombre = [
     "nombre" => "Miguel Pozo"
 ];
 
 
-//UD3.1.e
-$loggedln = true;
+//UD3.2.e
+$loggedln = false;
