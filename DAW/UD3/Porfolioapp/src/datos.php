@@ -1,13 +1,15 @@
 <?php
 //UD3.3.a and UD3.3.b BEGIN 
-$proyectos = [
+//$json = file_get_contents("proyectos1.json");
+//$proyectos = json_decode($json, true);
+$proyectos = [ 
     [
         "clave" => "proyecto1",
         "titulo" => "Porfolio",
         "descripcion" => "Mostrar todos mis proyectos",
         "imagen" => "",
         "fecha" => "24/09/2022",
-        "categorias" => ["php", "javascript"]
+        "categorias" => ["css", "javascript"]
     ],
     [
         "clave" => "proyecto2",

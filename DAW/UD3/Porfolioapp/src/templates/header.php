@@ -42,8 +42,8 @@
                 <span class="caret"></span>
                 </a> 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <?php foreach($categorias as $categoria) :
-                        echo '<a class="dropdown-item" href="//localhost/index.php?categoria="clavecategoria">'.$categoria.'</a>';
+                    <?php foreach($categorias as $key => $value) :
+                        echo '<a class="dropdown-item" href="//localhost:8080/index.php?categoria='.$key.'">'.$value.'</a>';
                     endforeach; ?>
                 </div> 
             </li>
