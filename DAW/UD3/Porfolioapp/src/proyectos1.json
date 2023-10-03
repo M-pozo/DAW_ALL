@@ -1,11 +1,11 @@
-{
-    "proyectos":[{
+[
+    {
         "clave" : "proyecto1",
         "titulo" : "Porfolio",
         "descripcion" : "Mostrar todos mis proyectos",
         "imagen" : "",
         "fecha" : "24/09/2022",
-        "categorias" : ["php", "javascript"]
+        "categorias" : ["css", "javascript"]
     },
     {
         "clave" : "proyecto2",
@@ -22,5 +22,5 @@
         "imagen" : "static/images/pelicula.png",
         "fecha" : "12/11/2021",
         "categorias" : ["php", "javascript"]
-    }]
-}
+    }
+]

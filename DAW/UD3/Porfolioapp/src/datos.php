@@ -1,8 +1,12 @@
 <?php
+//UD3.3.g
+$json = file_get_contents("proyectos1.json");
+$proyectos1 = json_decode($json, true);
+$json = file_get_contents("proyectos2.json");
+$proyectos2 = json_decode($json, true);
+$proyectos = array_merge($proyectos1, $proyectos2);
 //UD3.3.a and UD3.3.b BEGIN 
-//$json = file_get_contents("proyectos1.json");
-//$proyectos = json_decode($json, true);
-$proyectos = [ 
+/* $proyectos = [ 
     [
         "clave" => "proyecto1",
         "titulo" => "Porfolio",
@@ -43,7 +47,7 @@ $proyectos = [
         "fecha" => "16/04/2020",
         "categorias" => ["php", "javascript"]
     ],
-];
+]; */
 //UD3.3.a and UD3.3.b END
 
 $categorias = [
@@ -60,6 +64,8 @@ $nombre = [
     "nombre" => "Miguel Pozo"
 ];
 
-
 //UD3.2.e
-$loggedln = false;
+$loggedln = true;
+
+//UD3.3.f
+$proyecto_filtrado = $proyectos;

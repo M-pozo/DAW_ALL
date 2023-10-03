@@ -1,20 +1,33 @@
 <?php include("templates/header.php"); ?>
 <?php include("datos.php"); ?>
-<?php include("utiles.php"); ?>
+<?php include_once("utiles.php"); ?>
+
 
 
 <?php
 //UD3.2.f
 $sort = $_GET['sort'];
-if (isset($_GET['sort']) && $_GET['sort'] == "-1") {
-    usort($proyectos, 'ordenaTituloProyectoDesc');
-} else {
-    usort($proyectos, 'ordenaTituloProyectoAsc');
+if (isset($_GET['sort'])) {
+    if ($_GET['sort'] == "-1") {
+        usort($proyecto_filtrado, 'ordenaTituloProyectoDesc');
+    } else if ($_GET['sort'] == "1") {
+        usort($proyecto_filtrado, 'ordenaTituloProyectoAsc');
+    }
+}
+//UD3.3.f
+if (isset($_GET['categoria'])) {
+    $proyecto_filtrado = array_filter($proyecto_filtrado, 'buscadorCategoria');
 };
 //UD3.3.h
-if (isset($_GET['delete']) && $_GET['delete'] == "true") {
-    array_pop($categorias);
+if (isset($_GET['delete']) == "true") {
+    array_pop($proyectos);
 };
+//UD3.5.c
+/*if (isset($_GET['sort_date']) && $_GET['sort_date'] == "-1") {
+    usort($proyectos, 'ordenaFechaProyectoDesc');
+} else {
+    usort($proyectos, 'ordenaFechaProyectoAsc');
+};*/
 ?>
 <div class="container mb-5">
     <!--UD3.2.f BEGIN-->
@@ -22,7 +35,7 @@ if (isset($_GET['delete']) && $_GET['delete'] == "true") {
     <a href="?sort=1"><button href="" type="button" class="btn btn-outline-secondary">Ascendente</button></a>
     <!--UD3.2.f END-->
     <div class="row mt-3">
-        <?php foreach ($proyectos as $proyecto) : ?>
+        <?php foreach ($proyecto_filtrado as $proyecto) : ?>
             <?php
             ?>
             <div class="col-sm-3">
