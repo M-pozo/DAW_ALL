@@ -26,11 +26,11 @@ function actualizarFechas($proyectos)
     return $proyecto;
 }
 //UD2.5.c
-/*function ordenaFechaProyectoDesc($a, $b)
+function ordenaFechaProyectoDesc($a, $b)
 {
     return strtotime(trim($a['fecha'])) > strtotime(trim($b['fecha']));
 }
 function ordenaFechaProyectoAsc($a, $b)
 {
     return strtotime(trim($b['fecha'])) > strtotime(trim($a['fecha']));
-}*/
+}

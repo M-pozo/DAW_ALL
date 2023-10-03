@@ -4,13 +4,9 @@
 
 
 <?php
-//UD3.3.f
-if (isset($_GET['categoria'])) {
-    $proyecto_filtrado = array_filter($proyecto_filtrado, 'buscadorCategoria');
-};
 //UD3.2.f
 $sort = $_GET['sort'];
-if (isset($_GET['sort']) && $_GET['sort'] == "-1") {
+if (isset($_GET['sort']) == "-1") {
     usort($proyecto_filtrado, 'ordenaTituloProyectoDesc');
 } else {
     usort($proyecto_filtrado, 'ordenaTituloProyectoAsc');
@@ -19,17 +15,24 @@ if (isset($_GET['sort']) && $_GET['sort'] == "-1") {
 if (isset($_GET['delete']) == "true") {
     array_pop($proyectos);
 };
+//UD3.3.f
+$proyecto_filtrado = $proyectos;
+if (isset($_GET['categoria'])) {
+    $proyecto_filtrado = array_filter($proyecto_filtrado, 'buscadorCategoria');
+};
 //UD3.5.c
-/*if (isset($_GET['sort_date']) && $_GET['sort_date'] == "-1") {
+if (isset($_GET['sort_date']) && $_GET['sort_date'] == "-1") {
     usort($proyecto_filtrado, 'ordenaFechaProyectoDesc');
 } else {
     usort($proyecto_filtrado, 'ordenaFechaProyectoAsc');
-};*/
+};
 ?>
 <div class="container mb-5">
     <!--UD3.2.f BEGIN-->
-    <a href="?sort=-1"><button href="" type="button" class="btn btn-outline-secondary">Descendente</button></a>
-    <a href="?sort=1"><button href="" type="button" class="btn btn-outline-secondary">Ascendente</button></a>
+    <a href="?sort=-1"><button href="" type="button" class="btn btn-outline-secondary">ProyectoDesc</button></a>
+    <a href="?sort=1"><button href="" type="button" class="btn btn-outline-secondary">ProyectosAsc</button></a>
+    <a href="?sort_date=-1"><button href="" type="button" class="btn btn-outline-secondary">FechaDesc</button></a>
+    <a href="?sort_date=1"><button href="" type="button" class="btn btn-outline-secondary">FechAsc</button></a>
     <!--UD3.2.f END-->
     <div class="row mt-3">
         <?php foreach ($proyecto_filtrado as $proyecto) : ?>

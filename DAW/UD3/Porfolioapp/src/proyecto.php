@@ -9,7 +9,7 @@
         <div class="container">
             <h2><?php echo $proyecto['titulo'] ?></h2>
             <!--UD3.5.b-->
-            <h4><a href="#"><?php echo date('d/m/Y', /*strtotime(&proyecto['fecha'])*/ $proyecto['fecha']) ?></a></h4>
+            <h4><a href="#"><?php echo date('yy-m-d', strtotime($proyecto['fecha']));?></a></h4>
             <span>Categorías: </span>
             <a href="#">
                 <!-- UD3.3.c BEGIN-->
