@@ -1,0 +1,18 @@
+[
+    {
+        "clave" : "proyecto4",
+        "titulo" : "Juego 2D",
+        "descripcion" : "Juego web 2D de plataformas",
+        "imagen" : "static/images/juego2d.png",
+        "fecha" : "2020-11-14",
+        "categorias" : ["php", "javascript"]
+    },
+    {
+        "clave" : "proyecto5",
+        "titulo" : "Ropa",
+        "descripcion" : "Venta de ropa de segunda mano",
+        "imagen" : "static/images/ropa.png",
+        "fecha" : "2019-11-14",
+        "categorias" : ["php", "javascript"] 
+    }
+]
