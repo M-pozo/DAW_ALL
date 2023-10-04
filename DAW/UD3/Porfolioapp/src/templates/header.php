@@ -52,6 +52,13 @@
                     endforeach; ?>
                 </div>
             </li>
+            <li class="nav-item">
+                <!--UD3.2.b-->
+                <a href="./sobre_mi.php" class="nav-link
+                        <?php echo ($_SERVER['SCRIPT_NAME'] == "/sobre_mi.php") ? "active" : "" ?>
+                    ">SOBRE MÍ
+                </a>
+            </li>
             <!-- UD3.3.e END-->
             <li class="nav-item">
                 <!--UD3.2.b-->
