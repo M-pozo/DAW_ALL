@@ -34,3 +34,10 @@ function ordenaFechaProyectoAsc($a, $b)
 {
     return strtotime(trim($b['fecha'])) > strtotime(trim($a['fecha']));
 }
+function test_input($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
