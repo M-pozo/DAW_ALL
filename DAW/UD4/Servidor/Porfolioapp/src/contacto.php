@@ -1,7 +1,7 @@
 <?php include("templates/header.php"); ?>
 
 <?php
-$nameErr = "";
+$nameErr = $emailErr = $telefonoErr = $tipoErr = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($_POST["nombreApellidos"])) {
         $nameErr = "Por favor, introduzca nombre y apellidos";
@@ -43,6 +43,28 @@ if (!empty($_FILES['archivo'])) {
     if ($nombreArchivo) {
         $pathArchivo = "uploads/{$nombreArchivo}";
     }
+}
+if ($nameErr === "" && $emailErr === "" && $telefonoErr === "" && $tipoErr === "") {
+    $contacto = [
+        "name" => $name,
+        "email" => $email,
+        "telefono" => $telefono,
+        "tipo" => $tipo,
+        "mensaje" => $mensaje,
+        "file" => $pathArchivo,
+    ];
+    $tempArray = json_decode(file_get_contents('mysql/contactos.json'));
+    if ($tempArray === NULL) {
+        $tempArray = [];
+    }
+    array_push($tempArray, $contacto);
+    $contactos_json = json_encode($tempArray);
+    file_put_contents('mysql/contactos.json', $contactos_json);
+?>
+    <script type="text/javascript">
+        window.location = "http://localhost:8080/confirma_contacto.php";
+    </script>
+<?php
 }
 ?>
 <div class="container">
