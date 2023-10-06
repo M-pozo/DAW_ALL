@@ -68,7 +68,9 @@
             </li>
             <!-- UD3.2.e BEGIN -->
             <li class="nav-item">
-                <a href="#" class="nav-link"><?php if ($loggedln == true) echo "ADMINISTRACION"; ?></a>
+                <a href="./contacto_lista.php" class="nav-link 
+                <?php echo ($_SERVER['SCRIPT_NAME'] == "/contacto_lista.php") ? "active" : "" ?> ">
+                    <?php if ($loggedln == true) echo "ADMINISTRACION"; ?></a>
             </li>
             <!-- UD3.2.e END -->
         </ul>

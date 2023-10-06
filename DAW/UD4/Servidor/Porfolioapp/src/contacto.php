@@ -57,6 +57,7 @@ if ($nameErr === "" && $emailErr === "" && $telefonoErr === "" && $tipoErr === "
     if ($tempArray === NULL) {
         $tempArray = [];
     }
+    $contacto['id'] = count($tempArray) + 1;
     array_push($tempArray, $contacto);
     $contactos_json = json_encode($tempArray);
     file_put_contents('mysql/contactos.json', $contactos_json);
@@ -111,10 +112,10 @@ if ($nameErr === "" && $emailErr === "" && $telefonoErr === "" && $tipoErr === "
                 <textarea class="form-control" name="mensaje" id="areaTexto" rows="3" placeholder="Escriba su mensaje..."><?php print $mensaje; ?></textarea>
                 <label for="areaTexto" class="form-label">Mensaje</label>
             </div>
-            <div class="row mb-4">
+            <!--<div class="row mb-4">
                 <label for="archivoID" class="form-label">Adjuntar archivo</label>
                 <input class="form-control" type="file" id="archivoID" name="archivo">
-            </div>
+            </div>-->
             <span class="text-danger"> <?php echo $archivoErr ?> </span>
             <br>
             <button type="submit" class="btn btn-success">Enviar</button>
