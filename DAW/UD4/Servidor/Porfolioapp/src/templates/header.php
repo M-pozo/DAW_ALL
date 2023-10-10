@@ -66,6 +66,14 @@
                     ">CONTACTO
                 </a>
             </li>
+            <!--UD4.1.a BEGIN-->
+            <li class="nav-item">
+                <a href="./login.php" class="nav-link
+                        <?php echo ($_SERVER['SCRIPT_NAME'] == "/login.php") ? "active" : "" ?>
+                    ">LOG IN
+                </a>
+            </li>
+            <!--UD4.1.a END-->
             <!-- UD3.2.e BEGIN -->
             <li class="nav-item">
                 <a href="./contacto_lista.php" class="nav-link 

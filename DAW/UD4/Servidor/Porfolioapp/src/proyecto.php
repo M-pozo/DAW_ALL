@@ -2,7 +2,6 @@
 <?php include("datos.php"); ?>
 
 
-<!--UD3.3.d BEGIN-->
 <!---->
 <?php $id = $_GET['id'] ?>
 <?php foreach ($proyectos as $proyecto) : if ($id == $proyecto['clave']) { ?>
