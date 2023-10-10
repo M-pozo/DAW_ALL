@@ -12,11 +12,8 @@ if (empty($_POST["email"])) {
         $emailErr = "Introduzca un e-mail válido.";
     }
 }
-
 ?>
-<?php
 
-?>
 <div class="container">
     <h2 class="mb-5">Log in</h2>
     <div class="row">
