@@ -3,14 +3,13 @@
 <!--UD4.1.a BEGIN-->
 <?php
 $emailErr = "";
-if (empty($_POST["email"])) {
-    $emailErr = "Por favor, introduzca su e-mail.";
+$passwordErr = "";
+$email = $_POST["email"];
+$password = $_POST["password"];
+if (in_array($_POST["email"], $usuarios["email"]) && in_array($_POST["password"], $usuarios["password"])) {
+    $loggedIn = true;
 } else {
-    $email = test_input($_POST["email"]);
-    if (!preg_match("/^(([^<>()\[\]\.,;:\s@\”]+(\.[^<>()\[\]\.,;:\s@\”]+)*)|(\”.+\”))@(([^<>()[\]\.,;:\s@\”]+\.)+[^<>()
-    [\]\.,;:\s@\”]{2,})$/", $email)) {
-        $emailErr = "Introduzca un e-mail válido.";
-    }
+    $emailErr = "Este email no esta registrado";
 }
 ?>
 
@@ -28,12 +27,13 @@ if (empty($_POST["email"])) {
             <div class="row">
                 <div class="mb-3 col-sm-6 p-0">
                     <label for="passwordID" class="form-label">password</label>
-                    <input type="password" name="password" value="<?php echo $password; ?>" class="form-control" id="emailID" placeholder="Su e-mail">
+                    <input type="password" name="password" value="<?php echo $password; ?>" class="form-control" id="passwordID" placeholder="Su password">
                     <span class="text-danger"> <?php echo $passwordErr ?> </span>
                 </div>
             </div>
             <br>
             <button type="submit" class="btn btn-success">Log in</button>
+            <?php var_dump($usuarios["password"]) ?>
         </form>
     </div>
 </div>
