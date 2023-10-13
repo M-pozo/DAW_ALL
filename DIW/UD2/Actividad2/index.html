@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="prueba.html" method="get">
+        <fieldset>
+            <label>Introdice tu nombre:
+                <input type="text" name="nombre" maxlength="40" pattern="^[A-Za-z0-9]+">
+            </label>
+        </fieldset>
+        <fieldset>
+            <label>Introdice tu código postal:
+                <input type="text" name="codigoPostal" pattern="0[1-9][0-9]{3}|[1-4][0-9]{4}|5[0-2][0-9]{3}">
+            </label>
+        </fieldset>
+        <fieldset>
+            <label>Introduce tu edad:
+                <input type="number" name="edad">
+            </label>
+        </fieldset>
+        <fieldset>
+            <legend>Boton</legend>
+            <button type="submit">Enviar</button>
+        </fieldset>
+    </form>
+</body>
+</html>

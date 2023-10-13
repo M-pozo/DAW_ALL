@@ -13,7 +13,7 @@ if (isset($_GET['sort']) && $_GET['sort'] == "-1") {
 };
 //UD3.3.h
 if (isset($_GET['delete']) == "true") {
-    array_pop($proyectos);
+    array_pop($proyecto_filtrado);
 };
 //UD3.3.f
 $proyecto_filtrado = $proyectos;
