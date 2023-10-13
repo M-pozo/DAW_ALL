@@ -67,8 +67,5 @@ $nombre = [
 //UD3.2.e
 $loggedIn = false;
 
-//UD3.3.f
-$proyecto_filtrado = $proyectos;
-
 $jsonUsuarios = file_get_contents("./mysql/usuarios.json");
 $usuarios = json_decode($jsonUsuarios, true);

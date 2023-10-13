@@ -6,11 +6,26 @@ $emailErr = "";
 $passwordErr = "";
 $email = $_POST["email"];
 $password = $_POST["password"];
-if (in_array($_POST["email"], $usuarios["email"]) && in_array($_POST["password"], $usuarios["password"])) {
-    $loggedIn = true;
-} else {
-    $emailErr = "Este email no esta registrado";
+//UD4.1.b BEGIN
+$user = array_filter($usuarios, 'buscarUsuario');
+$user = array_values($user)[0];
+//UD4.1.d BEGIN
+if (!empty($email) && !empty($password)) {
+    if (is_null($user)) {
+        $emailErr = "Introduce un e-mail válido";
+    }
+    if ($email == $user['email'] && $password !== $user['password']) {
+        $passwordErr = "Contraseña incorrecta";
+    }
+    if ($email == $user['email'] && $password == $user['password']) {
+        //UD4.1.c BEGIN
+        //UD4.1.c END
+    }
 }
+//UD4.1.d END
+//UD4.1.b END
+
+
 ?>
 
 <div class="container">
@@ -33,7 +48,6 @@ if (in_array($_POST["email"], $usuarios["email"]) && in_array($_POST["password"]
             </div>
             <br>
             <button type="submit" class="btn btn-success">Log in</button>
-            <?php var_dump($usuarios["password"]) ?>
         </form>
     </div>
 </div>

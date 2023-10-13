@@ -12,6 +12,13 @@ function buscadorCategoria($proyecto)
 {
     return in_array($_GET['categoria'], $proyecto["categorias"]);
 }
+//UD4.1.b
+//UD4.1.b BEGIN
+function buscarUsuario($usuario)
+{
+    return $_POST['email'] == $usuario["email"];
+}
+//UD4.1.b END
 //UD3.5.a
 function anyoActual()
 {
@@ -41,4 +48,3 @@ function test_input($data)
     $data = htmlspecialchars($data);
     return $data;
 }
-?>

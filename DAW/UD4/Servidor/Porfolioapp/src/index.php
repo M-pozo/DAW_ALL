@@ -5,10 +5,12 @@
 
 <?php
 //UD3.2.f
+//UD3.3.f
+$proyecto_filtrado = $proyectos;
 $sort = $_GET['sort'];
-if (isset($_GET['sort']) && $_GET['sort'] == "-1") {
+if (isset($sort) && $sort == "-1") {
     usort($proyecto_filtrado, 'ordenaTituloProyectoDesc');
-} else {
+} else if (isset($sort) && $sort == "1") {
     usort($proyecto_filtrado, 'ordenaTituloProyectoAsc');
 };
 //UD3.3.h
@@ -16,14 +18,13 @@ if (isset($_GET['delete']) == "true") {
     array_pop($proyecto_filtrado);
 };
 //UD3.3.f
-$proyecto_filtrado = $proyectos;
 if (isset($_GET['categoria'])) {
     $proyecto_filtrado = array_filter($proyecto_filtrado, 'buscadorCategoria');
 };
 //UD3.5.c
 if (isset($_GET['sort_date']) && $_GET['sort_date'] == "-1") {
     usort($proyecto_filtrado, 'ordenaFechaProyectoDesc');
-} else {
+} else if (isset($_GET['sort_date']) && $_GET['sort_date'] == "1") {
     usort($proyecto_filtrado, 'ordenaFechaProyectoAsc');
 };
 ?>
