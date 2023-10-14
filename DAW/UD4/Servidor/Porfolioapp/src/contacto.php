@@ -11,61 +11,61 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $nameErr = "Solo se permiten letras y espacios.";
         }
     }
-}
-if (empty($_POST["email"])) {
-    $emailErr = "Por favor, introduzca su e-mail.";
-} else {
-    $email = test_input($_POST["email"]);
-    if (!preg_match("/^(([^<>()\[\]\.,;:\s@\”]+(\.[^<>()\[\]\.,;:\s@\”]+)*)|(\”.+\”))@(([^<>()[\]\.,;:\s@\”]+\.)+[^<>()
-    [\]\.,;:\s@\”]{2,})$/", $email)) {
-        $emailErr = "Introduzca un e-mail válido.";
+    if (empty($_POST["email"])) {
+        $emailErr = "Por favor, introduzca su e-mail.";
+    } else {
+        $email = test_input($_POST["email"]);
+        if (!preg_match("/^(([^<>()\[\]\.,;:\s@\”]+(\.[^<>()\[\]\.,;:\s@\”]+)*)|(\”.+\”))@(([^<>()[\]\.,;:\s@\”]+\.)+[^<>()
+        [\]\.,;:\s@\”]{2,})$/", $email)) {
+            $emailErr = "Introduzca un e-mail válido.";
+        }
     }
-}
-if (empty($_POST["telefono"])) {
-    $telefonoErr = "Por favor, introduzca su teléfono.";
-} else {
-    $telefono = test_input($_POST["telefono"]);
-    if (!preg_match("/^[9|6]{1}([\d]{2}[-]*){3}[\d]{2}$/", $telefono)) {
-        $telefonoErr = "Introduzca un teĺéfono válido.";
+    if (empty($_POST["telefono"])) {
+        $telefonoErr = "Por favor, introduzca su teléfono.";
+    } else {
+        $telefono = test_input($_POST["telefono"]);
+        if (!preg_match("/^[9|6]{1}([\d]{2}[-]*){3}[\d]{2}$/", $telefono)) {
+            $telefonoErr = "Introduzca un teĺéfono válido.";
+        }
     }
-}
-if (empty($_POST["tipo"])) {
-    $tipoErr = "Por favor, introduzca el tipo de consulta.";
-} else {
-    $tipo = $_POST["tipo"];
-}
-if (!empty($_POST["mensaje"])) {
-    $mensaje = test_input($_POST["mensaje"]);
-}
-if (!empty($_FILES['archivo'])) {
-    $nombreArchivo = $_FILES['archivo']['name'];
-    move_uploaded_file($_FILES['archivo']['tmp_name'], "/var/www/html/uploads/{$nombreArchivo}");
-    if ($nombreArchivo) {
-        $pathArchivo = "uploads/{$nombreArchivo}";
+    if (empty($_POST["tipo"])) {
+        $tipoErr = "Por favor, introduzca el tipo de consulta.";
+    } else {
+        $tipo = $_POST["tipo"];
     }
-}
-if ($nameErr === "" && $emailErr === "" && $telefonoErr === "" && $tipoErr === "") {
-    $contacto = [
-        "name" => $name,
-        "email" => $email,
-        "telefono" => $telefono,
-        "tipo" => $tipo,
-        "mensaje" => $mensaje,
-        "file" => $pathArchivo,
-    ];
-    $tempArray = json_decode(file_get_contents('mysql/contactos.json'));
-    if ($tempArray === NULL) {
-        $tempArray = [];
+    if (!empty($_POST["mensaje"])) {
+        $mensaje = test_input($_POST["mensaje"]);
     }
-    $contacto['id'] = count($tempArray) + 1;
-    array_push($tempArray, $contacto);
-    $contactos_json = json_encode($tempArray);
-    file_put_contents('mysql/contactos.json', $contactos_json);
-?>
-    <script type="text/javascript">
-        window.location = "http://localhost:8080/confirma_contacto.php";
-    </script>
-<?php
+    if (!empty($_FILES['archivo'])) {
+        $nombreArchivo = $_FILES['archivo']['name'];
+        move_uploaded_file($_FILES['archivo']['tmp_name'], "/var/www/html/uploads/{$nombreArchivo}");
+        if ($nombreArchivo) {
+            $pathArchivo = "uploads/{$nombreArchivo}";
+        }
+    }
+    if ($nameErr === "" && $emailErr === "" && $telefonoErr === "" && $tipoErr === "") {
+        $contacto = [
+            "name" => $name,
+            "email" => $email,
+            "telefono" => $telefono,
+            "tipo" => $tipo,
+            "mensaje" => $mensaje,
+            "file" => $pathArchivo,
+        ];
+        $tempArray = json_decode(file_get_contents('mysql/contactos.json'));
+        if ($tempArray === NULL) {
+            $tempArray = [];
+        }
+        $contacto['id'] = count($tempArray) + 1;
+        array_push($tempArray, $contacto);
+        $contactos_json = json_encode($tempArray);
+        file_put_contents('mysql/contactos.json', $contactos_json);
+        ?>
+            <script type="text/javascript">
+                window.location = "http://localhost:8080/confirma_contacto.php";
+            </script>
+        <?php
+    }
 }
 ?>
 <div class="container">

@@ -59,9 +59,17 @@
                 </a>
             </li>
             <!-- UD3.3.e END-->
-            <?php 
-            //UD4.1.e BEGIN
-            if ($_COOKIE['loggedIn'] === "true") { ?>
+            <!-- UD4.2.a BEGIN-->
+            <li class="nav-item">
+                <!--UD3.2.b-->
+                <a href="./creacion_proyecto.php" class="nav-link
+                        <?php echo ($_SERVER['SCRIPT_NAME'] == "/creacion_proyecto.php") ? "active" : "" ?>
+                    ">CREAR PROYECTO
+                </a>
+            </li>
+            <!-- UD4.2.a END--> 
+            <!--UD4.1.e BEGIN-->
+            <?php if ($_COOKIE['loggedIn'] === "true") { ?>
                 <!-- UD3.2.e BEGIN -->
                 <li class="nav-item">
                     <a href="./contacto_lista.php" class="nav-link 

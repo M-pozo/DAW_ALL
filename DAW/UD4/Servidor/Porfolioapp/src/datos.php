@@ -1,10 +1,8 @@
 <?php
 //UD3.3.g
-$json = file_get_contents("proyectos1.json");
-$proyectos1 = json_decode($json, true);
-$json = file_get_contents("proyectos2.json");
-$proyectos2 = json_decode($json, true);
-$proyectos = array_merge($proyectos1, $proyectos2);
+$json = file_get_contents("mysql/proyectos.json");
+$proyectos = json_decode($json, true);
+
 //UD3.3.a and UD3.3.b BEGIN 
 /* $proyectos = [ 
     [
