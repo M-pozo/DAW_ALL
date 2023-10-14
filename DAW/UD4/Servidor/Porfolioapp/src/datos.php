@@ -64,8 +64,6 @@ $nombre = [
     "nombre" => "Miguel Pozo"
 ];
 
-//UD3.2.e
-$loggedIn = false;
-
 $jsonUsuarios = file_get_contents("./mysql/usuarios.json");
 $usuarios = json_decode($jsonUsuarios, true);
+?>

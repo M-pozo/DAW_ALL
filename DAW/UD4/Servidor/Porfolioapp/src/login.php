@@ -1,7 +1,7 @@
-<?php include("templates/header.php"); ?>
-
-<!--UD4.1.a BEGIN-->
+<?php include_once("datos.php"); ?>
+<?php include_once("utiles.php"); ?>
 <?php
+//UD4.1.a BEGIN
 $emailErr = "";
 $passwordErr = "";
 $email = $_POST["email"];
@@ -18,16 +18,17 @@ if (!empty($email) && !empty($password)) {
         $passwordErr = "Contraseña incorrecta";
     }
     if ($email == $user['email'] && $password == $user['password']) {
-        //UD4.1.c BEGIN
-        //UD4.1.c END
+        //UD4.1.c UD4.1.e
+        setcookie("loggedIn", "true", time() + 84600);
+        setcookie("user_email", $email, time() + 84600);
+        header('Location: index.php');
+        exit;
     }
 }
 //UD4.1.d END
 //UD4.1.b END
-
-
 ?>
-
+<?php include("templates/header.php"); ?>
 <div class="container">
     <h2 class="mb-5">Log in</h2>
     <div class="row">

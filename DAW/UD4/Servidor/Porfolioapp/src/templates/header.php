@@ -1,5 +1,5 @@
-<?php include("datos.php"); ?>
-<?php include("utiles.php"); ?>
+<?php include_once("datos.php"); ?>
+<?php include_once("utiles.php"); ?>
 <!--DOCTYPE html -->
 <html>
 
@@ -59,30 +59,32 @@
                 </a>
             </li>
             <!-- UD3.3.e END-->
-            <li class="nav-item">
-                <!--UD3.2.b-->
-                <a href="./contacto.php" class="nav-link
-                        <?php echo ($_SERVER['SCRIPT_NAME'] == "/contacto.php") ? "active" : "" ?>
-                    ">CONTACTO
-                </a>
-            </li>
-            <!--UD4.1.a BEGIN-->
-            <li class="nav-item">
-                <a href="./login.php" class="nav-link
-                        <?php echo ($_SERVER['SCRIPT_NAME'] == "/login.php") ? "active" : "" ?>
-                    ">LOG IN
-                </a>
-            </li>
-            <!--UD4.1.a END-->
-            <li class="nav-item">
-                <a href="./contacto_lista.php" class="nav-link 
-                <?php echo ($_SERVER['SCRIPT_NAME'] == "/contacto_lista.php") ? "active" : "" ?> ">
-                    <?php if ($loggedIn == true) echo "ADMINISTRACION"; ?></a>
-            </li>
-            <!-- UD3.2.e BEGIN -->
-            <li class="nav-item">
-                <a href="#" class="nav-link"><?php if ($loggedln == true) echo "ADMINISTRACION"; ?></a>
-            </li>
-            <!-- UD3.2.e END -->
+            <?php 
+            //UD4.1.e BEGIN
+            if ($_COOKIE['loggedIn'] === "true") { ?>
+                <!-- UD3.2.e BEGIN -->
+                <li class="nav-item">
+                    <a href="./contacto_lista.php" class="nav-link 
+                    <?php echo ($_SERVER['SCRIPT_NAME'] == "/contacto_lista.php") ? "active" : "" ?> ">
+                        <!--UD4.1.c-->
+                        <?php if ($_COOKIE['loggedIn'] === "true") echo "ADMINISTRACION"; ?></a>
+                </li>
+                <!-- UD3.2.e END -->
+                <li class="nav-item">
+                    <a href="/logout.php" class="nav-link
+                            <?php echo ($_SERVER['SCRIPT_NAME'] == "/logout.php" ) ? "active" : "" ?>
+                        "><?php if ($_COOKIE['loggedIn'] === "true") echo "LOG OUT"; ?></a>
+                    </a>
+                </li>
+            <?php } else { ?>
+                <!--UD4.1.a BEGIN-->
+                <li class="nav-item">
+                    <a href="/login.php" class="nav-link
+                            <?php echo ($_SERVER['SCRIPT_NAME'] == "/login.php" ) ? "active" : "" ?>
+                        "><?php if ($_COOKIE['loggedIn'] === "false") echo "LOG IN"; ?></a>
+                    </a>
+                </li>
+                <!--UD4.1.a END-->
+            <?php } //UD4.1.e END?>
         </ul>
     </header>

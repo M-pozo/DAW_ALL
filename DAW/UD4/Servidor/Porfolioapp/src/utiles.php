@@ -12,7 +12,6 @@ function buscadorCategoria($proyecto)
 {
     return in_array($_GET['categoria'], $proyecto["categorias"]);
 }
-//UD4.1.b
 //UD4.1.b BEGIN
 function buscarUsuario($usuario)
 {
@@ -48,3 +47,4 @@ function test_input($data)
     $data = htmlspecialchars($data);
     return $data;
 }
+?>
