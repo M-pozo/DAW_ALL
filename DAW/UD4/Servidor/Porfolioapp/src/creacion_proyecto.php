@@ -50,8 +50,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $tempArray = [];
         }
         array_push($tempArray, $proyecto);
-        $proyecto_json = json_encode($tempArray);
-        file_put_contents('mysql/proyectos.json', $proyecto_json);
+        $proyectos_json = json_encode($tempArray);
+        file_put_contents('mysql/proyectos.json', $proyectos_json);
 ?>
         <script type="text/javascript">
             window.location = "http://localhost:8080/confirmar_proyecto.php";
