@@ -89,7 +89,7 @@
                 <li class="nav-item">
                     <a href="/login.php" class="nav-link
                             <?php echo ($_SERVER['SCRIPT_NAME'] == "/login.php" ) ? "active" : "" ?>
-                        "><?php if ($_COOKIE['loggedIn'] === "false") echo "LOG IN"; ?></a>
+                        ">LOG IN</a>
                     </a>
                 </li>
                 <!--UD4.1.a END-->

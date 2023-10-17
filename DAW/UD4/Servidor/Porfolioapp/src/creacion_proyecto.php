@@ -33,18 +33,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $pathImagen = "uploads/{$nombreImagen}";
         }
     } else {
-        $descripcion = "";
+        $nombreImagen = "";
     }
     if ($claveErr === "" && $tituloErr === "" && $fechaErr === "") {
         $proyectos = [
             "clave" => $clave,
             "titulo" => $titulo,
             "descripcion" => $descripcion,
-            "imagen" => $imagen,
+            "imagen" => $nombnreImagen,
             "fecha" => $fecha,
             "categorias" => ['css'],
         ];
-        $tempArray = json_decode(file_get_contents('mysql/proyectos.json'));
+        $tempArray = json_decode(file_get_contents('mysql/proyectos.json'), true);
         if ($tempArray === NULL) {
             $tempArray = [];
         }

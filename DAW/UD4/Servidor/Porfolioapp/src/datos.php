@@ -3,6 +3,9 @@
 $json = file_get_contents("mysql/proyectos.json");
 $proyectos = json_decode($json, true);
 
+$json = file_get_contents("mysql/usuarios.json");
+$usuarios = json_decode($json, true);
+
 //UD3.3.a and UD3.3.b BEGIN 
 /* $proyectos = [ 
     [
