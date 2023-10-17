@@ -2,42 +2,23 @@
 include("datos.php");
 include("utiles.php");
 //UD4.2.c BEGIN
-$claveErr = $tituloErr = $fechaErr = $descripcionErr = "";
+$user = array_filter($usuarios, 'buscarUsuario');
+$user = array_values($user)[0];
+$emailErr = $nombreApellidosErr = $dniErr = $passwordErr = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (empty($_POST["clave"])) {
-        $claveErr = "Por favor, introduzca una clave";
-    } else {
-        $clave = test_input($_POST["clave"]);
-        if (preg_match("/[ ]/", $clave)) {
-            $claveErr = "Por favor no intriduzcas espacios";
-        }
+    if (is_null($user)) {
+        $emailErr = "Introduce un e-mail válido";
+    } else if (!preg_match("/^(([^<>()\[\]\.,;:\s@\”]+(\.[^<>()\[\]\.,;:\s@\”]+)*)|(\”.+\”))@(([^<>()[\]\.,;:\s@\”]+\.)+[^<>()
+        [\]\.,;:\s@\”]{2,})$/", $email)) {
+        $emailErr = "Introduzca un e-mail válido.";
     }
-    if (empty($_POST["titulo"])) {
-        $tituloErr = "Por favor, introduzca un titulo.";
-    } else {
-        $titulo = test_input($_POST["titulo"]);
+    var_dump($user);
+    die();
+    if ($email == $user['email'] && $password !== $user['password']) {
+        $passwordErr = "Contraseña incorrecta";
     }
-    if (empty($_POST["fecha"])) {
-        $fechaErr = "Por favor, introduzca su fecha.";
-    } else {
-        $fecha = test_input($_POST["fecha"]);
-    }
-    if (empty($_POST["descripcion"])) {
-        $descripcionErr = "Por favor, introduzca su descripción.";
-    } else {
-        $descripcion = test_input($_POST["descripcion"]);
-    }
-    if (!empty($_FILES['imagen'])) {
-        $nombreImagen = $_FILES['imagen']['name'];
-        move_uploaded_file($_FILES['imagen']['tmp_name'], "/var/www/html/static/images/{$nombreImagen}");
-        if ($nombreImagen) {
-            $pathImagen = "static/images/{$nombreImagen}";
-        }
-    } else {
-        $pathImagen = "";
-    }
-    if ($claveErr === "" && $tituloErr === "" && $fechaErr === "" && $descripcionErr === "") {
-        $proyectos = [
+    if ($emailErr === "" && $nombreApellidosErr === "" && $dniErr === "" && $passwrodErr === "") {
+        /*$proyectos = [
             "clave" => $clave,
             "titulo" => $titulo,
             "descripcion" => $descripcion,
@@ -56,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <script type="text/javascript">
             window.location = "http://localhost:8080/confirmar_proyecto.php";
         </script>
-<?php
+<?php*/
     }
 }
 //UD4.2.c END
@@ -69,32 +50,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="row">
                 <div class="mb-3 col-sm-6 p-0">
                     <label for="claveID" class="form-label">email</label>
-                    <input type="text" name="clave" value="<?php echo $clave; ?>" class="form-control" id="claveID" placeholder="Sin espacios">
-                    <span class="text-danger"> <?php echo $claveErr ?> </span>
+                    <input type="text" name="email" value="<?php echo $email; ?>" class="form-control" id="emailID" placeholder="">
+                    <span class="text-danger"> <?php echo $emailErr ?> </span>
                 </div>
             </div>
             <div class="row">
                 <div class="mb-3 col-sm-6 p-0">
-                    <label for="tituloID" class="form-label">Nombre y apellidos</label>
-                    <input type="text" name="titulo" value="<?php echo $titulo; ?>" class="form-control" id="tituloID">
-                    <span class="text-danger"> <?php echo $tituloErr ?> </span>
+                    <label for="nombreApellidosID" class="form-label">Nombre y apellidos</label>
+                    <input type="text" name="nombreApellidosID" value="<?php echo $nombreApellidos; ?>" class="form-control" id="nombreApellidosID">
+                    <span class="text-danger"> <?php echo $nombreApellidosErr ?> </span>
                 </div>
             </div>
             <div class="row">
                 <div class="mb-3 col-sm-6 p-0">
-                    <label for="fechaID" class="form-label">DNI</label>
-                    <input type="text" name="fecha" value="<?php echo $fecha; ?>" class="form-control" id="fechaID">
-                    <span class="text-danger"> <?php echo $fechaErr ?> </span>
+                    <label for="dniID" class="form-label">DNI</label>
+                    <input type="text" name="dni" value="<?php echo $dni; ?>" class="form-control" id="dniID">
+                    <span class="text-danger"> <?php echo $dniErr ?> </span>
                 </div>
             </div>
             <div class="row">
                 <div class="mb-3 col-sm-6 p-0">
-                    <label for="fechaID" class="form-label">Password</label>
-                    <input type="password" name="fecha" value="<?php echo $fecha; ?>" class="form-control" id="fechaID">
-                    <span class="text-danger"> <?php echo $fechaErr ?> </span>
+                    <label for="passwordID" class="form-label">Password</label>
+                    <input type="password" name="password" value="<?php echo $password; ?>" class="form-control" id="passwordID">
+                    <span class="text-danger"> <?php echo $passwordErr ?> </span>
                 </div>
             </div>
-            <span class="text-danger"> <?php echo $imagenErr ?> </span>
             <br>
             <button type="submit" class="btn btn-success">Crear</button>
         </form>

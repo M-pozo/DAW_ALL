@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $pathImagen = "";
     }
     if ($claveErr === "" && $tituloErr === "" && $fechaErr === "" && $descripcionErr === "") {
-        $proyectos = [
+        $proyecto = [
             "clave" => $clave,
             "titulo" => $titulo,
             "descripcion" => $descripcion,
@@ -49,9 +49,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($tempArray === NULL) {
             $tempArray = [];
         }
-        array_push($tempArray, $proyectos);
-        $proyectos_json = json_encode($tempArray);
-        file_put_contents('mysql/proyectos.json', $proyectos_json);
+        array_push($tempArray, $proyecto);
+        $proyecto_json = json_encode($tempArray);
+        file_put_contents('mysql/proyectos.json', $proyecto_json);
 ?>
         <script type="text/javascript">
             window.location = "http://localhost:8080/confirmar_proyecto.php";
@@ -65,6 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="container">
     <h2 class="mb-5">Crear proyecto</h2>
     <div class="row">
+        <!--UD4.2.d-->
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="mb-3 col-sm-6 p-0">

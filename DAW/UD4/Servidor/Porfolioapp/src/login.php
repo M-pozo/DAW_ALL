@@ -13,6 +13,9 @@ $user = array_values($user)[0];
 if (!empty($email) && !empty($password)) {
     if (is_null($user)) {
         $emailErr = "Introduce un e-mail válido";
+    } else if (!preg_match("/^(([^<>()\[\]\.,;:\s@\”]+(\.[^<>()\[\]\.,;:\s@\”]+)*)|(\”.+\”))@(([^<>()[\]\.,;:\s@\”]+\.)+[^<>()
+        [\]\.,;:\s@\”]{2,})$/", $email)) {
+        $emailErr = "Introduzca un e-mail válido.";
     }
     if ($email == $user['email'] && $password !== $user['password']) {
         $passwordErr = "Contraseña incorrecta";
