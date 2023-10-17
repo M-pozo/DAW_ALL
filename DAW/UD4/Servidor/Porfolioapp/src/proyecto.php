@@ -1,6 +1,7 @@
 <?php include("datos.php"); ?>
 <?php $id = $_GET['id'] ?>
-<?php include("templates/header.php"); ?>
+<?php include("templates/header.php"); 
+//UD4.2.b?>
 <?php if ($_COOKIE['loggedIn'] === "true") { ?>
     <div class="container">
     <h2 class="mb-5">Actualizar proyecto</h2>

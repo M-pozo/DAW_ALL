@@ -67,32 +67,37 @@
                     ">CREAR PROYECTO
                 </a>
             </li>
-            <!-- UD4.2.a END--> 
+            <!-- UD4.2.a END-->
             <!--UD4.1.e BEGIN-->
             <?php if ($_COOKIE['loggedIn'] === "true") { ?>
                 <!-- UD3.2.e BEGIN -->
                 <li class="nav-item">
-                    <a href="./contacto_lista.php" class="nav-link 
-                    <?php echo ($_SERVER['SCRIPT_NAME'] == "/contacto_lista.php") ? "active" : "" ?> ">
-                        <!--UD4.1.c-->
-                        <?php if ($_COOKIE['loggedIn'] === "true") echo "ADMINISTRACION"; ?></a>
+                    <a class="nav-link dropdown-toggle 
+                    <?php echo ($_SERVER['SCRIPT_NAME'] == "/usuarios.php" || $_SERVER['SCRIPT_NAME'] == "/contacto_lista.php") ? "active" : "" ?>" id="dropdownMenu1" data-bs-toggle="dropdown" ariahaspopup="true">ADMINISTRACION
+                        <span class="caret"></span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <a class="dropdown-item" href="/contacto_lista.php">Lista de contactos</a>
+                        <a class="dropdown-item" href="/usuarios.php">Usuarios</a>
+                    </div>
                 </li>
                 <!-- UD3.2.e END -->
                 <li class="nav-item">
                     <a href="/logout.php" class="nav-link
-                            <?php echo ($_SERVER['SCRIPT_NAME'] == "/logout.php" ) ? "active" : "" ?>
-                        "><?php if ($_COOKIE['loggedIn'] === "true") echo "LOG OUT"; ?></a>
+                            <?php echo ($_SERVER['SCRIPT_NAME'] == "/logout.php") ? "active" : "" ?>
+                        ">LOG OUT</a>
                     </a>
                 </li>
             <?php } else { ?>
                 <!--UD4.1.a BEGIN-->
                 <li class="nav-item">
                     <a href="/login.php" class="nav-link
-                            <?php echo ($_SERVER['SCRIPT_NAME'] == "/login.php" ) ? "active" : "" ?>
+                            <?php echo ($_SERVER['SCRIPT_NAME'] == "/login.php") ? "active" : "" ?>
                         ">LOG IN</a>
                     </a>
                 </li>
                 <!--UD4.1.a END-->
-            <?php } //UD4.1.e END?>
+            <?php } //UD4.1.e END
+            ?>
         </ul>
     </header>

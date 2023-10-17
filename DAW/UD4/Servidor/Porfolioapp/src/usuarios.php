@@ -63,38 +63,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 <?php include("templates/header.php") ?>
 <div class="container">
-    <h2 class="mb-5">Crear proyecto</h2>
+    <h2 class="mb-5">Mantenimiento</h2>
     <div class="row">
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="mb-3 col-sm-6 p-0">
-                    <label for="claveID" class="form-label">Clave</label>
+                    <label for="claveID" class="form-label">email</label>
                     <input type="text" name="clave" value="<?php echo $clave; ?>" class="form-control" id="claveID" placeholder="Sin espacios">
                     <span class="text-danger"> <?php echo $claveErr ?> </span>
                 </div>
             </div>
             <div class="row">
                 <div class="mb-3 col-sm-6 p-0">
-                    <label for="tituloID" class="form-label">Titulo</label>
+                    <label for="tituloID" class="form-label">Nombre y apellidos</label>
                     <input type="text" name="titulo" value="<?php echo $titulo; ?>" class="form-control" id="tituloID">
                     <span class="text-danger"> <?php echo $tituloErr ?> </span>
                 </div>
             </div>
             <div class="row">
                 <div class="mb-3 col-sm-6 p-0">
-                    <label for="fechaID" class="form-label">Fecha</label>
-                    <input type="date" name="fecha" value="<?php echo $fecha; ?>" class="form-control" id="fechaID">
+                    <label for="fechaID" class="form-label">DNI</label>
+                    <input type="text" name="fecha" value="<?php echo $fecha; ?>" class="form-control" id="fechaID">
                     <span class="text-danger"> <?php echo $fechaErr ?> </span>
                 </div>
             </div>
-            <div class="row mb-4">
-                <label for="areaTexto" class="form-label">Descripcion</label>
-                <textarea class="form-control" name="descripcion" id="areaTexto" rows="3" placeholder="Escriba su mensaje..."><?php print $descripcion; ?></textarea>
-                <span class="text-danger"> <?php echo $descripcionErr ?> </span>
-            </div>
-            <div class="row mb-4">
-                <label for="imagenID" class="form-label">Imagen</label>
-                <input class="form-control" type="file" id="imagenID" name="imagen">
+            <div class="row">
+                <div class="mb-3 col-sm-6 p-0">
+                    <label for="fechaID" class="form-label">Password</label>
+                    <input type="password" name="fecha" value="<?php echo $fecha; ?>" class="form-control" id="fechaID">
+                    <span class="text-danger"> <?php echo $fechaErr ?> </span>
+                </div>
             </div>
             <span class="text-danger"> <?php echo $imagenErr ?> </span>
             <br>
