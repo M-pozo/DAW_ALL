@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $clave = test_input($_POST["clave"]);
         if (preg_match("/[ ]/", $clave)) {
-            $claveErr = "Por favor no intriduzcas espacios";
+            $claveErr = "Por favor no introduzcas espacios";
         }
     }
     if (empty($_POST["titulo"])) {
@@ -32,12 +32,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($nombreImagen) {
             $pathImagen = "static/images/{$nombreImagen}";
         }
-    } else {
-        $pathImagen = "";
     }
+
     if ($claveErr === "" && $tituloErr === "" && $fechaErr === "" && $descripcionErr === "") {
-        print_r(array_values(array_filter($proyectos, 'buscarProyecto'))[0]['clave']);
-        
+
+        $proyecto = array_values(array_filter($proyectos, 'buscarProyecto'))[0];
+
+        $proyecto['clave'] = $clave;
+        $proyecto['titulo'] = $titulo;
+        $proyecto['fecha'] = $fecha;
+        $proyecto['descripcion'] = $descripcion;
+        $proyecto['imagen'] = $pathImagen;
+
+        $proyectos[array_keys(array_filter($proyectos, 'buscarProyecto'))[0]] = $proyecto;
         $proyecto_json = json_encode($proyectos);
         file_put_contents('mysql/proyectos.json', $proyecto_json);
 ?>
@@ -51,50 +58,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 //UD4.2.b
 ?>
 <?php if ($_COOKIE['loggedIn'] === "true") { ?>
-    <div class="container">
-        <h2 class="mb-5">Actualizar proyecto</h2>
-        <div class="row">
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
+    <?php foreach ($proyectos as $proyecto) : if ($id == $proyecto['clave']) { ?>
+            <div class="container">
+                <h2 class="mb-5">Actualizar proyecto</h2>
                 <div class="row">
-                    <div class="mb-3 col-sm-6 p-0">
-                        <label for="claveID" class="form-label">Clave</label>
-                        <input type="text" name="clave" value="<?php echo $clave; ?>" class="form-control" id="claveID" placeholder="Sin espacios">
-                        <span class="text-danger"> <?php echo $claveErr ?> </span>
-                    </div>
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="<?= $id ?>">
+                        <div class="row">
+                            <div class="mb-3 col-sm-6 p-0">
+                                <label for="claveID" class="form-label">Clave</label>
+                                <input type="text" name="clave" value="<?php echo $proyecto['clave']; ?>" class="form-control" id="claveID" placeholder="Sin espacios">
+                                <span class="text-danger"> <?php echo $claveErr ?> </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col-sm-6 p-0">
+                                <label for="tituloID" class="form-label">Titulo</label>
+                                <input type="text" name="titulo" value="<?php echo $proyecto['titulo']; ?>" class="form-control" id="tituloID">
+                                <span class="text-danger"> <?php echo $tituloErr ?> </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col-sm-6 p-0">
+                                <label for="fechaID" class="form-label">Fecha</label>
+                                <input type="date" name="fecha" value="<?php echo $proyecto['fecha']; ?><?php echo $fecha; ?>" class="form-control" id="fechaID">
+                                <span class="text-danger"> <?php echo $fechaErr ?> </span>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <label for="descripcionID" class="form-label">Descripcion</label>
+                            <textarea class="form-control" name="descripcion" id="descripcionID" rows="3" placeholder="Escriba su descripción"><?php echo $proyecto['descripcion']; ?></textarea>
+                        </div>
+                        <div class="row mb-4">
+                            <label for="imagenID" class="form-label">Imagen</label>
+                            <input class="form-control" type="file" id="imagenID" name="imagen" value="<?php echo $proyecto['imagen']; ?>">
+                        </div>
+                        <span class="text-danger"> <?php echo $archivoErr ?> </span>
+                        <br>
+                        <button type="submit" class="btn btn-success">Actualizar</button>
+                    </form>
                 </div>
-                <div class="row">
-                    <div class="mb-3 col-sm-6 p-0">
-                        <label for="tituloID" class="form-label">Titulo</label>
-                        <input type="text" name="titulo" value="<?php echo $titulo; ?>" class="form-control" id="tituloID">
-                        <span class="text-danger"> <?php echo $tituloErr ?> </span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="mb-3 col-sm-6 p-0">
-                        <label for="fechaID" class="form-label">Fecha</label>
-                        <input type="date" name="fecha" value="<?php echo $fecha; ?>" class="form-control" id="fechaID">
-                        <span class="text-danger"> <?php echo $fechaErr ?> </span>
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <label for="areaTexto" class="form-label">Descripcion</label>
-                    <textarea class="form-control" name="mensaje" id="areaTexto" rows="3" placeholder="Escriba su mensaje..."><?php print $mensaje; ?></textarea>
-                </div>
-                <div class="row mb-4">
-                    <label for="imagenID" class="form-label">Imagen</label>
-                    <input class="form-control" type="file" id="imagenID" name="imagen">
-                </div>
-                <span class="text-danger"> <?php echo $archivoErr ?> </span>
-                <br>
-                <button type="submit" class="btn btn-success">Actualizar</button>
-            </form>
-        </div>
+        <?php };
+    endforeach; ?>
     <?php } else { ?>
         <?php foreach ($proyectos as $proyecto) : if ($id == $proyecto['clave']) { ?>
                 <div class="container">
                     <h2><?php echo $proyecto['titulo'] ?></h2>
                     <!--UD3.5.b-->
-                    <h4><a href="#"><?php echo date('yy-m-d', strtotime($proyecto['fecha'])); ?></a></h4>
+                    <h4><a href="#"><?php echo date('y-m-d', strtotime($proyecto['fecha'])); ?></a></h4>
                     <span>Categorías: </span>
                     <a href="#">
                         <!-- UD3.3.c BEGIN-->

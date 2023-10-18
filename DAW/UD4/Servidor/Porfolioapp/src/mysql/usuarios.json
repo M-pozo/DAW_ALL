@@ -1,14 +1,1 @@
-[
-    {
-    "email": "prueba@gmail.com",
-    "password": "123",
-    "dni" : "15236521L",
-    "nombreApellido" : "Miguel Pozo Pérez"
-    },
-    {
-    "email": "miguel@gmail.com",
-    "password": "123",
-    "dni" : "15236521L",
-    "nombreApellido" : "Miguel Pozo Pérez"
-    }
-]
+{"0":{"email":"prueba@gmail.com","password":"1234","dni":"15236521L","nombreApellidos":"Miguel Pozo"},"1":{"email":"miguel@gmail.com","password":"123","dni":"15236521L","nombreApellidos":"Miguel Pozo P\u00e9rez"},"":{"email":"prueba2@gmail.com","nombreApellidos":"Miguel Pozo","dni":"15236521L","password":"1234"}}
