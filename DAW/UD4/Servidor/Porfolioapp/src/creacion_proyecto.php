@@ -45,12 +45,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "fecha" => $fecha,
             "categorias" => ['css'],
         ];
-        $tempArray = json_decode(file_get_contents('mysql/proyectos.json'), true);
-        if ($tempArray === NULL) {
-            $tempArray = [];
+        if ($proyectos === NULL) {
+            $proyectos = [];
         }
-        array_push($tempArray, $proyecto);
-        $proyectos_json = json_encode($tempArray);
+        array_push($proyectos, $proyecto);
+        $proyectos_json = json_encode($proyectos);
         file_put_contents('mysql/proyectos.json', $proyectos_json);
 ?>
         <script type="text/javascript">

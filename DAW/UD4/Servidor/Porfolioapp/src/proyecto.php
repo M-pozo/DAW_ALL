@@ -36,23 +36,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $pathImagen = "";
     }
     if ($claveErr === "" && $tituloErr === "" && $fechaErr === "" && $descripcionErr === "") {
-        $tempArray = json_decode(file_get_contents('mysql/proyectos.json'), true);
-        if ($tempArray === NULL) {
-            $tempArray = [];
-        }
-        //array_value
-        //array_key
-        /*$proyecto_json = json_encode($tempArray);
+        print_r(array_values(array_filter($proyectos, 'buscarProyecto'))[0]['clave']);
+        
+        $proyecto_json = json_encode($proyectos);
         file_put_contents('mysql/proyectos.json', $proyecto_json);
 ?>
         <script type="text/javascript">
             window.location = "http://localhost:8080/confirmar_proyecto.php";
         </script>
-<?php*/
+<?php
     }
 }
-$tempArray = json_decode(file_get_contents('mysql/proyectos.json'), true);
-var_dump($tempArray)
+
 //UD4.2.b
 ?>
 <?php if ($_COOKIE['loggedIn'] === "true") { ?>

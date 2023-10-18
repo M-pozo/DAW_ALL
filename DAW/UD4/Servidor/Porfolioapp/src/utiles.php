@@ -47,4 +47,8 @@ function test_input($data)
     $data = htmlspecialchars($data);
     return $data;
 }
+function buscarProyecto($proyecto)
+{ 
+    return $_GET['id'] == $proyecto['clave'];
+}
 ?>

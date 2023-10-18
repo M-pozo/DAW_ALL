@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($email == $user['email'] && $password !== $user['password']) {
         $passwordErr = "Contraseña incorrecta";
     }
-    if ($emailErr === "" && $nombreApellidosErr === "" && $dniErr === "" && $passwrodErr === "") {
+    if ($emailErr === "" && $nombreApellidosErr === "" && $dniErr === "" && $passwordErr === "") {
         /*$proyectos = [
             "clave" => $clave,
             "titulo" => $titulo,
