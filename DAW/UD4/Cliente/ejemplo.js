@@ -38,3 +38,42 @@ a.splice(3,0,...b);
 console.log(a);
 
 a.push(11)
+
+let personas =[
+    ["Jose", 35],
+    ["María", 74],
+    ["Pepe", 40],
+    ["Antonio", 18],
+    ["Martin", 29],
+    ["Javi", 65],
+    ["Alejandro", 51],
+    ["Mario", 33],
+    ["Adrian", 29],
+    ["Daniel", 93]
+]
+console.log(personas)
+let personasAsc = JSON.parse(JSON.stringify(personas));
+//personasAsc.sort((n1, n2) => n2[1] - n1[1]);
+/*personasAsc.sort((n1, n2)=> {
+    if (n1[1] === n2[1]) {
+        return n1[0] - n2[0]
+    }else{
+        return n2[1] - n1[1]
+    }
+}
+);*/
+personasAsc.sort((n1, n2)=> {
+    if ((n2[1]-n1[1]) == 0) {
+        if (n1[0] > n2[0]) {
+            return 1;
+        }
+        else if (n1[0]<n2[0]) {
+            return -1;
+        }else{
+            return 0;
+        }
+    } else {
+        return n2[1] - n1[1];
+    }
+});
+console.log(personasAsc);
