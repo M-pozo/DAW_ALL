@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         file_put_contents('mysql/proyectos.json', $proyecto_json);
 ?>
         <script type="text/javascript">
-            window.location = "http://localhost:8080/confirmar_proyecto.php";
+            window.location = "/confirmar_proyecto.php";
         </script>
 <?php
     }

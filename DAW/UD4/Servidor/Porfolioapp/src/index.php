@@ -35,13 +35,13 @@ if (isset($_GET['sort_date']) && $_GET['sort_date'] == "-1") {
     <a href="?sort_date=1"><button href="" type="button" class="btn btn-outline-secondary">FechAsc</button></a>
     <!--UD3.2.f END-->
     <div class="row mt-3">
+        <h1><----- MARICON</h1>
         <?php foreach ($proyecto_filtrado as $proyecto) : ?>
             <?php
             ?>
             <div class="col-sm-3">
                 <!-- UD3.3.d-->
-                <!-- Poner // al principio para que se sobrescriba la url-->
-                <a href="//localhost:8080/proyecto.php?id=<?php echo $proyecto["clave"] ?>" class="m-5">
+                <a href="/proyecto.php?id=<?php echo $proyecto["clave"] ?>" class="m-5">
                     <div clss="card">
                         <!-- UD3.2.c -->
                         <img class="card-img-top" style="height: 10rem;" src="<?php echo $proyecto['imagen'] == '' ? 'static/images/default.png' : $proyecto['imagen'] ?>" alt="<?php echo $proyecto['titulo'] ?>">
