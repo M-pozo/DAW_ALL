@@ -79,11 +79,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <h2 class="mb-5">Actualizar proyecto</h2>
                 <div class="row">
                     <form action="
-                        <?php echo htmlspecialchars($_SERVER["PHP_SELF"]);
-                        if (isset($id)) {
-                            echo "?id=" . $proyecto['clave'];
-                        }
-                        ?>" method="POST" enctype="multipart/form-data">
+                        <?php echo htmlspecialchars($_SERVER["PHP_SELF"]). "?id=". $proyecto['clave'];?>
+                        " method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="id" value="<?php echo $id ?>">
                         <div class="row">
                             <div class="mb-3 col-sm-6 p-0">
