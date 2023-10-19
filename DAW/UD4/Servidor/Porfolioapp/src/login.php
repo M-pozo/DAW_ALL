@@ -21,11 +21,18 @@ if (!empty($email) && !empty($password)) {
         $passwordErr = "Contraseña incorrecta";
     }
     if ($email == $user['email'] && $password == $user['password']) {
-        //UD4.1.c UD4.1.e
+        //UD4.1.c BEGIN
+        //UD4.1.e BEGIN
+        //UD4.3.c.1 He utilizado una cookie persistente para que el usuario no se tenga que loguear cada vez que cierra la sesión.
         setcookie("loggedIn", "true", time() + 84600);
         setcookie("user_email", $email, time() + 84600);
-        header('Location: index.php');
-        exit;
+        //UD4.1.e END
+        ?>
+            <script type="text/javascript">
+                window.location = "/contacto_lista.php";
+            </script>
+        <?php
+        //UD4.1.c END
     }
 }
 //UD4.1.d END

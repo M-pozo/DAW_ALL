@@ -47,7 +47,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
                     <?php foreach ($categorias as $key => $value) :
-                        echo '<a class="dropdown-item" href="//localhost:8080/index.php?categoria=' . $key . '">' . $value . '</a>';
+                        echo '<a class="dropdown-item" href="/index.php?categoria=' . $key . '">' . $value . '</a>';
                     endforeach; ?>
                 </div>
             </li>
@@ -59,16 +59,7 @@
                 </a>
             </li>
             <!-- UD3.3.e END-->
-            <!-- UD4.2.a BEGIN-->
-            <li class="nav-item">
-                <!--UD3.2.b-->
-                <a href="./creacion_proyecto.php" class="nav-link
-                        <?php echo ($_SERVER['SCRIPT_NAME'] == "/creacion_proyecto.php") ? "active" : "" ?>
-                    ">CREAR PROYECTO
-                </a>
-            </li>
-            <!-- UD4.2.a END-->
-            <!--UD4.1.e BEGIN-->
+            <!--UD4.1.e BEGIN / UD4.1.f BEGIN-->
             <?php if ($_COOKIE['loggedIn'] === "true") { ?>
                 <!-- UD3.2.e BEGIN -->
                 <li class="nav-item">
@@ -76,10 +67,12 @@
                     <?php echo ($_SERVER['SCRIPT_NAME'] == "/usuarios.php" || $_SERVER['SCRIPT_NAME'] == "/contacto_lista.php") ? "active" : "" ?>" id="dropdownMenu1" data-bs-toggle="dropdown" ariahaspopup="true">ADMINISTRACION
                         <span class="caret"></span>
                     </a>
+                    <!--UD4.3.a BEGIN-->
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         <a class="dropdown-item" href="/contacto_lista.php">Lista de contactos</a>
                         <a class="dropdown-item" href="/usuarios.php">Usuarios</a>
                     </div>
+                    <!--UD4.3.a END-->
                 </li>
                 <!-- UD3.2.e END -->
                 <li class="nav-item">
@@ -97,7 +90,7 @@
                     </a>
                 </li>
                 <!--UD4.1.a END-->
-            <?php } //UD4.1.e END
+            <?php } //UD4.1.e END / UD4.1.f END
             ?>
         </ul>
     </header>

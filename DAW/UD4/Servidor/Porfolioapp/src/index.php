@@ -35,7 +35,6 @@ if (isset($_GET['sort_date']) && $_GET['sort_date'] == "-1") {
     <a href="?sort_date=1"><button href="" type="button" class="btn btn-outline-secondary">FechAsc</button></a>
     <!--UD3.2.f END-->
     <div class="row mt-3">
-        <h1><----- MARICON</h1>
         <?php foreach ($proyecto_filtrado as $proyecto) : ?>
             <?php
             ?>
@@ -47,22 +46,26 @@ if (isset($_GET['sort_date']) && $_GET['sort_date'] == "-1") {
                         <img class="card-img-top" style="height: 10rem;" src="<?php echo $proyecto['imagen'] == '' ? 'static/images/default.png' : $proyecto['imagen'] ?>" alt="<?php echo $proyecto['titulo'] ?>">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $proyecto['titulo'] ?></h5>
-                            <p class="card-text"><?php /* UD3.3.d*/ echo nl2br($proyecto['descripcion']); ?></p>
                             <p class="card-text"><?php /* UD3.3.d*/ echo nl2br($proyecto['fecha']); ?></p>
                             <!-- UD3.3.c BEGIN-->
-                            <p class="card-text">
+                            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                <div class="btn-group mr-2" role="group" aria-label="First group">
                                 <?php foreach ($proyecto['categorias'] as $categoria) : ?>
-                                    <button class="btn btn-outline-secondary">
+                                    <button class="btn btn-outline-info btn-sm">
                                         <?php echo array_key_exists($categoria, $categorias) ? $categorias[$categoria] : ""; ?>
                                     </button>
                                 <?php endforeach; ?>
-                                <!-- UD3.3.c END-->
-                            </p>
+                                </div>
+                            </div>
+                            <!-- UD3.3.c END-->
                         </div>
                     </div>
                 </a>
             </div>
         <?php endforeach; ?>
     </div>
+    <!--UD4.2.a BEGIN-->
+    <a href="/creacion_proyecto.php"><button href="" type="button" class="btn btn-outline-secondary">Crear Proyecto</button></a>
+    <!--UD4.2.a END-->
 </div>
 <?php include("templates/footer.php"); ?>

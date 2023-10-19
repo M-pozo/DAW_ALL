@@ -2,14 +2,14 @@
 include("datos.php");
 include("utiles.php");
 //UD4.2.c BEGIN
-$claveErr = $tituloErr = $fechaErr = $descripcionErr = "";
+$claveErr = $tituloErr = $fechaErr = $descripcionErr = $imagenErr = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($_POST["clave"])) {
         $claveErr = "Por favor, introduzca una clave";
     } else {
         $clave = test_input($_POST["clave"]);
         if (preg_match("/[ ]/", $clave)) {
-            $claveErr = "Por favor no intriduzcas espacios";
+            $claveErr = "Por favor no introduzcas espacios";
         }
     }
     if (empty($_POST["titulo"])) {
@@ -21,6 +21,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $fechaErr = "Por favor, introduzca su fecha.";
     } else {
         $fecha = test_input($_POST["fecha"]);
+        if (preg_match("/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/", $fecha)) {
+            $fechaErr = "Introduzca un formato válido";
+        }
     }
     if (empty($_POST["descripcion"])) {
         $descripcionErr = "Por favor, introduzca su descripción.";
@@ -29,6 +32,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     if (!empty($_FILES['imagen'])) {
         $nombreImagen = $_FILES['imagen']['name'];
+        if (!preg_match("/\.(jpg|jpeg|png|gif|bmp|webp)$/", $nombreImagen)) {
+            $imagenErr = "Introduzca un formato válido";
+        }
         move_uploaded_file($_FILES['imagen']['tmp_name'], "/var/www/html/static/images/{$nombreImagen}");
         if ($nombreImagen) {
             $pathImagen = "static/images/{$nombreImagen}";
@@ -36,7 +42,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $pathImagen = "";
     }
-    if ($claveErr === "" && $tituloErr === "" && $fechaErr === "" && $descripcionErr === "") {
+    //UD4.2.c END
+    //UD4.2.e BEGIN
+    if ($claveErr === "" && $tituloErr === "" && $fechaErr === "" && $descripcionErr === "" && $imagenErr === "") {
         $proyecto = [
             "clave" => $clave,
             "titulo" => $titulo,
@@ -51,10 +59,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         array_push($proyectos, $proyecto);
         $proyectos_json = json_encode($proyectos);
         file_put_contents('mysql/proyectos.json', $proyectos_json);
+        //UD4.2.e END
 ?>
+        <!--UD4.2.f BEGIN-->
         <script type="text/javascript">
             window.location = "/confirmar_proyecto.php";
         </script>
+        <!--UD4.2.f END-->
 <?php
     }
 }
@@ -65,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <h2 class="mb-5">Crear proyecto</h2>
     <div class="row">
         <!--UD4.2.d-->
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
+        <form action="<?php /*UD4.2.d*/ echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="mb-3 col-sm-6 p-0">
                     <label for="claveID" class="form-label">Clave</label>
@@ -88,15 +99,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             </div>
             <div class="row mb-4">
-                <label for="areaTexto" class="form-label">Descripcion</label>
+                <label for="areaTexto" class="form-label">Descripción</label>
                 <textarea class="form-control" name="descripcion" id="areaTexto" rows="3" placeholder="Escriba su mensaje..."><?php print $descripcion; ?></textarea>
                 <span class="text-danger"> <?php echo $descripcionErr ?> </span>
             </div>
             <div class="row mb-4">
                 <label for="imagenID" class="form-label">Imagen</label>
                 <input class="form-control" type="file" id="imagenID" name="imagen">
+                <span class="text-danger"> <?php echo $imagenErr ?> </span>
             </div>
-            <span class="text-danger"> <?php echo $imagenErr ?> </span>
             <br>
             <button type="submit" class="btn btn-success">Crear</button>
         </form>
