@@ -32,15 +32,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     if (!empty($_FILES['imagen'])) {
         $nombreImagen = $_FILES['imagen']['name'];
-        if (!preg_match("/\.(jpg|jpeg|png|gif|bmp|webp)$/", $nombreImagen)) {
-            $imagenErr = "Introduzca un formato válido";
+        if (!empty($nombreImagen)) {
+            if (!preg_match("/\.(jpg|jpeg|png|gif|bmp|webp)$/", $nombreImagen)) {
+                $imagenErr = "Introduzca un formato válido";
+            } else {
+                move_uploaded_file($_FILES['imagen']['tmp_name'], "/var/www/html/static/images/{$nombreImagen}");
+                if ($nombreImagen) {
+                    $pathImagen = "static/images/{$nombreImagen}";
+                }
+            }
+        }else{
+            $pathImagen = "";
         }
-        move_uploaded_file($_FILES['imagen']['tmp_name'], "/var/www/html/static/images/{$nombreImagen}");
-        if ($nombreImagen) {
-            $pathImagen = "static/images/{$nombreImagen}";
-        }
-    } else {
-        $pathImagen = "";
     }
     //UD4.2.c END
     //UD4.2.e BEGIN

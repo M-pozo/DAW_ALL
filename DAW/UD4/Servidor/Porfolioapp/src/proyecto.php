@@ -32,18 +32,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     if (!empty($_FILES['imagen'])) {
         $nombreImagen = $_FILES['imagen']['name'];
-        if (!preg_match("/\.(jpg|jpeg|png|gif|bmp|webp)$/", $nombreImagen)) {
-            $imagenErr = "Introduzca un formato válido";
-        }else{
-            move_uploaded_file($_FILES['imagen']['tmp_name'], "/var/www/html/static/images/{$nombreImagen}");
-            if ($nombreImagen) {
-            $pathImagen = "static/images/{$nombreImagen}";
-        }
+        if (!empty($nombreImagen)) {
+            if (!preg_match("/\.(jpg|jpeg|png|gif|bmp|webp)$/", $nombreImagen)) {
+                $imagenErr = "Introduzca un formato válido";
+            } else {
+                move_uploaded_file($_FILES['imagen']['tmp_name'], "/var/www/html/static/images/{$nombreImagen}");
+                if ($nombreImagen) {
+                    $pathImagen = "static/images/{$nombreImagen}";
+                }
+            }
         }
     }
     //UD4.2.c END
-    //UD4.2.e BEGIN    
-    if ($claveErr === "" && $tituloErr === "" && $fechaErr === "" && $descripcionErr === "" && $imagenErr === "") {
+    //UD4.2.e BEGIN
+    if ($claveErr == "" && $tituloErr == "" && $fechaErr == "" && $descripcionErr == "" && $imagenErr == "") {
 
         $proyecto = array_values(array_filter($proyectos, 'buscarProyecto'))[0];
 
@@ -51,7 +53,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $proyecto['titulo'] = $titulo;
         $proyecto['fecha'] = $fecha;
         $proyecto['descripcion'] = $descripcion;
-        $proyecto['imagen'] = $pathImagen;
+        if (!empty($nombreImagen)) {
+            $proyecto['imagen'] = $pathImagen;
+        }
 
         $proyectos[array_keys(array_filter($proyectos, 'buscarProyecto'))[0]] = $proyecto;
         $proyecto_json = json_encode($proyectos);
@@ -64,23 +68,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </script>
         <!--UD4.2.f END-->
 <?php
-    }else{
-        ?>
-        <script type="text/javascript">
-            window.location = "/proyecto.php?id=<?php echo $_POST["id"]?>";
-        </script>
-        <?php
     }
 }
 
 //UD4.2.b BEGIN
 ?>
 <?php if ($_COOKIE['loggedIn'] === "true") { ?>
-    <?php foreach ($proyectos as $proyecto) : if ($_POST["clave"] == $proyecto['clave'] || $id == $proyecto['clave']) { ?>
+    <?php foreach ($proyectos as $proyecto) : if ($id == $proyecto['clave']) { ?>
             <div class="container">
                 <h2 class="mb-5">Actualizar proyecto</h2>
                 <div class="row">
-                    <form action="<?php /*UD4.2.d*/ echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
+                    <form action="
+                        <?php echo htmlspecialchars($_SERVER["PHP_SELF"]);
+                        if (isset($id)) {
+                            echo "?id=" . $proyecto['clave'];
+                        }
+                        ?>" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="id" value="<?php echo $id ?>">
                         <div class="row">
                             <div class="mb-3 col-sm-6 p-0">
@@ -99,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="row">
                             <div class="mb-3 col-sm-6 p-0">
                                 <label for="fechaID" class="form-label">Fecha</label>
-                                <input type="date" name="fecha" value="<?php echo $proyecto['fecha']; ?><?php echo $fecha; ?>" class="form-control" id="fechaID">
+                                <input type="date" name="fecha" value="<?php echo $proyecto['fecha']; ?>" class="form-control" id="fechaID">
                                 <span class="text-danger"> <?php echo $fechaErr ?> </span>
                             </div>
                         </div>
@@ -110,14 +113,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="row mb-4">
                             <label for="imagenID" class="form-label">Imagen</label>
                             <input class="form-control" type="file" id="imagenID" name="imagen">
-                            <span class="text-danger"> <?php echo $fechaErr ?> </span>
+                            <span class="text-danger"> <?php echo $imagenErr ?> </span>
                         </div>
                         <span class="text-danger"> <?php echo $archivoErr ?> </span>
                         <br>
                         <button type="submit" class="btn btn-success">Actualizar</button>
                     </form>
                 </div>
-        <?php }; endforeach; ?>
+        <?php };
+    endforeach; ?>
     <?php } else { ?>
         <?php foreach ($proyectos as $proyecto) : if ($id == $proyecto['clave']) { ?>
                 <div class="container">
