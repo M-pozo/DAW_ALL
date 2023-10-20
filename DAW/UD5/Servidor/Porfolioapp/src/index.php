@@ -1,5 +1,15 @@
 <?php include("templates/header.php"); ?>
+<?php include("mysql/db_credenciales.php");
 
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Conexión exitosa";
+} catch (PDOException $e) {
+    echo "La conexión ha fallado: " . $e->getMessage();
+}
+
+?>
 
 
 <?php

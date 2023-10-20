@@ -12,7 +12,7 @@ for (let x = 0 ; x < filas; x++) {
 console.log(array)
 */
 
-let array = [];
+/*let array = [];
 array.push("Bocata")
 array.push("Jamón")
 array.push("con tozino")
@@ -26,7 +26,7 @@ let subArray = array.slice(1, 3);
 console.log(subArray);
 
 let a = ['a', 'b', 'c', 'd', 'e'];
-let b = ["1", "2", "3", "4", "5"];
+let b = ["1", "2", "3", "4", "5"];*/
 
 //Usando bucle
 /*for (let i in b){
@@ -34,7 +34,7 @@ let b = ["1", "2", "3", "4", "5"];
 }*/
 //a=a.splice(0,3).concat(b.concat(a.splice(3)));
 
-a.splice(3,0,...b);
+/*a.splice(3,0,...b);
 console.log(a);
 
 a.push(11)
@@ -52,7 +52,7 @@ let personas =[
     ["Daniel", 93]
 ]
 console.log(personas)
-let personasAsc = JSON.parse(JSON.stringify(personas));
+let personasAsc = JSON.parse(JSON.stringify(personas));*/
 //personasAsc.sort((n1, n2) => n2[1] - n1[1]);
 /*personasAsc.sort((n1, n2)=> {
     if (n1[1] === n2[1]) {
@@ -62,7 +62,7 @@ let personasAsc = JSON.parse(JSON.stringify(personas));
     }
 }
 );*/
-personasAsc.sort((n1, n2)=> {
+/*personasAsc.sort((n1, n2)=> {
     if ((n2[1]-n1[1]) == 0) {
         if (n1[0] > n2[0]) {
             return 1;
@@ -76,4 +76,26 @@ personasAsc.sort((n1, n2)=> {
         return n2[1] - n1[1];
     }
 });
-console.log(personasAsc);
+console.log(personasAsc);*/
+let enteros =[0,1,2,3,4,5,6,7,8,9,10]
+console.log(enteros.every(n => n%2 == 0))
+enteros.forEach((num, indice, array) => {
+    console.log("Índice "+ indice + " en [" + array + "] es " + num)
+});
+let sum = 0;
+enteros.forEach(num => sum += num)
+sum = sum/enteros.length 
+enteros.forEach((num) =>{
+    if (num > sum) {
+        console.log(num);
+    }
+});
+
+console.log(enteros.map(num => num % 2 == 0));
+console.log(enteros.filter(num => num % 2 == 0));
+
+console.log(enteros.reduce((acum, n) => {
+    return valor;
+}, valInicial)
+);
+
