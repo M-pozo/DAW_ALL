@@ -40,32 +40,32 @@ if (isset($_GET['sort_date']) && $_GET['sort_date'] == "-1") {
             ?>
             <div class="col-sm-3">
                 <!-- UD3.3.d / UD4.2.b BEGIN-->
-                <?php if($_COOKIE['loggedIn']) {?>
+                <?php if ($_COOKIE['loggedIn'] == 'true') { ?>
                     <a href="/crear_actualizar_proyecto.php?id=<?php echo $proyecto["clave"] ?>" class="m-5">
-                <?php } else { ?>
-                    <a href="/proyecto.php?id=<?php echo $proyecto["clave"] ?>" class="m-5">
-                <?php } ?>
-                <!--UD4.2.b END-->
-                    <div class="card">
-                        <!-- UD3.2.c -->
-                        <img class="card-img-top" style="height: 10rem;" src="<?php echo $proyecto['imagen'] == '' ? 'static/images/default.png' : $proyecto['imagen'] ?>" alt="<?php echo $proyecto['titulo'] ?>">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo $proyecto['titulo'] ?></h5>
-                            <p class="card-text"><?php /* UD3.3.d*/ echo date('d-m-Y', strtotime($proyecto['fecha'])); ?></p>
-                            <!-- UD3.3.c BEGIN-->
-                            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                                <div class="btn-group mr-2" role="group" aria-label="First group">
-                                <?php foreach ($proyecto['categorias'] as $categoria) : ?>
-                                    <button class="btn btn-outline-info btn-sm">
-                                        <?php echo array_key_exists($categoria, $categorias) ? $categorias[$categoria] : ""; ?>
-                                    </button>
-                                <?php endforeach; ?>
+                    <?php } else { ?>
+                        <a href="/proyecto.php?id=<?php echo $proyecto["clave"] ?>" class="m-5">
+                        <?php } ?>
+                        <!--UD4.2.b END-->
+                        <div class="card">
+                            <!-- UD3.2.c -->
+                            <img class="card-img-top" style="height: 10rem;" src="<?php echo $proyecto['imagen'] == '' ? 'static/images/default.png' : $proyecto['imagen'] ?>" alt="<?php echo $proyecto['titulo'] ?>">
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo $proyecto['titulo'] ?></h5>
+                                <p class="card-text"><?php /* UD3.3.d*/ echo date('d-m-Y', strtotime($proyecto['fecha'])); ?></p>
+                                <!-- UD3.3.c BEGIN-->
+                                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                                        <?php foreach ($proyecto['categorias'] as $categoria) : ?>
+                                            <button class="btn btn-outline-info btn-sm">
+                                                <?php echo array_key_exists($categoria, $categorias) ? $categorias[$categoria] : ""; ?>
+                                            </button>
+                                        <?php endforeach; ?>
+                                    </div>
                                 </div>
+                                <!-- UD3.3.c END-->
                             </div>
-                            <!-- UD3.3.c END-->
                         </div>
-                    </div>
-                </a>
+                        </a>
             </div>
         <?php endforeach; ?>
     </div>

@@ -50,15 +50,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $usuario['password'] = $password;
         $usuario['dni'] = $dni;
         $usuario['nombreApellidos'] = $nombreApellidos;
-        
+
         $usuarios[array_keys(array_filter($usuarios, 'buscarUsuario'))[0]] = $usuario;
         $usuario_json = json_encode($usuarios, true);
         file_put_contents('mysql/usuarios.json', $usuario_json);
-        ?>
-            <script type="text/javascript">
-                window.location = "/confirmar_usuario.php";
-            </script>
-        <?php
+?>
+        <script type="text/javascript">
+            window.location = "/confirmar_usuario.php";
+        </script>
+<?php
     }
 }
 ?>
@@ -103,6 +103,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
     <?php };
 endforeach; ?>
-<!--UD4.3.b END-->
-<!--UD4.3.c.3 BEGIN-->
-<?php include("templates/footer.php") ?>
+    <!--UD4.3.b END-->
+    <!--UD4.3.c.3 BEGIN-->
+    <?php include("templates/footer.php") ?>

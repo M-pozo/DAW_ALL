@@ -41,13 +41,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $pathImagen = "static/images/{$nombreImagen}";
                 }
             }
-        }else if (!isset($id)){
+        } else if (!isset($id)) {
             $pathImagen = "";
         }
     }
     //UD4.2.c END
     if ($claveErr === "" && $tituloErr === "" && $fechaErr === "" && $descripcionErr === "" && $imagenErr === "") {
-        if(!isset($id)){
+        if (!isset($id)) {
             $proyecto = [
                 "clave" => $clave,
                 "titulo" => $titulo,
@@ -76,100 +76,102 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $proyectos[array_keys(array_filter($proyectos, 'buscarProyecto'))[0]] = $proyecto;
             $proyecto_json = json_encode($proyectos);
             file_put_contents('mysql/proyectos.json', $proyecto_json);
-            }
+        }
         //UD4.2.e END
         //UD4.2.f BEGIN
-        ?><script type="text/javascript">
+?><script type="text/javascript">
             window.location = "/confirmar_proyecto.php";
         </script><?php
-        //UD4.2.f END
-    }
-}
-include("templates/header.php");
-//UD4.2.e BEGIN
-if (!isset($id)) { ?>
+                    //UD4.2.f END
+                }
+            }
+            include("templates/header.php");
+            //UD4.2.e BEGIN
+            if (!isset($id)) { ?>
     <div class="container">
-    <h2 class="mb-5">Crear proyecto</h2>
-    <div class="row">
-        <!--UD4.2.d-->
-        <form action="<?php /*UD4.2.d*/ echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
-            <div class="row">
-                <div class="mb-3 col-sm-6 p-0">
-                    <label for="claveID" class="form-label">Clave</label>
-                    <input type="text" name="clave" value="<?php echo $clave; ?>" class="form-control" id="claveID" placeholder="Sin espacios">
-                    <span class="text-danger"> <?php echo $claveErr ?> </span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="mb-3 col-sm-6 p-0">
-                    <label for="tituloID" class="form-label">Titulo</label>
-                    <input type="text" name="titulo" value="<?php echo $titulo; ?>" class="form-control" id="tituloID">
-                    <span class="text-danger"> <?php echo $tituloErr ?> </span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="mb-3 col-sm-6 p-0">
-                    <label for="fechaID" class="form-label">Fecha</label>
-                    <input type="date" name="fecha" value="<?php echo $fecha; ?>" class="form-control" id="fechaID">
-                    <span class="text-danger"> <?php echo $fechaErr ?> </span>
-                </div>
-            </div>
-            <div class="row mb-4">
-                <label for="areaTexto" class="form-label">Descripción</label>
-                <textarea class="form-control" name="descripcion" id="areaTexto" rows="3" placeholder="Escriba su mensaje..."><?php print $descripcion; ?></textarea>
-                <span class="text-danger"> <?php echo $descripcionErr ?> </span>
-            </div>
-            <div class="row mb-4">
-                <label for="imagenID" class="form-label">Imagen</label>
-                <input class="form-control" type="file" id="imagenID" name="imagen">
-                <span class="text-danger"> <?php echo $imagenErr ?> </span>
-            </div>
-            <br>
-            <button type="submit" class="btn btn-success">Crear</button>
-        </form>
-    </div>
-<?php } else { ?>
-    <?php foreach ($proyectos as $proyecto) : if ($id == $proyecto['clave']) { ?>
-            <div class="container">
-                <h2 class="mb-5">Actualizar proyecto</h2>
+        <h2 class="mb-5">Crear proyecto</h2>
+        <div class="row">
+            <!--UD4.2.d-->
+            <form action="<?php /*UD4.2.d*/ echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
                 <div class="row">
-                    <form action="
-                        <?php echo /*UD4.2.d*/ htmlspecialchars($_SERVER["PHP_SELF"]). "?id=". $proyecto['clave'];?>
-                        " method="POST" enctype="multipart/form-data">
-                        <div class="row">
-                            <div class="mb-3 col-sm-6 p-0">
-                                <label for="claveID" class="form-label">Clave</label>
-                                <input type="text" name="clave" value="<?php echo $proyecto['clave']; ?>" class="form-control" id="claveID" placeholder="Sin espacios">
-                                <span class="text-danger"> <?php echo $claveErr ?> </span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="mb-3 col-sm-6 p-0">
-                                <label for="tituloID" class="form-label">Titulo</label>
-                                <input type="text" name="titulo" value="<?php echo $proyecto['titulo']; ?>" class="form-control" id="tituloID">
-                                <span class="text-danger"> <?php echo $tituloErr ?> </span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="mb-3 col-sm-6 p-0">
-                                <label for="fechaID" class="form-label">Fecha</label>
-                                <input type="date" name="fecha" value="<?php echo $proyecto['fecha']; ?>" class="form-control" id="fechaID">
-                                <span class="text-danger"> <?php echo $fechaErr ?> </span>
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <label for="descripcionID" class="form-label">Descripción</label>
-                            <textarea class="form-control" name="descripcion" id="descripcionID" rows="3" placeholder="Escriba su descripción"><?php echo $proyecto['descripcion']; ?></textarea>
-                        </div>
-                        <div class="row mb-4">
-                            <label for="imagenID" class="form-label">Imagen (<?php /*UD4.2.c*/ echo " ".pathinfo($proyecto['imagen'], PATHINFO_BASENAME)." "; ?>)</label>
-                            <input class="form-control" type="file" id="imagenID" name="imagen">
-                            <span class="text-danger"> <?php echo $imagenErr ?> </span>
-                        </div>
-                        <span class="text-danger"> <?php echo $archivoErr ?> </span>
-                        <br>
-                        <button type="submit" class="btn btn-success">Actualizar</button>
-                    </form>
+                    <div class="mb-3 col-sm-6 p-0">
+                        <label for="claveID" class="form-label">Clave</label>
+                        <input type="text" name="clave" value="<?php echo $clave; ?>" class="form-control" id="claveID" placeholder="Sin espacios">
+                        <span class="text-danger"> <?php echo $claveErr ?> </span>
+                    </div>
                 </div>
-        <?php }; endforeach;
-} //UD4.2.e END?>
+                <div class="row">
+                    <div class="mb-3 col-sm-6 p-0">
+                        <label for="tituloID" class="form-label">Titulo</label>
+                        <input type="text" name="titulo" value="<?php echo $titulo; ?>" class="form-control" id="tituloID">
+                        <span class="text-danger"> <?php echo $tituloErr ?> </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-sm-6 p-0">
+                        <label for="fechaID" class="form-label">Fecha</label>
+                        <input type="date" name="fecha" value="<?php echo $fecha; ?>" class="form-control" id="fechaID">
+                        <span class="text-danger"> <?php echo $fechaErr ?> </span>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <label for="areaTexto" class="form-label">Descripción</label>
+                    <textarea class="form-control" name="descripcion" id="areaTexto" rows="3" placeholder="Escriba su mensaje..."><?php print $descripcion; ?></textarea>
+                    <span class="text-danger"> <?php echo $descripcionErr ?> </span>
+                </div>
+                <div class="row mb-4">
+                    <label for="imagenID" class="form-label">Imagen</label>
+                    <input class="form-control" type="file" id="imagenID" name="imagen">
+                    <span class="text-danger"> <?php echo $imagenErr ?> </span>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-success">Crear</button>
+            </form>
+        </div>
+    <?php } else { ?>
+        <?php foreach ($proyectos as $proyecto) : if ($id == $proyecto['clave']) { ?>
+                <div class="container">
+                    <h2 class="mb-5">Actualizar proyecto</h2>
+                    <div class="row">
+                        <form action="
+                        <?php echo /*UD4.2.d*/ htmlspecialchars($_SERVER["PHP_SELF"]) . "?id=" . $proyecto['clave']; ?>
+                        " method="POST" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="mb-3 col-sm-6 p-0">
+                                    <label for="claveID" class="form-label">Clave</label>
+                                    <input type="text" name="clave" value="<?php echo $proyecto['clave']; ?>" class="form-control" id="claveID" placeholder="Sin espacios">
+                                    <span class="text-danger"> <?php echo $claveErr ?> </span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col-sm-6 p-0">
+                                    <label for="tituloID" class="form-label">Titulo</label>
+                                    <input type="text" name="titulo" value="<?php echo $proyecto['titulo']; ?>" class="form-control" id="tituloID">
+                                    <span class="text-danger"> <?php echo $tituloErr ?> </span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col-sm-6 p-0">
+                                    <label for="fechaID" class="form-label">Fecha</label>
+                                    <input type="date" name="fecha" value="<?php echo $proyecto['fecha']; ?>" class="form-control" id="fechaID">
+                                    <span class="text-danger"> <?php echo $fechaErr ?> </span>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="descripcionID" class="form-label">Descripción</label>
+                                <textarea class="form-control" name="descripcion" id="descripcionID" rows="3" placeholder="Escriba su descripción"><?php echo $proyecto['descripcion']; ?></textarea>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="imagenID" class="form-label">Imagen (<?php /*UD4.2.c*/ echo " " . pathinfo($proyecto['imagen'], PATHINFO_BASENAME) . " "; ?>)</label>
+                                <input class="form-control" type="file" id="imagenID" name="imagen">
+                                <span class="text-danger"> <?php echo $imagenErr ?> </span>
+                            </div>
+                            <span class="text-danger"> <?php echo $archivoErr ?> </span>
+                            <br>
+                            <button type="submit" class="btn btn-success">Actualizar</button>
+                        </form>
+                    </div>
+        <?php };
+                endforeach;
+            } //UD4.2.e END
+        ?>
