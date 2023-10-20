@@ -49,6 +49,6 @@ function test_input($data)
 }
 function buscarProyecto($proyecto)
 { 
-    return $_POST['id'] == $proyecto['clave'];
+    return $_GET['id'] == $proyecto['clave'];
 }
 ?>

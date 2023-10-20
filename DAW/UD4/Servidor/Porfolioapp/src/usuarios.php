@@ -4,6 +4,12 @@ include("utiles.php");
 //UD4.3.b BEGIN
 $emailErr = $nombreApellidosErr = $dniErr = $passwordErr = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    //UD4.3.c.3 BEGIN
+    foreach ($usuarios as $usuario) : if ($usuario['email'] == $_POST["email"]) {
+            $emailErr = "El que intentas introducir ya e-mail ya existe";
+        }
+    endforeach;
+    //UD4.3.c.3 END
     if (empty($_POST["email"])) {
         $emailErr = "Por favor, introduzca un e-mail";
     } else {
@@ -34,19 +40,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $password = test_input($_POST["password"]);
     }
-    //UD4.3.c.3 BEGIN
     if ($emailErr === "" && $nombreApellidosErr === "" && $dniErr === "" && $passwordErr === "") {
         //UD4.3.c.2 BEGIN
-        setcookie("user_email", $email, time() + 84600, '/');
+        setcookie("user_email", $email, time() + 84600);
         //UD4.3.c.2 END
         $usuario = array_values(array_filter($usuarios, 'buscarUsuario'))[0];
-        $usuario['email'] = $email;
-        $usuario['nombreApellidos'] = $nombreApellidos;
-        $usuario['dni'] = $dni;
-        $usuario['password'] = $password;
 
+        $usuario['email'] = $email;
+        $usuario['password'] = $password;
+        $usuario['dni'] = $dni;
+        $usuario['nombreApellidos'] = $nombreApellidos;
+        
         $usuarios[array_keys(array_filter($usuarios, 'buscarUsuario'))[0]] = $usuario;
-        $usuario_json = json_encode($usuarios);
+        $usuario_json = json_encode($usuarios, true);
         file_put_contents('mysql/usuarios.json', $usuario_json);
         ?>
             <script type="text/javascript">
@@ -54,9 +60,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </script>
         <?php
     }
-    //UD4.3.c.3 END
 }
 ?>
+<!--UD4.3.c.3 BEGIN-->
 <?php include("templates/header.php") ?>
 <?php foreach ($usuarios as $usuario) : if ($usuario['email'] == $_COOKIE['user_email']) { ?>
         <div class="container">
@@ -98,4 +104,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php };
 endforeach; ?>
 <!--UD4.3.b END-->
-    <?php include("templates/footer.php") ?>
+<!--UD4.3.c.3 BEGIN-->
+<?php include("templates/footer.php") ?>
