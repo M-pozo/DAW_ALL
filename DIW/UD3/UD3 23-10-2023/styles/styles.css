@@ -1,0 +1,59 @@
+/* Comentarios */
+*{
+    letter-spacing: 10px;
+}
+
+h1 {
+    color: purple !important;
+    font-size: 100px;
+}
+
+.titulo {
+    color: darkred !important;
+}
+p{
+    color: plum;
+}
+#ultimoParrafo{
+    margin: 150px;
+}
+header li{
+    text-transform: uppercase;
+}
+div div div{
+    padding: 10px;
+    border: 1px solid #000;
+}
+div div {
+    background-color:bisque;
+}
+div p{
+    text-align: center;
+}
+main > p{
+    font-weight: bold;
+    font-size: 20px;
+}
+main div p{
+    font-style: italic;
+}
+
+p + div {
+    background: cadetblue;
+}
+.negrita{
+    font-weight: bold;
+}
+
+.grande{
+    font-size: 25px;
+}
+.beige{
+    color: beige;
+}
+.negrita.grande.rojo{
+    text-decoration: underline;
+}
+header, footer, aside{
+    background-color: brown;
+}
