@@ -1,5 +1,6 @@
 <?php include("templates/header.php"); ?>
 <?php include("mysql/db_credenciales.php");
+include("mysql/proyecto_sql.php");
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
@@ -9,8 +10,11 @@ try {
     echo "La conexión ha fallado: " . $e->getMessage();
 }
 
+$consulta = $conn->prepare($proyecto_select_all);
+$resultado = $consulta->setFetchMode(PDO::FETCH_ASSOC);
+$consulta->execute();
+$proyectos = $consulta->fetchAll();
 ?>
-
 
 <?php
 //UD3.2.f
@@ -45,7 +49,7 @@ if (isset($_GET['sort_date']) && $_GET['sort_date'] == "-1") {
     <a href="?sort_date=1"><button href="" type="button" class="btn btn-outline-secondary">FechAsc</button></a>
     <!--UD3.2.f END-->
     <div class="row mt-3">
-        <?php foreach ($proyecto_filtrado as $proyecto) : ?>
+        <?php foreach ($proyectos as $proyecto) : ?>
             <?php
             ?>
             <div class="col-sm-3">
@@ -84,3 +88,4 @@ if (isset($_GET['sort_date']) && $_GET['sort_date'] == "-1") {
     <!--UD4.2.a END-->
 </div>
 <?php include("templates/footer.php"); ?>
+<?php $conn = null; ?>
