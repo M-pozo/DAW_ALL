@@ -1,19 +1,16 @@
 <?php include("templates/header.php"); ?>
 <?php include("mysql/db_credenciales.php");
 include("mysql/proyecto_sql.php");
+include("mysql/categoria_sql.php");
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Conexión exitosa";
 } catch (PDOException $e) {
     echo "La conexión ha fallado: " . $e->getMessage();
 }
 
-$consulta = $conn->prepare($proyecto_select_all);
-$resultado = $consulta->setFetchMode(PDO::FETCH_ASSOC);
-$consulta->execute();
-$proyectos = $consulta->fetchAll();
+
 ?>
 
 <?php
@@ -49,7 +46,7 @@ if (isset($_GET['sort_date']) && $_GET['sort_date'] == "-1") {
     <a href="?sort_date=1"><button href="" type="button" class="btn btn-outline-secondary">FechAsc</button></a>
     <!--UD3.2.f END-->
     <div class="row mt-3">
-        <?php foreach ($proyectos as $proyecto) : ?>
+        <?php foreach (get_proyectos_all($conn) as $proyecto) : ?>
             <?php
             ?>
             <div class="col-sm-3">
@@ -57,32 +54,26 @@ if (isset($_GET['sort_date']) && $_GET['sort_date'] == "-1") {
                 <?php if ($_COOKIE['loggedIn'] == 'true') { ?>
                     <a href="/crear_actualizar_proyecto.php?id=<?php echo $proyecto["clave"] ?>" class="m-5">
                     <?php } else { ?>
-                        <a href="/proyecto.php?id=<?php echo $proyecto["clave"] ?>" class="m-5">
+                        <a href="/proyecto.php?id=<?php echo $proyecto["id"] ?>" class="m-5">
                         <?php } ?>
                         <!--UD4.2.b END-->
-                        <div class="card">
+                        <div class="">
                             <!-- UD3.2.c -->
                             <img class="card-img-top" style="height: 10rem;" src="<?php echo $proyecto['imagen'] == '' ? 'static/images/default.png' : $proyecto['imagen'] ?>" alt="<?php echo $proyecto['titulo'] ?>">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo $proyecto['titulo'] ?></h5>
                                 <p class="card-text"><?php /* UD3.3.d*/ echo date('d-m-Y', strtotime($proyecto['fecha'])); ?></p>
-                                <!-- UD3.3.c BEGIN-->
-                                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                                    <div class="btn-group mr-2" role="group" aria-label="First group">
-                                        <?php foreach ($proyecto['categorias'] as $categoria) : ?>
-                                            <button class="btn btn-outline-info btn-sm">
-                                                <?php echo array_key_exists($categoria, $categorias) ? $categorias[$categoria] : ""; ?>
-                                            </button>
-                                        <?php endforeach; ?>
-                                    </div>
-                                </div>
-                                <!-- UD3.3.c END-->
                             </div>
                         </div>
                         </a>
+                        <?php foreach (get_categorias_por_proyecto($conn, $proyecto['id']) as $categoria) : ?>
+                            <a href="#" class="badge bg-secondary"><?php echo utf8_encode($categoria['nombre'])
+                                                                    ?></a>
+                        <?php endforeach; ?>
             </div>
         <?php endforeach; ?>
     </div>
+    <hr>
     <!--UD4.2.a BEGIN-->
     <a href="/crear_actualizar_proyecto.php"><button href="" type="button" class="btn btn-outline-secondary">Crear Proyecto</button></a>
     <!--UD4.2.a END-->
