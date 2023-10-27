@@ -1,0 +1,50 @@
+body {
+    margin: 0;
+    font-size: 12px;
+}
+.capaPunto {
+    width: 25pt;
+    height: 5in;
+    border: 1px solid #000;
+}
+
+.capaPorcentaje {
+    width: 50%;
+    height: 25px;
+    border: 1px solid #000;
+}
+
+.capaViewport {
+    width: 50vw;
+    height: 25vh;
+    border: 1px solid #0cc;
+}
+
+.capaColores {
+    color: rebeccapurple;
+    background-color: rgb(216, 155, 228);
+    background-image: url('https://i.pinimg.com/736x/46/37/61/463761318ebcaeda767cb270b035baaf.jpg');
+    background-size: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 20px 40px;
+    background-position: 20px;
+    background-position: center, center;
+    opacity: 0.5;
+    /*background: <color> <url> <position>/<size> <repeat>;*/
+    background: rgb(168, 0, 247) url('https://www.farma-amparo.es/themes/parafarmacia/img/cms/silla-de-ruedas-alquiler-valencia.jpg') no-repeat cover;
+}
+
+.capaTexto {
+    height: 50vh;
+    text-align: center;
+    line-height: 200%;
+    letter-spacing: 3px;
+    vertical-align: middle;
+    border: 1px solid #000;
+    font-size: 1.25rem;
+}
+
+.capaPadreTexto {
+    font-size: 7px;
+}
