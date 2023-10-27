@@ -1,16 +1,13 @@
-<?php include("templates/header.php"); ?>
-<?php include("mysql/db_credenciales.php");
+<?php 
+include("templates/header.php");
+include("mysql/db_credenciales.php");
+include("mysql/db_access.php");
 include("mysql/proyecto_sql.php");
 include("mysql/categoria_sql.php");
 
-try {
-    $conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    echo "La conexión ha fallado: " . $e->getMessage();
-}
-
-
+$conn = open_connection($servername, $db, $username, $password);
+print_r(get_proyectos_all($conn));
+print_r(get_proyectos_por_categoria($conn, "4"))
 ?>
 
 <?php
@@ -54,7 +51,7 @@ if (isset($_GET['sort_date']) && $_GET['sort_date'] == "-1") {
                 <?php if ($_COOKIE['loggedIn'] == 'true') { ?>
                     <a href="/crear_actualizar_proyecto.php?id=<?php echo $proyecto["clave"] ?>" class="m-5">
                     <?php } else { ?>
-                        <a href="/proyecto.php?id=<?php echo $proyecto["id"] ?>" class="m-5">
+                        <a href="/proyecto.php?id=<?php echo $proyecto["id"] ?>" class="m-1">
                         <?php } ?>
                         <!--UD4.2.b END-->
                         <div class="">
@@ -78,5 +75,5 @@ if (isset($_GET['sort_date']) && $_GET['sort_date'] == "-1") {
     <a href="/crear_actualizar_proyecto.php"><button href="" type="button" class="btn btn-outline-secondary">Crear Proyecto</button></a>
     <!--UD4.2.a END-->
 </div>
-<?php include("templates/footer.php"); ?>
-<?php $conn = null; ?>
+<?php include("templates/footer.php"); 
+close_connection($conn)?>

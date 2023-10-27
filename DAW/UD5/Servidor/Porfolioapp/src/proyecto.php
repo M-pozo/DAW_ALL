@@ -25,8 +25,8 @@ $proyecto = get_proyecto_detail($conn, $proyecto_id);
     <br> <br>
     <div class="row">
         <div class="col-sm">
-            <img src="<?php echo $proyecto['imagen'] ?>" alt="<?php echo
-                                                                utf8_encode($proyecto['titulo']) ?>" class="img-fluid rounded">
+            <img src="<?php echo $proyecto['imagen'] ?>" alt="
+                <?php echo utf8_encode($proyecto['titulo']) ?>" class="img-fluid rounded">
             <br>
         </div>
         <div class="col-sm">

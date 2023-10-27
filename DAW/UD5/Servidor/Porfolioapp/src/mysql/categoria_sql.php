@@ -11,4 +11,13 @@ function get_categorias_por_proyecto($conn, $proyecto_id){
     $isOk = $consulta->execute();
     return $consulta->fetchAll();
 }
-?>
+//UD5.3.a BEGIN
+function get_categorias_all($conn){
+    $categoria_select_all = "SELECT * 
+                            FROM categoria";
+    $consulta = $conn->prepare($categoria_select_all);
+    $resultado = $consulta->setFetchMode(PDO::FETCH_ASSOC);
+    $consulta->execute();
+    return $proyectos = $consulta->fetchAll();
+}
+//UD5.3.a END
