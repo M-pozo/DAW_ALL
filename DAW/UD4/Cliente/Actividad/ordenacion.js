@@ -46,6 +46,7 @@ function ordenarCargo(n1, n2){
         return 1;
       }
 }
+
 personas.sort((n1, n2)=> {
     if (n1[2] === n2[2]) {
         if (n1[1] === n2[1]) {

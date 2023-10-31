@@ -1,5 +1,5 @@
 <?php
-function get_usuario($conn, $email)
+/*function get_usuario($conn, $email)
 {
     $get_usuario_by_email = "SELECT * 
                             FROM usuario
@@ -15,4 +15,4 @@ function get_usuario($conn, $email)
         trigger_error('Se ha recuperado más de un registro');
     }
     return $consulta->fetch();
-}
+}*/
