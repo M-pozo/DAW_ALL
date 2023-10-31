@@ -39,7 +39,10 @@ function ordenarEdadDesc(n2, n1){
 }
 
 /*Tercera función de ordenación compara por cargo
-*/
+vamos comparando para que ordene primero por profesor
+después por Administrativo y por ultimo en estudiante
+si quisiéramos ordenar más cargos tendríamos que seguir 
+añadiendo else if en el orden que deseemos (un poco ineficiente ;)*/
 function ordenarCargo(n1, n2){
     if (n1[2] === "Profesor") {
         return -1;
