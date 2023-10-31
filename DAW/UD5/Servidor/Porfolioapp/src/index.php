@@ -6,8 +6,6 @@ include("mysql/proyecto_sql.php");
 include("mysql/categoria_sql.php");
 
 $conn = open_connection($servername, $db, $username, $password);
-print_r(get_proyectos_all($conn));
-print_r(get_proyectos_por_categoria($conn, "5"))
 ?>
 
 <?php
@@ -43,7 +41,7 @@ if (isset($_GET['sort_date']) && $_GET['sort_date'] == "-1") {
     <a href="?sort_date=1"><button href="" type="button" class="btn btn-outline-secondary">FechAsc</button></a>
     <!--UD3.2.f END-->
     <div class="row mt-3">
-        <?php foreach (get_proyectos_all($conn) as $proyecto) : ?>
+        <?php foreach (get_proyectos_paginados($conn) as $proyecto) : ?>
             <?php
             ?>
             <div class="col-sm-3">

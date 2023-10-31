@@ -1,9 +1,10 @@
 <?php
-/*function get_usuario($conn, $email)
+//UD5.2.e BEGIN
+function get_credenciales_usuario($conn, $email)
 {
     $get_usuario_by_email = "SELECT * 
                             FROM usuario
-                            WHERE email = :email;
+                            WHERE email = :email";
     $consulta = $conn->prepare($get_usuario_by_email);
     $consulta->setFetchMode(PDO::FETCH_ASSOC);
     $consulta->bindParam(':email', $email);
@@ -15,4 +16,5 @@
         trigger_error('Se ha recuperado más de un registro');
     }
     return $consulta->fetch();
-}*/
+}
+//UD5.2.e END

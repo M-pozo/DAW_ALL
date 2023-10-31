@@ -17,7 +17,10 @@ let personas=[
 ["Fermín",64, "Estudiante"],
 ["Jose",47, "Profesor"]
 ];
-//Separe en 3 funciones de comparación
+/*Primera función de ordenación compara los nombre
+si es mayor devuelve -1
+si es menor devuelve 1
+y si es igual devuelve 0*/
 function ordenarNombreAsc(n1, n2){
     if (n1[0] > n2[0]) {
         return -1;
@@ -27,10 +30,16 @@ function ordenarNombreAsc(n1, n2){
         return 0;
       }
 }
+/*Segunda función de ordenación compara la edad
+si n1 es menor devuelve un valor positivo
+si n1 es mayor devuelve un valor negativo
+y si es igual devuelve 0*/
 function ordenarEdadDesc(n2, n1){
     return n2[1] - n1[1];
 }
 
+/*Tercera función de ordenación compara por cargo
+*/
 function ordenarCargo(n1, n2){
     if (n1[2] === "Profesor") {
         return -1;
@@ -47,18 +56,7 @@ function ordenarCargo(n1, n2){
       }
 }
 
-// personas.sort((n1, n2)=> {
-//     if (n1[2] === n2[2]) {
-//         if (n1[1] === n2[1]) {
-//             return ordenarEdadDesc(n1, n2)
-//         }else{
-//            return ordenarNombreAsc(n1, n2)
-//         }
-//     }else{
-//         return ordenarCargo(n1, n2)
-//     }
-// });
-
+//Le pasamos las tren funciones de ordenación creadas para ordenar nuestro array
 personas
     .sort(ordenarNombreAsc)
     .sort(ordenarEdadDesc)

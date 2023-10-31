@@ -51,4 +51,7 @@ function buscarProyecto($proyecto)
 { 
     return $_GET['id'] == $proyecto['clave'];
 }
+function get_user_logged_in(){
+    
+}
 ?>

@@ -49,3 +49,14 @@ function get_proyectos_order_by($conn, $order ){
     return $consulta->fetchAll();
 }
 //UD5.3.d END
+//UD5.2.f BEGIN
+function get_proyectos_paginados($conn){
+    $limit = 2;
+    $offset = 0;
+    $paginacion = "SELECT * FROM proyecto LIMIT $limit OFFSET $offset";
+    $consulta = $conn->prepare($paginacion);
+    $resultado = $consulta->setFetchMode(PDO::FETCH_ASSOC);
+    $consulta->execute();
+    return $paginacion = $consulta->fetchAll();
+}
+//UD5.2.f END
