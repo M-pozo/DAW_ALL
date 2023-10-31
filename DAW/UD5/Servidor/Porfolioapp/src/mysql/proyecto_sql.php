@@ -36,11 +36,16 @@ function get_proyectos_por_categoria($conn, $categoria_id){
     $consulta->setFetchMode(PDO::FETCH_ASSOC);
     $consulta->bindParam(":cat_id", $categoria_id);
     $isOk = $consulta->execute();
-    return $consulta->fetch();
+    return $consulta->fetchAll();
 }
 //UD5.3.c END
 //UD5.3.d BEGIN
-function get_proyectos_order_by(){
-
+function get_proyectos_order_by($conn, $order ){
+    $proyecto_select_order = "SELECT *
+                                FROM Proyecto order by $order";
+    $consulta = $conn->prepare($proyecto_select_order);
+    $consulta->setFetchMode(PDO::FETCH_ASSOC);
+    $isOk = $consulta->execute();
+    return $consulta->fetchAll();
 }
 //UD5.3.d END

@@ -7,7 +7,7 @@ include("mysql/categoria_sql.php");
 
 $conn = open_connection($servername, $db, $username, $password);
 print_r(get_proyectos_all($conn));
-print_r(get_proyectos_por_categoria($conn, "4"))
+print_r(get_proyectos_por_categoria($conn, "5"))
 ?>
 
 <?php

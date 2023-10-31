@@ -17,37 +17,44 @@ let personas=[
 ["Fermín",64, "Estudiante"],
 ["Jose",47, "Profesor"]
 ];
+//Separe en 3 funciones de comparación
+function ordenarNombreAsc(n1, n2){
+    if (n1[0] < n2[0]) {
+        return -1;
+      } else if (n1[0] > n2[0]) {
+        return 1;
+      } else {
+        return 0;
+      }
+}
+function ordenarEdadDesc(n1, n2){
+    return n2[1] - n1[1];
+}
+
+function ordenarCargo(n1, n2){
+    if (n1[2] === "Profesor") {
+        return -1;
+      } else if (n2[2] === "Profesor") {
+        return 1;
+      } else if (n1[2] === "Administrativo") {
+        return -1;
+      } else if (n2[2] === "Administrativo") {
+        return 1;
+      } else if (n1[2] === "Estudiante") {
+        return -1;
+      } else {
+        return 1;
+      }
+}
 personas.sort((n1, n2)=> {
-        if (n1[2] == "Profesor" && n2[2] == "Administrativo") {
-            return -1;
+    if (n1[2] === n2[2]) {
+        if (n1[1] === n2[1]) {
+            return ordenarEdadDesc(n1, n2)
+        }else{
+           return ordenarNombreAsc(n1, n2)
         }
-        else if (n1[2] == "Profesor" && n2[2] == "Estudiante") {
-            return -1;
-        }else if (n1[2] == "Administrativo" && n2[2] == "Estudiante"){
-            return 1;
-        }else if (n1[2] == "Administrativo" && n2[2] == "Profesor"){
-            return 1;
-        }else if (n1[2] == "Estudiante" && n2[2] == "Administrativo"){
-            return 0;
-        }else if (n1[2] == "Estudiante" && n2[2] == "Profesor"){
-            return 0;
-        }else if (n1[2] == n2[2]){
-            if (n1[1] > n2[1]) {
-                return 1;
-            }
-            else if (n1[1]<n2[1]) {
-                return -1;
-            }else{
-                if (n1[0] > n2[0]) {
-                    return 1;
-                }
-                else if (n1[0]<n2[0]) {
-                    return -1;
-                }else{
-                    return 0;
-                }
-            } 
-        }
-    
+    }else{
+        return ordenarCargo(n1, n2)
+    }
 });
 console.log(personas);
