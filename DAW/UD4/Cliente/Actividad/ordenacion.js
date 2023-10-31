@@ -19,15 +19,15 @@ let personas=[
 ];
 //Separe en 3 funciones de comparación
 function ordenarNombreAsc(n1, n2){
-    if (n1[0] < n2[0]) {
+    if (n1[0] > n2[0]) {
         return -1;
-      } else if (n1[0] > n2[0]) {
+      } else if (n1[0] < n2[0]) {
         return 1;
       } else {
         return 0;
       }
 }
-function ordenarEdadDesc(n1, n2){
+function ordenarEdadDesc(n2, n1){
     return n2[1] - n1[1];
 }
 
@@ -47,15 +47,21 @@ function ordenarCargo(n1, n2){
       }
 }
 
-personas.sort((n1, n2)=> {
-    if (n1[2] === n2[2]) {
-        if (n1[1] === n2[1]) {
-            return ordenarEdadDesc(n1, n2)
-        }else{
-           return ordenarNombreAsc(n1, n2)
-        }
-    }else{
-        return ordenarCargo(n1, n2)
-    }
-});
+// personas.sort((n1, n2)=> {
+//     if (n1[2] === n2[2]) {
+//         if (n1[1] === n2[1]) {
+//             return ordenarEdadDesc(n1, n2)
+//         }else{
+//            return ordenarNombreAsc(n1, n2)
+//         }
+//     }else{
+//         return ordenarCargo(n1, n2)
+//     }
+// });
+
+personas
+    .sort(ordenarNombreAsc)
+    .sort(ordenarEdadDesc)
+    .sort(ordenarCargo)
+
 console.log(personas);
