@@ -1,37 +1,22 @@
-<?php 
-include("templates/header.php");
-include("mysql/db_credenciales.php");
-include("mysql/db_access.php");
-include("mysql/proyecto_sql.php");
-include("mysql/categoria_sql.php");
-
-$conn = open_connection($servername, $db, $username, $password);
-?>
-
 <?php
-//UD3.2.f
-//UD3.3.f
-$proyecto_filtrado = $proyectos;
+include("templates/header.php");
+include("mysql/proyecto_sql.php");
+include_once("mysql/categoria_sql.php");
+
+$proyectos = get_proyectos_all($conn);
 $sort = $_GET['sort'];
-if (isset($sort) && $sort == "-1") {
-    usort($proyecto_filtrado, 'ordenaTituloProyectoDesc');
-} else if (isset($sort) && $sort == "1") {
-    usort($proyecto_filtrado, 'ordenaTituloProyectoAsc');
-};
-//UD3.3.h
-if (isset($_GET['delete']) == "true") {
-    array_pop($proyecto_filtrado);
-};
-//UD3.3.f
-if (isset($_GET['categoria'])) {
-    $proyecto_filtrado = array_filter($proyecto_filtrado, 'buscadorCategoria');
-};
-//UD3.5.c
-if (isset($_GET['sort_date']) && $_GET['sort_date'] == "-1") {
-    usort($proyecto_filtrado, 'ordenaFechaProyectoDesc');
-} else if (isset($_GET['sort_date']) && $_GET['sort_date'] == "1") {
-    usort($proyecto_filtrado, 'ordenaFechaProyectoAsc');
-};
+$sort_date = $_GET['sort_date'];
+$id_categoria = $_GET['categoria'];
+
+if (isset($sort)) {
+    get_proyectos_order_by($conn, $sort);
+}
+if (isset($sort_date)) {
+    get_proyectos_order_by($conn, $sort_date);
+}
+if (isset($id_categoria)) {
+    $proyectos = get_proyectos_por_categoria($conn, $id_categoria);
+}
 ?>
 <div class="container mb-5">
     <!--UD3.2.f BEGIN-->
@@ -41,13 +26,13 @@ if (isset($_GET['sort_date']) && $_GET['sort_date'] == "-1") {
     <a href="?sort_date=1"><button href="" type="button" class="btn btn-outline-secondary">FechAsc</button></a>
     <!--UD3.2.f END-->
     <div class="row mt-3">
-        <?php foreach (get_proyectos_paginados($conn) as $proyecto) : ?>
+        <?php foreach ($proyectos as $proyecto) : ?>
             <?php
             ?>
             <div class="col-sm-3">
                 <!-- UD3.3.d / UD4.2.b BEGIN-->
                 <?php if ($_COOKIE['loggedIn'] == 'true') { ?>
-                    <a href="/crear_actualizar_proyecto.php?id=<?php echo $proyecto["clave"] ?>" class="m-5">
+                    <a href="/crear_actualizar_proyecto.php?id=<?php echo $proyecto["id"] ?>" class="m-5">
                     <?php } else { ?>
                         <a href="/proyecto.php?id=<?php echo $proyecto["id"] ?>" class="m-1">
                         <?php } ?>
@@ -62,8 +47,8 @@ if (isset($_GET['sort_date']) && $_GET['sort_date'] == "-1") {
                         </div>
                         </a>
                         <?php foreach (get_categorias_por_proyecto($conn, $proyecto['id']) as $categoria) : ?>
-                            <a href="#" class="badge bg-secondary"><?php echo utf8_encode($categoria['nombre'])
-                                                                    ?></a>
+                            <a href="/index.php?categoria=<?php echo $categoria['id'] ?>" class="badge bg-secondary"><?php echo utf8_encode($categoria['nombre'])
+                                                                                                                    ?></a>
                         <?php endforeach; ?>
             </div>
         <?php endforeach; ?>
@@ -73,5 +58,5 @@ if (isset($_GET['sort_date']) && $_GET['sort_date'] == "-1") {
     <a href="/crear_actualizar_proyecto.php"><button href="" type="button" class="btn btn-outline-secondary">Crear Proyecto</button></a>
     <!--UD4.2.a END-->
 </div>
-<?php include("templates/footer.php"); 
-close_connection($conn)?>
+<?php include("templates/footer.php");
+close_connection($conn) ?>

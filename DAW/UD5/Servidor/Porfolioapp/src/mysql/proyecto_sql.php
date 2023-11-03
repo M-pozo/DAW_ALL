@@ -1,4 +1,4 @@
-<?php 
+<?php
 function get_proyectos_all($conn)
 {
     $proyecto_select_all = "SELECT * 
@@ -18,17 +18,18 @@ function get_proyecto_detail($conn, $proyecto_id)
     $consulta->setFetchMode(PDO::FETCH_ASSOC);
     $consulta->bindParam(":proy_id", $proyecto_id);
     $isOk = $consulta->execute();
-    if ($consulta -> rowCount() == 0){
+    if ($consulta->rowCount() == 0) {
         trigger_error("No se ha encontrado el ID de proyecto");
     }
-    if ($consulta -> rowCount() > 1){
+    if ($consulta->rowCount() > 1) {
         trigger_error("Se ha recuperado más de un registro");
     }
     return $consulta->fetch();
 }
 //UD5.3.c BEGIN
-function get_proyectos_por_categoria($conn, $categoria_id){
-    $proyectos_only_categoria = "SELECT *
+function get_proyectos_por_categoria($conn, $categoria_id)
+{
+    $proyectos_only_categoria = "SELECT p.*
                                 FROM proyecto p
                                 JOIN categoria_proyecto cp ON p.id = cp.proyecto_id
                                 WHERE cp.categoria_id = :cat_id";
@@ -40,7 +41,11 @@ function get_proyectos_por_categoria($conn, $categoria_id){
 }
 //UD5.3.c END
 //UD5.3.d BEGIN
-function get_proyectos_order_by($conn, $order ){
+function get_proyectos_order_by($conn, $order)
+{
+    if ($order == 'sort') {
+        # code...
+    }
     $proyecto_select_order = "SELECT *
                                 FROM Proyecto order by $order";
     $consulta = $conn->prepare($proyecto_select_order);
@@ -50,9 +55,10 @@ function get_proyectos_order_by($conn, $order ){
 }
 //UD5.3.d END
 //UD5.2.f BEGIN
-function get_proyectos_paginados($conn){
+function get_proyectos_paginados($conn)
+{
     $limit = 2;
-    $offset = 0;
+    $offset = $limit * $_GET['page'];
     $paginacion = "SELECT * FROM proyecto LIMIT $limit OFFSET $offset";
     $consulta = $conn->prepare($paginacion);
     $resultado = $consulta->setFetchMode(PDO::FETCH_ASSOC);

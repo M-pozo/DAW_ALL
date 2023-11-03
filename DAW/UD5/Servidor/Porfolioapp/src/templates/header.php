@@ -1,5 +1,7 @@
-<?php include_once("datos.php"); ?>
-<?php include_once("utiles.php"); ?>
+<?php include_once("datos.php");
+include_once("utiles.php");
+include("mysql/categoria_sql.php");
+?>
 <!--DOCTYPE html -->
 <html>
 
@@ -46,9 +48,11 @@
                     <span class="caret"></span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <?php foreach ($categorias as $key => $value) :
-                        echo '<a class="dropdown-item" href="/index.php?categoria=' . $key . '">' . $value . '</a>';
+                    <!--UD5.4.a BEGIN-->
+                    <?php foreach (get_categorias_all($conn) as $categoria) :
+                        echo '<a class="dropdown-item" href="/index.php?categoria=' . $categoria['id'] . '">' . $categoria['nombre'] . '</a>';
                     endforeach; ?>
+                    <!--UD5.4.a END-->
                 </div>
             </li>
             <li class="nav-item">
