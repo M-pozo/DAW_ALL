@@ -1,0 +1,65 @@
+.miTabla{
+    /*caption-side: top;*/
+    caption-side: bottom;
+    border: 1px solid #000;
+    table-layout: fixed;
+    border-collapse: collapse;
+    /*border-collapse: separate;*/
+    border-spacing: 10px;
+    /*empty-cells: show;*/
+    empty-cells: hide;
+}
+.miTabla td{
+    border: 1px solid #000;
+    width: 200px;
+}
+
+.miTable > caption{
+    font-weight: bold;
+}
+
+a:visited{
+    color: red;
+}
+a:hover{
+    color: green;
+}
+a:focus{
+    font-weight: bold;
+}
+a:link{
+background: #050;
+}
+a:active{
+    color: #000;
+}
+li{
+    font-family: 'Arial', sans-serif;
+}
+li:first-child{
+    font-family: serif;
+    font-weight: bold;
+}
+li:last-child {
+    font-family: serif;
+    font-weight: italic;
+}
+li:nth-child(2){
+    color: green;
+}
+li:nth-child(odd){
+    background:khaki;
+}
+li:nth-child(even){
+    background: aliceblue;
+}
+.miParrafo::before {
+    content: "";
+    background: url('');
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+.miParrafo::after{
+    content: "Después";
+}
