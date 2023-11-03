@@ -1,0 +1,63 @@
+header{
+    display: flex;
+    background-color: rgba(238, 220, 170, 0.801);
+}
+header img{
+    width: 200px;
+}
+header div{
+    padding: 50px;
+    width: 50%;
+}
+.button{
+    display: flex;
+    text-align: right;
+}
+article{
+    margin: 50px;
+    width: 50%;
+}
+.article1{
+    display: flex;
+    background-color: rgba(238, 220, 170, 0.801);
+}
+.article1 img{
+    width: 50%;
+}
+.article2{
+    display: flex;
+    background-color: black;
+    color: white;
+}
+.article2 img{
+    width: 100%;
+}
+.article2 h2{
+    margin-left: 58px;
+}
+.article3{
+    display: flex;
+    background-color: rgba(161, 196, 191, 0.767);
+}
+footer{
+    display: flex;
+    color: white;
+    background-color: black;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+.footer{
+    margin: 50px;
+    width: 50%;
+}
+.contacto{
+    color: rgb(117, 118, 119);
+}
+ul{
+    list-style-type: none;
+}
+li{
+    margin: 20px;
+}
