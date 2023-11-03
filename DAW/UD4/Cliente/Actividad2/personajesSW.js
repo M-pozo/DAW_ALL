@@ -1896,40 +1896,28 @@ let personajes=[
     ];
 const urlParams = new URLSearchParams(location.search);
 let pagina = 0;
-console.log(urlParams.get('pagina'))
-if (urlParams.get('pagina') >= 0 || urlParams.get('pagina') <= personajes.length) {
-    pagina = parseInt(urlParams.get('pagina'))
-}
 let limit = 9;
+pagina = parseInt(urlParams.get('pagina') - 1)
+
 document.write('<div class="row">');
-personajes.slice(pagina*limit, (pagina+1)*limit).forEach(p => {
-    document.write(`
-        <div class="col-sm-4">
-            <h3>`+p['name']+`</h3>
-            <p>`+p['height']+`</p>
-            <p>`+p['mass']+`</p>
-            <p>Resto de características...</p>
+    personajes.slice(pagina*limit, (pagina+1)*limit).forEach(p => {
+        document.write(`
+            <div class="col-sm-4">
+                <h3>`+p['name']+`</h3>
+                <p>`+p['height']+`</p>
+                <p>`+p['mass']+`</p>
+                <p>Resto de características...</p>
+            </div>`
+        )
+    });
+    document.write(
+        `<div class="col-sm-4">
+            <h3><a href="?pagina=`+(pagina+2)+`">Siguientes</a></h3>
+            <h3><a href="?pagina=`+(pagina)+`">Anterior</a></h3>
         </div>`
-    )
-});
-document.write(
-    `<div class="col-sm-4">
-        <h3><a href="?pagina=`+(pagina+1)+`">Siguientes<a></h3>
-        <h3><a href="?pagina=`+(pagina-1)+`">Anterior<a></h3>
-    </div>
-    <div class="col-sm-4">
-    </div>`
-);
-document.write('</div>')
-console.log(personajes.length);
-
-console.log(personajes[0]["name"]);
-
-console.log(location.search);
-
-let generos=[];
-
-generos=personajes.reduce(
+    );
+    let generos=[];
+    generos=personajes.reduce(
     (arrayG,personaje)=>{
         if(arrayG.indexOf(personaje["gender"])<0){
             arrayG.push(personaje["gender"]);
@@ -1937,6 +1925,14 @@ generos=personajes.reduce(
         return arrayG;
     },
     generos
-);
-
-console.log(generos);
+    );
+    console.log(generos)
+document.write('<div class="col-sm-4">')
+    for (let genero of generos) {
+        console.log(genero);
+        document.write(`
+            <p><a href="?pagina=${genero}">${genero}</a></p>
+        `);
+    }
+document.write('</div>')
+document.write('</div>')
