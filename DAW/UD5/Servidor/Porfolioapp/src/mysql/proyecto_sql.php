@@ -43,11 +43,8 @@ function get_proyectos_por_categoria($conn, $categoria_id)
 //UD5.3.d BEGIN
 function get_proyectos_order_by($conn, $order)
 {
-    if ($order == 'sort') {
-        # code...
-    }
     $proyecto_select_order = "SELECT *
-                                FROM Proyecto order by $order";
+                                FROM proyecto ORDER BY $order";
     $consulta = $conn->prepare($proyecto_select_order);
     $consulta->setFetchMode(PDO::FETCH_ASSOC);
     $isOk = $consulta->execute();
@@ -55,10 +52,11 @@ function get_proyectos_order_by($conn, $order)
 }
 //UD5.3.d END
 //UD5.2.f BEGIN
+
 function get_proyectos_paginados($conn)
 {
     $limit = 2;
-    $offset = $limit * $_GET['page'];
+    $offset = $limit * $_GET['pagina'];
     $paginacion = "SELECT * FROM proyecto LIMIT $limit OFFSET $offset";
     $consulta = $conn->prepare($paginacion);
     $resultado = $consulta->setFetchMode(PDO::FETCH_ASSOC);

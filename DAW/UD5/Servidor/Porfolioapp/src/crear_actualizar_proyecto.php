@@ -1,6 +1,10 @@
-<?php include("datos.php");
-include("utiles.php");
+<?php 
+include("templates/header.php");
+include("mysql/proyecto_sql.php");
 $id = $_GET["id"];
+$loggedln = get_user_logged_in($conn, $_COOKIE['user_email']);
+$proyectos = get_proyectos_all($conn);
+print_r($loggedln);
 $claveErr = $tituloErr = $fechaErr = $descripcionErr = $imagenErr = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //UD4.2.c BEGIN
@@ -85,7 +89,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     //UD4.2.f END
                 }
             }
-            include("templates/header.php");
             //UD4.2.e BEGIN
             if (!isset($id)) { ?>
     <div class="container">
@@ -124,22 +127,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input class="form-control" type="file" id="imagenID" name="imagen">
                     <span class="text-danger"> <?php echo $imagenErr ?> </span>
                 </div>
+                <!--UD5.4.e BEGIN-->
+                <div class="row mb-4">
+                    <select name = "subject" multiple size = 6>
+                        <?php foreach (get_categorias_all($conn) as $categoria) :
+                            echo '<option value = "'.$categoria['id'].'">'.$categoria['nombre'].'</option>';
+                        endforeach; ?>
+                    </select>
+                </div>
+                <!--UD5.4.e END-->
                 <br>
                 <button type="submit" class="btn btn-success">Crear</button>
             </form>
         </div>
     <?php } else { ?>
-        <?php foreach ($proyectos as $proyecto) : if ($id == $proyecto['clave']) { ?>
+        <?php foreach ($proyectos as $proyecto) : if ($loggedln == true) { ?>
                 <div class="container">
                     <h2 class="mb-5">Actualizar proyecto</h2>
                     <div class="row">
                         <form action="
-                        <?php echo /*UD4.2.d*/ htmlspecialchars($_SERVER["PHP_SELF"]) . "?id=" . $proyecto['clave']; ?>
+                        <?php echo /*UD4.2.d*/ htmlspecialchars($_SERVER["PHP_SELF"]) . "?id=" . $proyecto['id']; ?>
                         " method="POST" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="mb-3 col-sm-6 p-0">
                                     <label for="claveID" class="form-label">Clave</label>
-                                    <input type="text" name="clave" value="<?php echo $proyecto['clave']; ?>" class="form-control" id="claveID" placeholder="Sin espacios">
+                                    <input type="text" name="clave" value="<?php echo $proyecto['id']; ?>" class="form-control" id="claveID" placeholder="Sin espacios">
                                     <span class="text-danger"> <?php echo $claveErr ?> </span>
                                 </div>
                             </div>

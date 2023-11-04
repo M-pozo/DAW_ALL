@@ -1,17 +1,15 @@
-<?php include_once("datos.php"); ?>
-<?php include_once("utiles.php"); ?>
-<?php
-//UD4.1.a BEGIN
+<?php 
+include_once("datos.php");
+include_once("utiles.php");
+include_once("mysql/usuario_sql.php");
+include("mysql/sesion_sql.php");
 $emailErr = "";
 $passwordErr = "";
 $email = $_POST["email"];
 $password = $_POST["password"];
-//UD4.1.b BEGIN
-$user = array_filter($usuarios, 'buscarUsuario');
-$user = array_values($user)[0];
-//UD4.1.d BEGIN
 if (!empty($email) && !empty($password)) {
-    if (is_null($user)) {
+    $user = get_credenciales_usuario($conn, $email);
+    if (($user['email'] !== $email)) {
         $emailErr = "Introduce un e-mail válido";
     } else if (!preg_match("/^(([^<>()\[\]\.,;:\s@\”]+(\.[^<>()\[\]\.,;:\s@\”]+)*)|(\”.+\”))@(([^<>()[\]\.,;:\s@\”]+\.)+[^<>()
         [\]\.,;:\s@\”]{2,})$/", $email)) {
@@ -21,22 +19,18 @@ if (!empty($email) && !empty($password)) {
         $passwordErr = "Contraseña incorrecta";
     }
     if ($email == $user['email'] && $password == $user['password']) {
-        //UD4.1.c BEGIN
-        //UD4.1.e BEGIN
-        //UD4.3.c.1 He utilizado una cookie persistente para que el usuario no se tenga que loguear cada vez que cierra la sesión.
         setcookie("loggedIn", "true", time() + 84600);
-        setcookie("user_email", $email, time() + 84600);
-        //UD4.1.e END
+        setcookie("user_email", $user['email'], time() + 84600);
+        //UD5.5.a BEGIN
+        new_sesion($conn, $user['id']);
+        //UD5.5.a END
         ?>
             <script type="text/javascript">
                 window.location = "/contacto_lista.php";
             </script>
         <?php
-        //UD4.1.c END
     }
 }
-//UD4.1.d END
-//UD4.1.b END
 ?>
 <?php include("templates/header.php"); ?>
 <div class="container">
@@ -62,6 +56,4 @@ if (!empty($email) && !empty($password)) {
         </form>
     </div>
 </div>
-<!--UD4.1.a END-->
-
 <?php include("templates/footer.php"); ?>

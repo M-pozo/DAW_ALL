@@ -1,5 +1,5 @@
-<?php include_once("datos.php");
-include_once("utiles.php");
+<?php include("datos.php");
+include("utiles.php");
 include("mysql/categoria_sql.php");
 ?>
 <!--DOCTYPE html -->
@@ -50,7 +50,9 @@ include("mysql/categoria_sql.php");
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
                     <!--UD5.4.a BEGIN-->
                     <?php foreach (get_categorias_all($conn) as $categoria) :
+                        //UD5.4.b BEGIN
                         echo '<a class="dropdown-item" href="/index.php?categoria=' . $categoria['id'] . '">' . $categoria['nombre'] . '</a>';
+                        //UD5.4.b END
                     endforeach; ?>
                     <!--UD5.4.a END-->
                 </div>
