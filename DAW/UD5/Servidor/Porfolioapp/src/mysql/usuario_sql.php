@@ -1,5 +1,5 @@
 <?php
-//UD5.2.e BEGIN
+//UD5.3.e BEGIN
 function get_credenciales_usuario($conn, $email)
 {
     $get_usuario_by_email = "SELECT * 
@@ -11,4 +11,4 @@ function get_credenciales_usuario($conn, $email)
     $isOk = $consulta->execute();
     return $consulta->fetch();
 }
-//UD5.2.e END
+//UD5.3.e END

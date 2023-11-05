@@ -1,13 +1,21 @@
 <?php 
 include("templates/header.php");
 include("mysql/proyecto_sql.php");
-$id = $_GET["id"];
+include("mysql/categoria_proyecto_sql.php");
+$idGet = $_GET["id"];
 $loggedln = get_user_logged_in($conn, $_COOKIE['user_email']);
 $proyectos = get_proyectos_all($conn);
 print_r($loggedln);
 $claveErr = $tituloErr = $fechaErr = $descripcionErr = $imagenErr = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    //UD4.2.c BEGIN
+    //UD5.6.b BEGIN
+    if (!empty($_POST["eliminar"])) {
+        delete_proyecto($conn, $idGet);
+        ?><script type="text/javascript">
+            window.location = "/index.php";
+        </script><?php
+    }
+    //UD5.6.b END
     if (empty($_POST["clave"])) {
         $claveErr = "Por favor, introduzca una clave";
     } else {
@@ -45,30 +53,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $pathImagen = "static/images/{$nombreImagen}";
                 }
             }
-        } else if (!isset($id)) {
+        } else if (!isset($idGet)) {
             $pathImagen = "";
         }
     }
-    //UD4.2.c END
     if ($claveErr === "" && $tituloErr === "" && $fechaErr === "" && $descripcionErr === "" && $imagenErr === "") {
-        if (!isset($id)) {
+        if (!isset($idGet)) {
             $proyecto = [
                 "clave" => $clave,
                 "titulo" => $titulo,
+                "fecha" => $fecha,
                 "descripcion" => $descripcion,
                 "imagen" => $pathImagen,
-                "fecha" => $fecha,
-                "categorias" => [],
             ];
-            if ($proyectos === NULL) {
-                $proyectos = [];
+            create_proyecto($conn, $proyecto);
+            foreach ($cateegorias as $categoria) {
+                create_categoria_proyecto($conn, $categoria, $idGet);
             }
-            array_push($proyectos, $proyecto);
-            $proyectos_json = json_encode($proyectos);
-            file_put_contents('mysql/proyectos.json', $proyectos_json);
         } else {
-            $proyecto = array_values(array_filter($proyectos, 'buscarProyecto'))[0];
-
             $proyecto['clave'] = $clave;
             $proyecto['titulo'] = $titulo;
             $proyecto['fecha'] = $fecha;
@@ -76,26 +78,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (!empty($nombreImagen)) {
                 $proyecto['imagen'] = $pathImagen;
             }
-
-            $proyectos[array_keys(array_filter($proyectos, 'buscarProyecto'))[0]] = $proyecto;
-            $proyecto_json = json_encode($proyectos);
-            file_put_contents('mysql/proyectos.json', $proyecto_json);
+            update_proyecto($conn, $proyecto, $idGet);
         }
-        //UD4.2.e END
-        //UD4.2.f BEGIN
 ?><script type="text/javascript">
             window.location = "/confirmar_proyecto.php";
         </script><?php
-                    //UD4.2.f END
                 }
             }
-            //UD4.2.e BEGIN
-            if (!isset($id)) { ?>
+            if (!isset($idGet)) { ?>
     <div class="container">
         <h2 class="mb-5">Crear proyecto</h2>
         <div class="row">
             <!--UD4.2.d-->
             <form action="<?php /*UD4.2.d*/ echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="mb-3 col-sm-6 p-0">
+                        <label for="idID" class="form-label">Clave</label>
+                        <input type="text" name="id" value="<?php echo $id; ?>" class="form-control" id="idID">
+                        <span class="text-danger"> <?php echo $idErr ?> </span>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="mb-3 col-sm-6 p-0">
                         <label for="claveID" class="form-label">Clave</label>
@@ -129,6 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <!--UD5.4.e BEGIN-->
                 <div class="row mb-4">
+                    <h4>Selecciona las categorías</h4>
                     <select name = "subject" multiple size = 6>
                         <?php foreach (get_categorias_all($conn) as $categoria) :
                             echo '<option value = "'.$categoria['id'].'">'.$categoria['nombre'].'</option>';
@@ -141,7 +144,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </form>
         </div>
     <?php } else { ?>
-        <?php foreach ($proyectos as $proyecto) : if ($loggedln == true) { ?>
+        <?php foreach ($proyectos as $proyecto) : if ($idGet == $proyecto['id']) { ?>
                 <div class="container">
                     <h2 class="mb-5">Actualizar proyecto</h2>
                     <div class="row">
@@ -151,7 +154,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="row">
                                 <div class="mb-3 col-sm-6 p-0">
                                     <label for="claveID" class="form-label">Clave</label>
-                                    <input type="text" name="clave" value="<?php echo $proyecto['id']; ?>" class="form-control" id="claveID" placeholder="Sin espacios">
+                                    <input type="text" name="clave" value="<?php echo $proyecto['clave']; ?>" class="form-control" id="claveID" placeholder="Sin espacios">
                                     <span class="text-danger"> <?php echo $claveErr ?> </span>
                                 </div>
                             </div>
@@ -178,10 +181,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <input class="form-control" type="file" id="imagenID" name="imagen">
                                 <span class="text-danger"> <?php echo $imagenErr ?> </span>
                             </div>
-                            <span class="text-danger"> <?php echo $archivoErr ?> </span>
+                            <!--UD5.4.e BEGIN-->
+                            <div class="row mb-4">
+                                <h4>Selecciona las categorías</h4>
+                                <select name = "subject" multiple size = 6>
+                                    <?php foreach (get_categorias_all($conn) as $categoria) :
+                                        $selected = in_array($categoria, get_categorias_por_proyecto($conn, $idGet)) ?"selected":"";
+                                        echo '<option value = "'.$categoria['id'].'"'.$selected.'>'.$categoria['nombre'].'</option>';
+                                    endforeach; ?>
+                                </select>
+                            </div>
+                            <!--UD5.4.e END-->
                             <br>
                             <button type="submit" class="btn btn-success">Actualizar</button>
                         </form>
+                        <!--UD5.6.b BEGIN-->
+                        <?php if (get_user_logged_in($conn, $_COOKIE['user_email'])) { ?>
+                                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
+                                    <label for="eliminarID" class="form-label"></label>
+                                    <input type="submit" name="eliminar" value="Eliminar Proyecto" class="btn btn-outline-secondary mb-5" id="eliminarID">
+                                </form>
+                            <?php }?>
+                            <!--UD5.6.b END-->
                     </div>
         <?php };
                 endforeach;

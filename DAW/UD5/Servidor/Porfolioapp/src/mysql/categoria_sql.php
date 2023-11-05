@@ -11,7 +11,7 @@ function get_categorias_por_proyecto($conn, $proyecto_id){
     $isOk = $consulta->execute();
     return $consulta->fetchAll();
 }
-//UD5.3.a BEGIN
+//UD5.3.b BEGIN
 function get_categorias_all($conn){
     $categoria_select_all = "SELECT * 
                             FROM categoria";
@@ -20,4 +20,4 @@ function get_categorias_all($conn){
     $consulta->execute();
     return $proyectos = $consulta->fetchAll();
 }
-//UD5.3.a END
+//UD5.3.b END

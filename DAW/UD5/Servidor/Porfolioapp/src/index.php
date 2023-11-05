@@ -1,40 +1,47 @@
 <?php
-include("templates/header.php");
-include("mysql/proyecto_sql.php");
+include_once("templates/header.php");
+include_once("mysql/proyecto_sql.php");
 include_once("mysql/categoria_sql.php");
-
-$proyectos = get_proyectos_all($conn);
+$proyectos_all = get_proyectos_all($conn);
+$proyectos = get_proyectos_paginados($conn);
 $sort = $_GET['sort'];
 $sort_date = $_GET['sort_date'];
 $id_categoria = $_GET['categoria'];
 $pagina = $_GET['pagina'];
 $enlace = '?pagina=';
 
+//UD5.4.b BEGIN
+if (isset($pagina)) {
+    if(($pagina - 1) * 2 < count($proyectos_all) && ($pagina) * 2 > 0) {
+        $proyectos = get_proyectos_paginados($conn);
+    }else{
+        ?><script type="text/javascript">
+            window.location = "/index.php";
+        </script><?php
+    }
+}
+//UD5.4.b END
 //UD5.4.c BEGIN
 if (isset($sort)&& $sort == "-1") {
     $proyectos = get_proyectos_order_by($conn, "titulo DESC");
-    $enlace = '?sort=-1?pagina=';
+    $enlace = '?sort=-1&pagina=';
 }else if (isset($sort)&& $sort == "1"){
     $proyectos = get_proyectos_order_by($conn, "titulo ASC");
-    $enlace = '?sort=1?pagina=';
+    $enlace = '?sort=1&pagina=';
 }
-else if (isset($sort_date)&& $sort_date == "-1"){
+if (isset($sort_date)&& $sort_date == "-1"){
     $proyectos = get_proyectos_order_by($conn, "fecha DESC");
-    $enlace = '?sort_date=-1?pagina=';
+    $enlace = '?sort_date=-1&pagina=';
 }
 else if (isset($sort_date)&& $sort_date == "1"){
     $proyectos = get_proyectos_order_by($conn, "fecha ASC");
-    $enlace = '?sort_date=1?pagina=';
+    $enlace = '?sort_date=1&pagina=';
 }
 //UD5.4.c END
-//UD5.4.b BEGIN
-if (isset($pagina)) {
-    $proyectos = get_proyectos_paginados($conn);
-}
-//UD5.4.b END
 if (isset($id_categoria)) {
-    $proyectos = get_proyectos_por_categoria($conn, $id_categoria);
-    $enlace = '?categoria='.$id_categoria.'?pagina=';
+    $proyectos_all = get_proyectos_por_categoria($conn , $id_categoria);
+    $proyectos = get_proyectos_por_categoria_paginado($conn, $id_categoria);
+    $enlace = '?categoria='. $id_categoria.'&pagina=';
 }
 ?>
 <div class="container mb-1">
@@ -80,18 +87,26 @@ if (isset($id_categoria)) {
                         </div>
                         </a>
                         <?php foreach (get_categorias_por_proyecto($conn, $proyecto['id']) as $categoria) : ?>
-                            <!--UD5.4.b BEGIN-->
-                            <a href="/index.php?categoria=<?php echo $categoria['id'] ?>" class="badge bg-secondary">
+                            <a href="/index.php?categoria=<?php echo $categoria['id'] ?>" class="badge bg-secondary ">
                                 <?php echo utf8_encode($categoria['nombre'])?>
                             </a>
-                            <!--UD5.4.b END-->
                         <?php endforeach; ?>
             </div>
         <?php endforeach; ?>
     </div>
     <hr>
-    <a href="<?php echo $enlace.($pagina - 1)?>"><button href="" type="button" class="btn btn-outline-secondary">ANTERIOR</button></a>
-    <a href="<?php echo $enlace.($pagina + 1)?>"><button href="" type="button" class="btn btn-outline-secondary">SIGUIENTE</button></a>
+    <?php 
+    if (!isset($pagina)) { ?>
+        <a href="<?php echo $enlace . '2' ?>"><button type="button" class="btn btn-outline-secondary">SIGUIENTE</button></a>
+    <?php } else {
+        if ($pagina == 1) { ?>
+            <a href="<?php echo $enlace. ($pagina + 1) ?>"><button type="button" class="btn btn-outline-secondary">SIGUIENTE</button></a>
+        <?php } else if ($pagina == round(count($proyectos_all) / $limit)) { ?>
+            <a href="<?php echo $enlace. ($pagina - 1) ?>"><button type="button" class="btn btn-outline-secondary">ANTERIOR</button></a>
+        <?php ;} else { ?>
+            <a href="<?php echo $enlace . ($pagina - 1) ?>"><button type="button" class="btn btn-outline-secondary">ANTERIOR</button></a>
+            <a href="<?php echo $enlace . ($pagina + 1) ?>"><button type="button" class="btn btn-outline-secondary">SIGUIENTE</button></a>
+    <?php ;} } ?>
 </div>
 <?php include("templates/footer.php");
 close_connection($conn) ?>

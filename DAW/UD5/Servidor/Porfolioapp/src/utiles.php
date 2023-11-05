@@ -1,5 +1,5 @@
 <?php
-include("mysql/usuario_sql.php");
+include_once("mysql/usuario_sql.php");
 function anyoActual()
 {
     echo date('Y');
@@ -20,9 +20,9 @@ function test_input($data)
 }
 //UD5.3.g BEGIN
 function get_user_logged_in($conn, $cookie){
-    if (isset($_COOKIE['e-mail'])) {
+    if (isset($_COOKIE['user_email'])) {
         $user = get_credenciales_usuario($conn, $cookie);
-        if ($user['email'] == $cookie && $user['admin'] == true) {
+        if ($user['email'] == $_COOKIE['user_email'] || $user['admin'] == true) {
             return true;
         } else {
             return false;

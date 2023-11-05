@@ -1,6 +1,6 @@
-<?php include("datos.php");
-include("utiles.php");
-include("mysql/categoria_sql.php");
+<?php include_once("datos.php");
+include_once("utiles.php");
+include_once("mysql/categoria_sql.php");
 ?>
 <!--DOCTYPE html -->
 <html>
@@ -27,19 +27,16 @@ include("mysql/categoria_sql.php");
             <svg class="bi me-2" width="40" height="32">
                 <use xlink:href="#bootstrap"></use>
             </svg>
-            <!--UD3.5.a-->
             <span class="fs-4">Portfolio <?php anyoActual() ?></span>
         </a>
 
         <ul class="nav nav-pills">
             <li class="nav-item">
-                <!-- UD3.2.a-->
                 <a href="./index.php" class="nav-link
                         <?php echo ($_SERVER['SCRIPT_NAME'] == "/index.php") && !isset($_GET['categoria']) ? "active" : "" ?>
                     " aria-current="page">INICIO
                 </a>
             </li>
-            <!-- UD3.3.e BEGIN-->
             <li class="nav-item">
                 <a class="nav-link dropdown-toggle
                     <?php echo ($_SERVER['SCRIPT_NAME'] == "/index.php") && isset($_GET['categoria']) ? "active" : "" ?>
@@ -58,29 +55,23 @@ include("mysql/categoria_sql.php");
                 </div>
             </li>
             <li class="nav-item">
-                <!--UD3.2.b-->
                 <a href="./sobre_mi.php" class="nav-link
                         <?php echo ($_SERVER['SCRIPT_NAME'] == "/sobre_mi.php") ? "active" : "" ?>
                     ">SOBRE MÍ
                 </a>
             </li>
-            <!-- UD3.3.e END-->
-            <!--UD4.1.e BEGIN / UD4.1.f BEGIN-->
-            <?php if ($_COOKIE['loggedIn'] === "true") { ?>
-                <!-- UD3.2.e BEGIN -->
+            <!--UD5.6.a BEGIN-->
+            <?php if (get_user_logged_in($conn, $_COOKIE['user_email'])) { ?>
                 <li class="nav-item">
                     <a class="nav-link dropdown-toggle 
                     <?php echo ($_SERVER['SCRIPT_NAME'] == "/usuarios.php" || $_SERVER['SCRIPT_NAME'] == "/contacto_lista.php") ? "active" : "" ?>" id="dropdownMenu1" data-bs-toggle="dropdown" ariahaspopup="true">ADMINISTRACION
                         <span class="caret"></span>
                     </a>
-                    <!--UD4.3.a BEGIN-->
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         <a class="dropdown-item" href="/contacto_lista.php">Lista de contactos</a>
                         <a class="dropdown-item" href="/usuarios.php">Usuarios</a>
                     </div>
-                    <!--UD4.3.a END-->
                 </li>
-                <!-- UD3.2.e END -->
                 <li class="nav-item">
                     <a href="/logout.php" class="nav-link
                             <?php echo ($_SERVER['SCRIPT_NAME'] == "/logout.php") ? "active" : "" ?>
@@ -88,15 +79,13 @@ include("mysql/categoria_sql.php");
                     </a>
                 </li>
             <?php } else { ?>
-                <!--UD4.1.a BEGIN-->
                 <li class="nav-item">
                     <a href="/login.php" class="nav-link
                             <?php echo ($_SERVER['SCRIPT_NAME'] == "/login.php") ? "active" : "" ?>
                         ">LOG IN</a>
                     </a>
                 </li>
-                <!--UD4.1.a END-->
-            <?php } //UD4.1.e END / UD4.1.f END
-            ?>
+            <?php } ?>
+            <!--UD5.6.a END-->
         </ul>
     </header>

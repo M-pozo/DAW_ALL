@@ -1,8 +1,7 @@
 <?php 
 include_once("datos.php");
-include_once("utiles.php");
 include_once("mysql/usuario_sql.php");
-include("mysql/sesion_sql.php");
+include_once("mysql/sesion_sql.php");
 $emailErr = "";
 $passwordErr = "";
 $email = $_POST["email"];
