@@ -11,6 +11,8 @@ function get_credenciales_usuario($conn, $email)
     $isOk = $consulta->execute();
     return $consulta->fetch();
 }
+//UD5.3.e END
+//UD5.6.d BEGIN
 function update_usuario($conn, $usuario, $email){
     $update_usuario = "UPDATE usuario
                         SET email = :email, password = :password, nombreApellidos = :nombreApellidos, dni = :dni
@@ -24,4 +26,4 @@ function update_usuario($conn, $usuario, $email){
     $consulta->bindParam(':cookie', $email);
     $consulta->execute();
 }
-//UD5.3.e END
+//UD5.6.d END

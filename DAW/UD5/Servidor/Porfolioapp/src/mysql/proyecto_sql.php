@@ -87,11 +87,13 @@ function delete_proyecto( $conn, $id ){
     $consulta->execute();
 }
 //UD5.6.b END
-function create_proyecto($conn, $proyecto){
-    $create_proyecto =  'INSERT INTO proyecto (clave, titulo, fecha, descripcion, imagen)
-                        VALUES (:clave, :titulo, :fecha, :descripcion, :imagen ) ';
+//UD5.5.b BEGIN
+function new_proyecto($conn, $proyecto){
+    $create_proyecto =  'INSERT INTO proyecto (id, clave, titulo, fecha, descripcion, imagen)
+                        VALUES (:id, :clave, :titulo, :fecha, :descripcion, :imagen ) ';
     $consulta = $conn->prepare($create_proyecto);
     $consulta->setFetchMode(PDO::FETCH_ASSOC);
+    $consulta->bindParam(':id', $proyecto['id']);
     $consulta->bindParam(':clave', $proyecto['clave']);
     $consulta->bindParam(':titulo', $proyecto['titulo']);
     $consulta->bindParam(':fecha', $proyecto['fecha']);
@@ -99,18 +101,21 @@ function create_proyecto($conn, $proyecto){
     $consulta->bindParam(':imagen', $proyecto['imagen']);
     $consulta->execute();
 }
+//UD5.5.b END
 //UD5.6.c BEGIN
 function update_proyecto( $conn, $proyecto, $id){
     $update_proyecto = "UPDATE proyecto
-                        SET clave = :clave, titulo = :titulo, fecha = :fecha, descripcion = :descripcion, imagen = :imagen
-                        WHERE id = $id";
+                        SET id = :new_id, clave = :clave, titulo = :titulo, fecha = :fecha, descripcion = :descripcion, imagen = :imagen
+                        WHERE id = :id";
     $consulta = $conn->prepare($update_proyecto);
     $consulta->setFetchMode(PDO::FETCH_ASSOC);
+    $consulta->bindParam(':new_id', $proyecto['id']);
     $consulta->bindParam(':clave', $proyecto['clave']);
     $consulta->bindParam(':titulo', $proyecto['titulo']);
     $consulta->bindParam(':fecha', $proyecto['fecha']);
     $consulta->bindParam(':descripcion', $proyecto['descripcion']);
     $consulta->bindParam(':imagen', $proyecto['imagen']);
+    $consulta->bindParam(':id', $id);
     $consulta->execute();
 }
 //UD5.6.c END
@@ -123,4 +128,12 @@ function get_info_proyecto($conn, $id){
     $consulta->bindParam(':id', $id);
     $isOk = $consulta->execute();
     return $consulta->fetch();
+}
+function get_all_id_proyecto($conn){
+    $get_all_id = 'SELECT id 
+                    FROM proyecto';
+    $consulta = $conn->prepare($get_all_id);
+    $consulta->setFetchMode(PDO::FETCH_ASSOC);
+    $consulta->execute();
+    return $consulta->fetchAll();
 }

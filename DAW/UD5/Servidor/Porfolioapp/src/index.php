@@ -9,8 +9,7 @@ $sort_date = $_GET['sort_date'];
 $id_categoria = $_GET['categoria'];
 $pagina = $_GET['pagina'];
 $enlace = '?pagina=';
-
-//UD5.4.b BEGIN
+//UD5.4.d BEGIN
 if (isset($pagina)) {
     if(($pagina - 1) * 2 < count($proyectos_all) && ($pagina) * 2 > 0) {
         $proyectos = get_proyectos_paginados($conn);
@@ -20,7 +19,7 @@ if (isset($pagina)) {
         </script><?php
     }
 }
-//UD5.4.b END
+//UD5.4.d END
 //UD5.4.c BEGIN
 if (isset($sort)&& $sort == "-1") {
     $proyectos = get_proyectos_order_by($conn, "titulo DESC");
@@ -50,10 +49,12 @@ if (isset($id_categoria)) {
     <li class="nav-item">
         <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-bs-toggle="dropdown" ariahaspopup="true">Ordenar<span class="caret"></span></a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <!--UD5.4.c BEGIN-->
             <a href="?sort=-1"><button href="" type="button" class="btn btn-outline-secondary">ProyectoDesc</button></a>
             <a href="?sort=1"><button href="" type="button" class="btn btn-outline-secondary">ProyectosAsc</button></a>
             <a href="?sort_date=-1"><button href="" type="button" class="btn btn-outline-secondary">FechaDesc</button></a>
-            <a href="?sort_date=1"><button href="" type="button" class="btn btn-outline-secondary">FechAsc</button></a>
+            <a href="?sort_date=1"><button href="" type="button" class="btn btn-outline-secondary">FechaAsc</button></a>
+            <!--UD5.4.c END-->
         </div>
         <li class="nav-item">
             <!--UD4.2.a BEGIN-->
@@ -87,15 +88,17 @@ if (isset($id_categoria)) {
                         </div>
                         </a>
                         <?php foreach (get_categorias_por_proyecto($conn, $proyecto['id']) as $categoria) : ?>
+                            <!--UD5.4.b BEGIN-->
                             <a href="/index.php?categoria=<?php echo $categoria['id'] ?>" class="badge bg-secondary ">
                                 <?php echo utf8_encode($categoria['nombre'])?>
                             </a>
+                            <!--UD5.4.b END-->
                         <?php endforeach; ?>
             </div>
         <?php endforeach; ?>
     </div>
     <hr>
-    <?php 
+    <?php //UD5.4.d BEGIN
     if (!isset($pagina)) { ?>
         <a href="<?php echo $enlace . '2' ?>"><button type="button" class="btn btn-outline-secondary">SIGUIENTE</button></a>
     <?php } else {
@@ -106,7 +109,7 @@ if (isset($id_categoria)) {
         <?php ;} else { ?>
             <a href="<?php echo $enlace . ($pagina - 1) ?>"><button type="button" class="btn btn-outline-secondary">ANTERIOR</button></a>
             <a href="<?php echo $enlace . ($pagina + 1) ?>"><button type="button" class="btn btn-outline-secondary">SIGUIENTE</button></a>
-    <?php ;} } ?>
+    <?php ;} } //UD5.4.d END?>
 </div>
 <?php include("templates/footer.php");
 close_connection($conn) ?>

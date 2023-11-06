@@ -5,8 +5,7 @@ include("mysql/categoria_proyecto_sql.php");
 $idGet = $_GET["id"];
 $loggedln = get_user_logged_in($conn, $_COOKIE['user_email']);
 $proyecto = get_info_proyecto($conn, $idGet);
-print_r($idGet);
-$claveErr = $tituloErr = $fechaErr = $descripcionErr = $imagenErr = "";
+$claveErr = $tituloErr = $fechaErr = $descripcionErr = $imagenErr = $new_idErr = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //UD5.6.b BEGIN
     if (!empty($_POST["eliminar"])) {
@@ -16,6 +15,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </script><?php
     }
     //UD5.6.b END
+    if (empty($_POST["new_id"])) {
+        $new_idErr = "Por favor, introduzca un id";
+    } else {
+        $new_id = test_input($_POST["new_id"]);
+        foreach (get_all_id_proyecto($conn) as $id) {
+            if ($id['id'] == $new_id ) {
+                $new_idErr = "Este id ya esta en uso";
+            }
+        }
+    }
     if (empty($_POST["clave"])) {
         $claveErr = "Por favor, introduzca una clave";
     } else {
@@ -57,21 +66,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $pathImagen = null;
         }
     }
-    if ($claveErr === "" && $tituloErr === "" && $fechaErr === "" && $descripcionErr === "" && $imagenErr === "") {
+    if ($new_idErr === "" && $claveErr === "" && $tituloErr === "" && $fechaErr === "" && $descripcionErr === "" && $imagenErr === "") {
         if (!isset($idGet)) {
             $proyecto_sql = [
+                "id" => $new_id,
                 "clave" => $clave,
                 "titulo" => $titulo,
                 "fecha" => $fecha,
                 "descripcion" => $descripcion,
                 "imagen" => $pathImagen,
             ];
-            create_proyecto($conn, $proyecto_sql);
+            //UD5.5.b
+            new_proyecto($conn, $proyecto_sql);
         } else {
             if (empty($nombreImagen)) {
                 $pathImagen = $proyecto['imagen'];
             }
             $proyecto_sql = [
+                "id" => $new_id,
                 "clave" => $clave,
                 "titulo" => $titulo,
                 "fecha" => $fecha,
@@ -80,9 +92,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ];
             update_proyecto($conn, $proyecto_sql, $idGet);
         }
-        ?><script type="text/javascript">
-            window.location = "/index.php";
-        </script><?php
+        ?>
+        <script type="text/javascript">
+            window.location = "/crear_actualizar_proyecto.php?id=<?php echo $new_id; ?>";
+        </script>
+        <?php
     }
 }
 $proyecto = get_info_proyecto($conn, $idGet);
@@ -93,9 +107,9 @@ $proyecto = get_info_proyecto($conn, $idGet);
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <div class="mb-3 col-sm-6 p-0">
-                        <label for="idID" class="form-label">Clave</label>
-                        <input type="text" name="id" value="<?php echo $id; ?>" class="form-control" id="idID">
-                        <span class="text-danger"> <?php echo $idErr ?> </span>
+                        <label for="new_idID" class="form-label">Id</label>
+                        <input type="text" name="new_id" value="<?php echo $new_id; ?>" class="form-control" id="new_idID">
+                        <span class="text-danger"> <?php echo $new_idErr ?> </span>
                     </div>
                 </div>
                 <div class="row">
@@ -151,6 +165,13 @@ $proyecto = get_info_proyecto($conn, $idGet);
                         <form action="
                         <?php echo /*UD4.2.d*/ htmlspecialchars($_SERVER["PHP_SELF"]) . "?id=" . $proyecto['id']; ?>
                         " method="POST" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="mb-3 col-sm-6 p-0">
+                                    <label for="new_idID" class="form-label">Id</label>
+                                    <input type="text" name="new_id" value="<?php echo $proyecto['id']; ?>" class="form-control" id="new_idID">
+                                    <span class="text-danger"> <?php echo $new_idErr ?> </span>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="mb-3 col-sm-6 p-0">
                                     <label for="claveID" class="form-label">Clave</label>
