@@ -9,17 +9,6 @@ $sort_date = $_GET['sort_date'];
 $id_categoria = $_GET['categoria'];
 $pagina = $_GET['pagina'];
 $enlace = '?pagina=';
-//UD5.4.d BEGIN
-if (isset($pagina)) {
-    if(($pagina - 1) * 2 < count($proyectos_all) && ($pagina) * 2 > 0) {
-        $proyectos = get_proyectos_paginados($conn);
-    }else{
-        ?><script type="text/javascript">
-            window.location = "/index.php";
-        </script><?php
-    }
-}
-//UD5.4.d END
 //UD5.4.c BEGIN
 if (isset($sort)&& $sort == "-1") {
     $proyectos = get_proyectos_order_by($conn, "titulo DESC");
@@ -42,6 +31,17 @@ if (isset($id_categoria)) {
     $proyectos = get_proyectos_por_categoria_paginado($conn, $id_categoria);
     $enlace = '?categoria='. $id_categoria.'&pagina=';
 }
+//UD5.4.d BEGIN
+if (isset($pagina)) {
+    if(($pagina - 1) * 2 < count($proyectos_all) && ($pagina) * 2 > 0) {
+        $proyectos = get_proyectos_paginados($conn);
+    }else{
+        ?><script type="text/javascript">
+            window.location = "/index.php";
+        </script><?php
+    }
+}
+//UD5.4.d END
 ?>
 <div class="container mb-1">
 <!--UD3.2.f BEGIN-->
@@ -99,7 +99,8 @@ if (isset($id_categoria)) {
     </div>
     <hr>
     <?php //UD5.4.d BEGIN
-    if (!isset($pagina)) { ?>
+    if (count($proyectos_all) > $limit) {
+     if (!isset($pagina)) { ?>
         <a href="<?php echo $enlace . '2' ?>"><button type="button" class="btn btn-outline-secondary">SIGUIENTE</button></a>
     <?php } else {
         if ($pagina == 1) { ?>
@@ -109,7 +110,8 @@ if (isset($id_categoria)) {
         <?php ;} else { ?>
             <a href="<?php echo $enlace . ($pagina - 1) ?>"><button type="button" class="btn btn-outline-secondary">ANTERIOR</button></a>
             <a href="<?php echo $enlace . ($pagina + 1) ?>"><button type="button" class="btn btn-outline-secondary">SIGUIENTE</button></a>
-    <?php ;} } //UD5.4.d END?>
+    <?php ;} } //UD5.4.d END   
+    } ?>
 </div>
 <?php include("templates/footer.php");
 close_connection($conn) ?>

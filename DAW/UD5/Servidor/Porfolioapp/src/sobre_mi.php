@@ -15,7 +15,7 @@
                 particular.</p>
             <p>Si tienes cualquier tipo de pregunta, contacta conmigo por favor.</p>
             <p>Teléfono: 87654321</p>
-            <a href="/contacto.php" class="btn btn-primary">CONTACTAR</a>
+            <!--<a href="/contacto.php" class="btn btn-primary">CONTACTAR</a>-->
         </div>
     </div>
 </div>

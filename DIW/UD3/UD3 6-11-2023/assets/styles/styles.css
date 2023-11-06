@@ -1,0 +1,22 @@
+div{
+    box-sizing: content-box;
+    box-sizing: border-box;
+    border-radius: 50vh;
+}
+.miCapa{
+    width: 200px;
+    padding: 10px;
+    margin: 20px;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    margin: 20px 15px;
+    border: 1px solid #000;
+    display: flex;
+}
+
+.capaHija{
+    width: 100px;
+    padding: 15px;
+}
