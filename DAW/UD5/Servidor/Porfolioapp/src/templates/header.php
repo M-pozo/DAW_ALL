@@ -69,7 +69,9 @@ include_once("mysql/categoria_sql.php");
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         <a class="dropdown-item" href="/contacto_lista.php">Lista de contactos</a>
-                        <a class="dropdown-item" href="/usuarios.php">Usuarios</a>
+                        <?php if (get_user_logged_in($conn, $_COOKIE['user_email'])){?>
+                            <a class="dropdown-item" href="/usuarios.php">Usuarios</a>
+                        <?php ;}?>
                     </div>
                 </li>
                 <li class="nav-item">

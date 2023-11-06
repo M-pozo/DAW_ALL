@@ -114,3 +114,13 @@ function update_proyecto( $conn, $proyecto, $id){
     $consulta->execute();
 }
 //UD5.6.c END
+function get_info_proyecto($conn, $id){
+    $get_proyecto_by_id = "SELECT * 
+                            FROM proyecto
+                            WHERE id = :id";
+    $consulta = $conn->prepare($get_proyecto_by_id);
+    $consulta->setFetchMode(PDO::FETCH_ASSOC);
+    $consulta->bindParam(':id', $id);
+    $isOk = $consulta->execute();
+    return $consulta->fetch();
+}

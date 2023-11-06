@@ -4,8 +4,8 @@ include("mysql/proyecto_sql.php");
 include("mysql/categoria_proyecto_sql.php");
 $idGet = $_GET["id"];
 $loggedln = get_user_logged_in($conn, $_COOKIE['user_email']);
-$proyectos = get_proyectos_all($conn);
-print_r($loggedln);
+$proyecto = get_info_proyecto($conn, $idGet);
+print_r($idGet);
 $claveErr = $tituloErr = $fechaErr = $descripcionErr = $imagenErr = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //UD5.6.b BEGIN
@@ -54,43 +54,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             }
         } else if (!isset($idGet)) {
-            $pathImagen = "";
+            $pathImagen = null;
         }
     }
     if ($claveErr === "" && $tituloErr === "" && $fechaErr === "" && $descripcionErr === "" && $imagenErr === "") {
         if (!isset($idGet)) {
-            $proyecto = [
+            $proyecto_sql = [
                 "clave" => $clave,
                 "titulo" => $titulo,
                 "fecha" => $fecha,
                 "descripcion" => $descripcion,
                 "imagen" => $pathImagen,
             ];
-            create_proyecto($conn, $proyecto);
-            foreach ($cateegorias as $categoria) {
-                create_categoria_proyecto($conn, $categoria, $idGet);
-            }
+            create_proyecto($conn, $proyecto_sql);
         } else {
-            $proyecto['clave'] = $clave;
-            $proyecto['titulo'] = $titulo;
-            $proyecto['fecha'] = $fecha;
-            $proyecto['descripcion'] = $descripcion;
-            if (!empty($nombreImagen)) {
-                $proyecto['imagen'] = $pathImagen;
+            if (empty($nombreImagen)) {
+                $pathImagen = $proyecto['imagen'];
             }
-            update_proyecto($conn, $proyecto, $idGet);
+            $proyecto_sql = [
+                "clave" => $clave,
+                "titulo" => $titulo,
+                "fecha" => $fecha,
+                "descripcion" => $descripcion,
+                "imagen" => $pathImagen,
+            ];
+            update_proyecto($conn, $proyecto_sql, $idGet);
         }
-?><script type="text/javascript">
-            window.location = "/confirmar_proyecto.php";
+        ?><script type="text/javascript">
+            window.location = "/index.php";
         </script><?php
-                }
-            }
-            if (!isset($idGet)) { ?>
+    }
+}
+$proyecto = get_info_proyecto($conn, $idGet);
+    if (!isset($idGet)) { ?>
     <div class="container">
         <h2 class="mb-5">Crear proyecto</h2>
         <div class="row">
-            <!--UD4.2.d-->
-            <form action="<?php /*UD4.2.d*/ echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <div class="mb-3 col-sm-6 p-0">
                         <label for="idID" class="form-label">Clave</label>
@@ -144,7 +144,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </form>
         </div>
     <?php } else { ?>
-        <?php foreach ($proyectos as $proyecto) : if ($idGet == $proyecto['id']) { ?>
+        <?php if ($idGet == $proyecto['id']) { ?>
                 <div class="container">
                     <h2 class="mb-5">Actualizar proyecto</h2>
                     <div class="row">
@@ -197,14 +197,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </form>
                         <!--UD5.6.b BEGIN-->
                         <?php if (get_user_logged_in($conn, $_COOKIE['user_email'])) { ?>
-                                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
+                                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]). "?id=" . $proyecto['id']; ?>" method="POST" enctype="multipart/form-data">
                                     <label for="eliminarID" class="form-label"></label>
                                     <input type="submit" name="eliminar" value="Eliminar Proyecto" class="btn btn-outline-secondary mb-5" id="eliminarID">
                                 </form>
                             <?php }?>
                             <!--UD5.6.b END-->
                     </div>
-        <?php };
-                endforeach;
-            } //UD4.2.e END
-        ?>
+        <?php }; } ?>
+        <?php include("templates/footer.php") ?>
