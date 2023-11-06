@@ -1907,21 +1907,22 @@ generos
 const urlParams = new URLSearchParams(location.search);
 let pagina = 0;
 let limit = 9;
+let genero = "";
+if(urlParams.has('genero') && generos.includes(urlParams.get('genero'))) genero = urlParams.get('genero');
 pagina = parseInt(urlParams.get('pagina') - 1)
-generos.forEach(genero => {
-    if (genero == urlParams.get('genero')) {
-        personajes = personajes.filter(personaje => personaje['gender'] == urlParams.get('genero'));
-    }
-});
+if(pagina < 0) pagina = 0;
+if(genero !== "") {
+    personajes = personajes.filter(personaje => personaje.gender == genero);
+}
 console.log(personajes)
 document.write('<div class="row">');
     personajes.slice(pagina*limit, (pagina+1)*limit).forEach(p => {
         document.write(`
             <div class="col-sm-4">
                 <h3>`+p['name']+`</h3>
-                <p>`+p['height']+`</p>
-                <p>`+p['mass']+`</p>
-                <p>Resto de características...</p>
+                <p>Altura: `+p['height']+`</p>
+                <p>Peso: `+p['mass']+`</p>
+                 <p>Genero: `+p['gender']+`</p>
             </div>`
         )
     });

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: mysql
--- Tiempo de generación: 23-10-2023 a las 15:47:19
+-- Tiempo de generación: 06-11-2023 a las 16:21:57
 -- Versión del servidor: 5.7.43
 -- Versión de PHP: 8.2.8
 
@@ -32,6 +32,18 @@ CREATE TABLE `categoria` (
   `nombre` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `categoria`
+--
+
+INSERT INTO `categoria` (`id`, `nombre`) VALUES
+(1, 'PHP'),
+(2, 'JavaScript'),
+(3, 'Java'),
+(4, 'HTML'),
+(5, 'CSS'),
+(6, 'Python');
+
 -- --------------------------------------------------------
 
 --
@@ -40,9 +52,26 @@ CREATE TABLE `categoria` (
 
 CREATE TABLE `categoria_proyecto` (
   `id` int(11) NOT NULL,
-  `proyecto` int(11) NOT NULL,
-  `categoria` int(11) NOT NULL
+  `proyecto_id` int(11) NOT NULL,
+  `categoria_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `categoria_proyecto`
+--
+
+INSERT INTO `categoria_proyecto` (`id`, `proyecto_id`, `categoria_id`) VALUES
+(1, 1, 4),
+(2, 1, 5),
+(3, 2, 6),
+(4, 2, 2),
+(5, 3, 4),
+(6, 3, 5),
+(7, 4, 3),
+(8, 4, 6),
+(9, 5, 4),
+(10, 5, 1),
+(11, 5, 2);
 
 -- --------------------------------------------------------
 
@@ -72,8 +101,19 @@ CREATE TABLE `proyecto` (
   `titulo` varchar(50) NOT NULL,
   `fecha` date NOT NULL,
   `descripcion` text NOT NULL,
-  `imagen` text NOT NULL
+  `imagen` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `proyecto`
+--
+
+INSERT INTO `proyecto` (`id`, `clave`, `titulo`, `fecha`, `descripcion`, `imagen`) VALUES
+(1, 'proyecto1', 'Porfolio', '2023-10-24', 'Mostrar todos mis proyectos', 'static\\/images\\/proyecto1.jpg'),
+(2, 'proyecto2', 'Torneo', '2022-11-14', 'Utilizar la API de un juego para coger los datos de los participantes', 'static\\/images\\/torneo.png'),
+(3, 'proyecto3', 'MyFilms', '2023-11-14', 'Almacenar y categorizar pel\\u00edculas seg\\u00fan mis rese\\u00f1as', 'static\\/images\\/pelicula.png'),
+(4, 'proyecto4', 'Juego 2D', '2020-11-14', 'Juego web 2D de plataformas', 'static\\/images\\/juego2d.png'),
+(5, 'proyecto5', 'Ropa', '2019-11-14', 'Venta de ropa de segunda mano', 'static\\/images\\/ropa.png');
 
 -- --------------------------------------------------------
 
@@ -83,7 +123,7 @@ CREATE TABLE `proyecto` (
 
 CREATE TABLE `sesion` (
   `id` int(11) NOT NULL,
-  `usuario` int(11) NOT NULL
+  `usuario_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -94,13 +134,20 @@ CREATE TABLE `sesion` (
 
 CREATE TABLE `usuario` (
   `id` int(11) NOT NULL,
-  `e-mail` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
   `password` text NOT NULL,
-  `nombre y apellido` text NOT NULL,
+  `nombreApellidos` text NOT NULL,
   `dni` text NOT NULL,
   `activo` tinyint(1) NOT NULL DEFAULT '1',
   `admin` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `email`, `password`, `nombreApellidos`, `dni`, `activo`, `admin`) VALUES
+(1, 'prueba@gmail.com', '1234', 'Miguel Pozo PÃ©rez', '15236598L', 1, 0);
 
 --
 -- Índices para tablas volcadas
@@ -117,8 +164,8 @@ ALTER TABLE `categoria`
 --
 ALTER TABLE `categoria_proyecto`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_categoria` (`categoria`),
-  ADD KEY `fk_proyecto` (`proyecto`);
+  ADD KEY `fk_categoria` (`categoria_id`),
+  ADD KEY `fk_proyecto` (`proyecto_id`);
 
 --
 -- Indices de la tabla `contacto`
@@ -139,13 +186,29 @@ ALTER TABLE `proyecto`
 --
 ALTER TABLE `sesion`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_usuario` (`usuario`);
+  ADD KEY `fk_usuario` (`usuario_id`);
 
 --
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `categoria_proyecto`
+--
+ALTER TABLE `categoria_proyecto`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT de la tabla `sesion`
+--
+ALTER TABLE `sesion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
@@ -155,14 +218,14 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `categoria_proyecto`
 --
 ALTER TABLE `categoria_proyecto`
-  ADD CONSTRAINT `fk_categoria` FOREIGN KEY (`categoria`) REFERENCES `categoria` (`id`),
-  ADD CONSTRAINT `fk_proyecto` FOREIGN KEY (`proyecto`) REFERENCES `proyecto` (`id`);
+  ADD CONSTRAINT `fk_categoria` FOREIGN KEY (`categoria_id`) REFERENCES `categoria` (`id`),
+  ADD CONSTRAINT `fk_proyecto` FOREIGN KEY (`proyecto_id`) REFERENCES `proyecto` (`id`);
 
 --
 -- Filtros para la tabla `sesion`
 --
 ALTER TABLE `sesion`
-  ADD CONSTRAINT `fk_usuario` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`id`);
+  ADD CONSTRAINT `fk_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -46,11 +46,11 @@ include_once("mysql/categoria_sql.php");
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
                     <!--UD5.4.a BEGIN-->
-                    <?php foreach (get_categorias_all($conn) as $categoria) :
-                        //UD5.4.b BEGIN
-                        echo '<a class="dropdown-item" href="/index.php?categoria=' . $categoria['id'] . '">' . $categoria['nombre'] . '</a>';
-                        //UD5.4.b END
-                    endforeach; ?>
+                    <?php foreach (get_categorias_all($conn) as $categoria) : ?>
+                        <!-- //UD5.4.b BEGIN -->
+                        <a class="dropdown-item" href="/index.php?categoria=<?php echo $categoria['id'] ?>"><?php echo $categoria['nombre'] ?></a>
+                        <!-- //UD5.4.b END -->
+                    <?php endforeach; ?>
                     <!--UD5.4.a END-->
                 </div>
             </li>

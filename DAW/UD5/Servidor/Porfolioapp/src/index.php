@@ -9,6 +9,17 @@ $sort_date = $_GET['sort_date'];
 $id_categoria = $_GET['categoria'];
 $pagina = $_GET['pagina'];
 $enlace = '?pagina=';
+//UD5.4.d BEGIN
+if (isset($pagina)) {
+    if(($pagina - 1) * 2 < count($proyectos_all) && ($pagina) * 2 > 0) {
+        $proyectos = get_proyectos_paginados($conn);
+    }else{
+        ?><script type="text/javascript">
+            window.location = "/index.php";
+        </script><?php
+    }
+}
+//UD5.4.d END
 //UD5.4.c BEGIN
 if (isset($sort)&& $sort == "-1") {
     $proyectos = get_proyectos_order_by($conn, "titulo DESC");
@@ -31,17 +42,7 @@ if (isset($id_categoria)) {
     $proyectos = get_proyectos_por_categoria_paginado($conn, $id_categoria);
     $enlace = '?categoria='. $id_categoria.'&pagina=';
 }
-//UD5.4.d BEGIN
-if (isset($pagina)) {
-    if(($pagina - 1) * 2 < count($proyectos_all) && ($pagina) * 2 > 0) {
-        $proyectos = get_proyectos_paginados($conn);
-    }else{
-        ?><script type="text/javascript">
-            window.location = "/index.php";
-        </script><?php
-    }
-}
-//UD5.4.d END
+
 ?>
 <div class="container mb-1">
 <!--UD3.2.f BEGIN-->
