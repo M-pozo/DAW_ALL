@@ -1894,11 +1894,26 @@ let personajes=[
             "url": "https://swapi.dev/api/people/83/"
         }
     ];
+let generos=[];
+generos=personajes.reduce(
+(arrayG,personaje)=>{
+    if(arrayG.indexOf(personaje["gender"])<0){
+        arrayG.push(personaje["gender"]);
+    };
+    return arrayG;
+},
+generos
+);
 const urlParams = new URLSearchParams(location.search);
 let pagina = 0;
 let limit = 9;
 pagina = parseInt(urlParams.get('pagina') - 1)
-
+generos.forEach(genero => {
+    if (genero == urlParams.get('genero')) {
+        personajes = personajes.filter(personaje => personaje['gender'] == urlParams.get('genero'));
+    }
+});
+console.log(personajes)
 document.write('<div class="row">');
     personajes.slice(pagina*limit, (pagina+1)*limit).forEach(p => {
         document.write(`
@@ -1912,26 +1927,14 @@ document.write('<div class="row">');
     });
     document.write(
         `<div class="col-sm-4">
-            <h3><a href="?pagina=`+(pagina+2)+`">Siguientes</a></h3>
-            <h3><a href="?pagina=`+(pagina)+`">Anterior</a></h3>
+            <h3><a href="?pagina=`+(pagina+2)+`&genero=${genero}">Siguientes</a></h3>
+            <h3><a href="?pagina=`+(pagina)+`&genero=${genero}">Anterior</a></h3>
         </div>`
     );
-    let generos=[];
-    generos=personajes.reduce(
-    (arrayG,personaje)=>{
-        if(arrayG.indexOf(personaje["gender"])<0){
-            arrayG.push(personaje["gender"]);
-        };
-        return arrayG;
-    },
-    generos
-    );
-    console.log(generos)
 document.write('<div class="col-sm-4">')
     for (let genero of generos) {
-        console.log(genero);
         document.write(`
-            <p><a href="?pagina=${genero}">${genero}</a></p>
+            <p><a href="?genero=${genero}&pagina=${pagina}">${genero}</a></p>
         `);
     }
 document.write('</div>')
