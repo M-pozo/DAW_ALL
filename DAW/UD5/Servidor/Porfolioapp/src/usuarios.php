@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 ?>
         <script type="text/javascript">
-            window.location = "/confirmar_usuario.php";
+            window.location = "/confirmar_usuario.php?error";
         </script>
 <?php
     }
@@ -56,41 +56,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 <?php include("templates/header.php") ?>
 <?php if (get_user_logged_in($conn, $_COOKIE['user_email'])) { ?>
-        <div class="container">
-            <h2 class="mb-5">Mantenimiento</h2>
-            <div class="row">
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
-                    <div class="row">
-                        <div class="mb-3 col-sm-6 p-0">
-                            <label for="claveID" class="form-label">email</label>
-                            <input type="text" name="email" value="<?php echo $usuario['email']; ?>" class="form-control" id="emailID" placeholder="">
-                            <span class="text-danger"> <?php echo $emailErr ?> </span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="mb-3 col-sm-6 p-0">
-                            <label for="nombreApellidosID" class="form-label">Nombre y apellidos</label>
-                            <input type="text" name="nombreApellidos" value="<?php echo $usuario['nombreApellidos']; ?>" class="form-control" id="nombreApellidosID">
-                            <span class="text-danger"> <?php echo $nombreApellidosErr ?> </span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="mb-3 col-sm-6 p-0">
-                            <label for="dniID" class="form-label">DNI</label>
-                            <input type="text" name="dni" value="<?php echo $usuario['dni']; ?>" class="form-control" id="dniID">
-                            <span class="text-danger"> <?php echo $dniErr ?> </span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="mb-3 col-sm-6 p-0">
-                            <label for="passwordID" class="form-label">Password</label>
-                            <input type="password" name="password" value="<?php echo $usuario['password']; ?>" class="form-control" id="passwordID">
-                            <span class="text-danger"> <?php echo $passwordErr ?> </span>
-                        </div>
-                    </div>
-                    <br>
-                    <button type="submit" class="btn btn-success">Actualizar</button>
-                </form>
+    <div class="container">
+        <h2 class="mb-5">Mantenimiento</h2>
+        <?php if (isset($_GET['error'])) { ?>
+            <div class="alert alert-danger mt-5">
+                ERROR
             </div>
+        <?php } ?>
+        <div class="row">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="mb-3 col-sm-6 p-0">
+                        <label for="claveID" class="form-label">email</label>
+                        <input type="text" name="email" value="<?php echo $usuario['email']; ?>" class="form-control" id="emailID" placeholder="">
+                        <span class="text-danger"> <?php echo $emailErr ?> </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-sm-6 p-0">
+                        <label for="nombreApellidosID" class="form-label">Nombre y apellidos</label>
+                        <input type="text" name="nombreApellidos" value="<?php echo $usuario['nombreApellidos']; ?>" class="form-control" id="nombreApellidosID">
+                        <span class="text-danger"> <?php echo $nombreApellidosErr ?> </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-sm-6 p-0">
+                        <label for="dniID" class="form-label">DNI</label>
+                        <input type="text" name="dni" value="<?php echo $usuario['dni']; ?>" class="form-control" id="dniID">
+                        <span class="text-danger"> <?php echo $dniErr ?> </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-sm-6 p-0">
+                        <label for="passwordID" class="form-label">Password</label>
+                        <input type="password" name="password" value="<?php echo $usuario['password']; ?>" class="form-control" id="passwordID">
+                        <span class="text-danger"> <?php echo $passwordErr ?> </span>
+                    </div>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-success">Actualizar</button>
+            </form>
+        </div>
     <?php }; ?>
     <?php include("templates/footer.php") ?>

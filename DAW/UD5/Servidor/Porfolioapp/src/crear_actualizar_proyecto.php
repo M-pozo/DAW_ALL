@@ -19,10 +19,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $new_idErr = "Por favors, introduzca un id";
                 } else {
                     $new_id = test_input($_POST["new_id"]);
+                    if (!preg_match("/^[0-9]+$/", $new_id)) {
+                        $new_idErr = 'Solo permite números';
+                    }
                     foreach (get_all_id_proyecto($conn) as $id) {
                         if (!isset($idGet)) {
-                            if ($id['id'] == $new_id)  {
-                            $new_idErr = "Este id ya esta en uso";
+                            if ($id['id'] == $new_id) {
+                                $new_idErr = "Este id ya esta en uso";
                             }
                         } else if ($id['id'] == $new_id && !($idGet == $new_id)) {
                             $new_idErr = "Este id ya esta en uso";
@@ -81,7 +84,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             "imagen" => $pathImagen,
                         ];
                         //UD5.5.b
-                        new_proyecto($conn, $proyecto_sql);
+                        try {
+                            new_proyecto($conn, $proyecto_sql);
+                        } catch (PDOException $e) {
+                    ?>
+                <script type="text/javascript">
+                    window.location = "/crear_actualizar_proyecto.php?error";
+                </script>
+            <?php
+                        }
                     } else {
                         if (empty($nombreImagen)) {
                             $pathImagen = $proyecto['imagen'];
@@ -94,9 +105,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             "descripcion" => $descripcion,
                             "imagen" => $pathImagen,
                         ];
-                        update_proyecto($conn, $proyecto_sql, $idGet);
+                        try {
+                            update_proyecto($conn, $proyecto_sql, $idGet);
+                        } catch (PDOException $e) {
+            ?>
+                <script type="text/javascript">
+                    window.location = "/crear_actualizar_proyecto.php?id=<?php echo $new_id; ?>&error";
+                </script>
+        <?php
+                        }
                     }
-                    ?>
+        ?>
         <script type="text/javascript">
             window.location = "/crear_actualizar_proyecto.php?id=<?php echo $new_id; ?>";
         </script>
@@ -107,6 +126,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (!isset($idGet)) { ?>
     <div class="container">
         <h2 class="mb-5">Crear proyecto</h2>
+        <?php if (isset($_GET['error'])) { ?>
+            <div class="alert alert-danger mt-5">
+                ERROR ha introducido una clave o un título ya existente
+            </div>
+        <?php } ?>
         <div class="row">
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
                 <div class="row">
@@ -165,6 +189,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php if ($idGet == $proyecto['id']) { ?>
             <div class="container">
                 <h2 class="mb-5">Actualizar proyecto</h2>
+                <?php if (isset($_GET['error'])) { ?>
+                    <div class="alert alert-danger mt-5">
+                        ERROR ha introducido una clave o un título ya existente
+                    </div>
+                <?php } ?>
                 <div class="row">
                     <form action="
                         <?php echo /*UD4.2.d*/ htmlspecialchars($_SERVER["PHP_SELF"]) . "?id=" . $proyecto['id']; ?>
