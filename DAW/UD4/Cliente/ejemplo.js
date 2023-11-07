@@ -77,7 +77,7 @@ let personasAsc = JSON.parse(JSON.stringify(personas));*/
     }
 });
 console.log(personasAsc);*/
-let enteros =[0,1,2,3,4,5,6,7,8,9,10]
+/*let enteros =[0,1,2,3,4,5,6,7,8,9,10]
 console.log(enteros.every(n => n%2 == 0))
 enteros.forEach((num, indice, array) => {
     console.log("Índice "+ indice + " en [" + array + "] es " + num)
@@ -97,5 +97,46 @@ console.log(enteros.filter(num => num % 2 == 0));
 console.log(enteros.reduce((acum, n) => {
     return valor;
 }, valInicial)
-);
+);*/
+/*const mi_objeto ={
+    nombre:"miguel"
+}
+mi_objeto.apllidos="López Vélez";
+console.log(mi_objeto.nombre);
+console.log(mi_objeto.apellidos);
 
+let nuevo_objeto = mi_objeto;
+nuevo_objeto.nombre ="Pepe33";
+console.log(mi_objeto.nomrbe);
+console.log(mi_objeto['nombre']);
+
+for (const key in mi_objeto) {
+    console.log(key)
+}
+*/
+const alumno={
+    nombre:"Pepe",
+    apellidos:"Viruelas Pontebedra",
+    genero:"n/a",
+    edad:"33",
+    nia:"1029374895",
+    mochila:{
+        bomba:"5367234",
+        navaja:"mariposa",
+        drogas:"cocaína",
+        mujer:"Que es eso?"
+    }
+}
+
+
+function queHayEnMiMochila(){
+    for (const key in alumno) {
+    if(typeof alumno[key]== "object"){
+        for (const key2 in alumno[key]) {
+            console.log(key2)
+        }
+    }
+}
+}
+
+queHayEnMiMochila();
