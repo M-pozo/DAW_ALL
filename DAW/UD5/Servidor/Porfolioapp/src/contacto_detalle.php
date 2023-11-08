@@ -1,26 +1,20 @@
-<?php include("templates/header.php"); ?>
-<?php
+<?php 
+include("templates/header.php"); 
+include("mysql/contacto_sql.php");
+
 $contacto_id = $_GET['id'];
-//El segundo parámetro es para que devuelva un array
-$tempArray = json_decode(file_get_contents('mysql/contactos.json'), true);
-//Presuponemos que contactos.json no está vacío, pero la URL se puede manipular manualmente
-if ($tempArray === NULL) {
-    $tempArray = [];
-} else {
-    $contacto_key = array_search($contacto_id, array_column($tempArray, 'id'));
-    $contacto = $tempArray[$contacto_key];
-}
+$contacto = get_contacto($conn, $contacto_id);
 ?>
 <div class="container">
     <h1 class="mb-5">Detalle del contacto</h1>
     <?php if (!empty($contacto)) { ?>
-        <p><?php echo $contacto['name'] ?></p>
+        <p><?php echo $contacto['nombre y apellidos'] ?></p>
+        <p><?php echo $contacto['e-mail'] ?></p>
         <p><?php echo $contacto['telefono'] ?></p>
-        <p><?php echo $contacto['tipo'] ?></p>
-        <p><?php echo $contacto['email'] ?></p>
+        <p><?php echo $contacto['particular/empresa'] ?></p>
         <p><?php echo $contacto['mensaje'] ?></p>
-        <?php if ($contacto['file']) { ?>
-            <a href="<?php echo $contacto['file'] ?>" class="btn btn-info mb-4"><i class="fa-solid fa-
+        <?php if ($contacto['archivo']) { ?>
+            <a href="<?php echo $contacto['archivo'] ?>" class="btn btn-info mb-4"><i class="fa-solid fa-
 paperclip"></i> ARCHIVO ADJUNTO</a> <br>
         <?php } ?>
     <?php } else { ?>

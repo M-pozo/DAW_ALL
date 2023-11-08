@@ -36,7 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = test_input($_POST["password"]);
     }
     if ($emailErr === "" && $nombreApellidosErr === "" && $dniErr === "" && $passwordErr === "") {
-        setcookie("user_email", $email, time() + 84600);
         $usuarios = [
             "email" => $email,
             "password" => $password,
@@ -45,14 +44,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ];
         try {
             update_usuario($conn, $usuarios, $_COOKIE['user_email']);
+            setcookie("user_email", $email, time() + 84600);
         } catch (PDOException $e) {
             ?>
             <script type="text/javascript">
-                window.location = "/confirmar_usuario.php?error";
+                window.location = "/usuarios.php?error";
             </script>
             <?php
         }
-
 
 ?>
         <script type="text/javascript">
