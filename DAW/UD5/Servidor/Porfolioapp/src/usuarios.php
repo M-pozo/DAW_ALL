@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h2 class="mb-5">Mantenimiento</h2>
         <?php if (isset($_GET['error'])) { ?>
             <div class="alert alert-danger mt-5">
-                ERROR al crear el usuario
+                No se actualizo correctamente
             </div>
         <?php } ?>
         <div class="row">
