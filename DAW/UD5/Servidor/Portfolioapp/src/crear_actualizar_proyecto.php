@@ -9,6 +9,7 @@ $claveErr = $tituloErr = $fechaErr = $descripcionErr = $imagenErr = $new_idErr =
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //UD5.6.b BEGIN
     if (!empty($_POST["eliminar"])) {
+        delete_categorias_proyecto($conn, $idGet);
         delete_proyecto($conn, $idGet);
 ?><script type="text/javascript">
             window.location = "/index.php";

@@ -1,0 +1,57 @@
+body{
+    margin: 0;
+}
+.miCapa{
+    background: #000000;
+    width: 100%;
+    max-width: 800px;
+    min-width: 400px;
+    height: 300px;
+    margin: 0 auto;
+}
+
+.capaOculta{
+    background: #ff00ff;
+    height: 100px;
+   /*display: none;
+    display: block;*/
+    visibility: show;
+    visibility: hidden;
+}
+
+li{
+    display: inline-block;
+    padding: 5px 15px;
+    margin: 0px, 10px;
+}
+li:hover{
+    background: #000;
+    color: #fff;
+    font-size: 20px;
+}
+.absoluta{
+    width: 100px;
+    height: 100px;
+    background: #ff00ff;
+    position: absolute;
+}
+
+.green{
+    background: green;
+    z-index: -1;
+    top: 1px;
+}
+.fixed{
+    position: fixed;
+}
+input::placeholder{
+    color: #00f;
+    font-weight: bold;
+}
+
+textarea{
+    resize: both;
+    resize: none;
+    resize: vertical;
+    resize: horizontal;
+}
