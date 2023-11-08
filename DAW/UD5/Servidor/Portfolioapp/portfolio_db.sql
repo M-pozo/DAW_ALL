@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: mysql
--- Tiempo de generación: 06-11-2023 a las 16:21:57
+-- Tiempo de generación: 08-11-2023 a las 16:27:18
 -- Versión del servidor: 5.7.43
 -- Versión de PHP: 8.2.8
 
@@ -89,6 +89,13 @@ CREATE TABLE `contacto` (
   `archivo` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `contacto`
+--
+
+INSERT INTO `contacto` (`id`, `nombre y apellidos`, `e-mail`, `telefono`, `particular/empresa`, `mensaje`, `archivo`) VALUES
+(1, 'Pepe', 'pepe@gmail.com', 652658745, 'particular', '33', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -147,7 +154,9 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `email`, `password`, `nombreApellidos`, `dni`, `activo`, `admin`) VALUES
-(1, 'prueba@gmail.com', '1234', 'Miguel Pozo PÃ©rez', '15236598L', 1, 0);
+(1, 'prueba@gmail.com', '1234', 'Miguel Pozo PÃ©rez', '15236598L', 1, 0),
+(2, 'miguel@gmail.com', '123', 'Miguel Pozo Pérez', '51236548I', 1, 1),
+(3, 'pepe@gmail.com', '123', 'Pepe Alonso Ronaldo', '45896523K', 1, 0);
 
 --
 -- Índices para tablas volcadas
@@ -192,7 +201,8 @@ ALTER TABLE `sesion`
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -208,7 +218,7 @@ ALTER TABLE `categoria_proyecto`
 -- AUTO_INCREMENT de la tabla `sesion`
 --
 ALTER TABLE `sesion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
