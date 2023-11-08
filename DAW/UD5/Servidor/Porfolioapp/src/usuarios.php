@@ -43,12 +43,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "nombreApellidos" => $nombreApellidos,
             "dni" => $dni
         ];
-        update_usuario($conn, $usuarios, $_COOKIE['user_email']);
+        try {
+            update_usuario($conn, $usuarios, $_COOKIE['user_email']);
+        } catch (PDOException $e) {
+            ?>
+            <script type="text/javascript">
+                window.location = "/confirmar_usuario.php?error";
+            </script>
+            <?php
+        }
 
 
 ?>
         <script type="text/javascript">
-            window.location = "/confirmar_usuario.php?error";
+            window.location = "/confirmar_usuario.php";
         </script>
 <?php
     }
@@ -60,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h2 class="mb-5">Mantenimiento</h2>
         <?php if (isset($_GET['error'])) { ?>
             <div class="alert alert-danger mt-5">
-                ERROR
+                ERROR al crear el usuario
             </div>
         <?php } ?>
         <div class="row">
