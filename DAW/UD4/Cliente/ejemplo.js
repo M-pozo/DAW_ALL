@@ -114,7 +114,7 @@ for (const key in mi_objeto) {
     console.log(key)
 }
 */
-const alumno={
+/*const alumno={
     nombre:"Pepe",
     apellidos:"Viruelas Pontebedra",
     genero:"n/a",
@@ -138,5 +138,35 @@ function queHayEnMiMochila(){
     }
 }
 }
-
 queHayEnMiMochila();
+
+mi_objeto.sacar_asignatura = function(){
+    let retorno;
+}*/
+
+const miTemperatura={
+    temperatura:0,
+    get kelvin(){
+        return this.temperatura 
+    },
+    set kelvin(nuevaTemperaturna){
+        if (nuevaTemperaturna > 0 && nuevaTemperaturna < 1.4171e32) {
+            this.temperatura = nuevaTemperaturna;   
+        }
+    },
+    get celsius(){
+        return this.temperatura - 273.15;
+    },
+    set celsius(nuevaTemperaturna){
+        this.temperatura = nuevaTemperaturna + 273.15;   
+        
+    },
+    get farenheit(){
+        return (this.temperatura-273)*9/5+32;
+    },
+    set farenheit(nuevaTemperaturna){
+        this.temperatura = (nuevaTemperaturna -32)*5/9+273.15;   
+    },
+}
+console.log(miTemperatura.temperatura)
+console.log(miTemperatura.Celsius)
