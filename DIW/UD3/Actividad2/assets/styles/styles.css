@@ -1,0 +1,94 @@
+/*Ejercicio 1.b*/
+* {
+    font-family: 'Arial', sans-serif;
+}
+header{
+    /*Ejercicio 1.c*/
+    font-size: 1.5em;
+}
+h1,h2{
+    /*Ejercicio 1.e*/
+    color: #0275d8;
+}
+/*Ejercicios 1.d*/
+h1{
+    text-align: center;
+}
+/*Ejercicio 1.f*/
+section > p {
+    text-align: justify;
+}
+/*Ejercicio 1.g*/
+.post-author{
+    font-style: italic;
+    color: grey;
+}
+/*Ejercicio 1.h*/
+.post-date{
+    font-weight: bold;
+    color: orange;
+}
+/*Ejercicio 1.i*/
+main{
+    width: 70%;
+    float: left;
+    padding: 20px;
+    box-sizing: border-box;
+}
+/*Ejercicio 1.j*/
+aside{
+    width: 30%;
+    float: left;
+    padding: 20px;
+    box-sizing: border-box;
+    /*Ejercicio 1.k*/
+    background-color: #efeff0;
+}
+/*Ejercicio 1.k*/
+li{
+    list-style: none;
+    margin: 5px;
+}
+li > a{
+    text-decoration: none;
+}
+li > a:hover{
+    background-color: #efeff0;
+}
+/*Ejercicio 1.l*/
+nav li{
+    display: inline;
+}
+/*Ejercicio 2.a*/
+table{
+    caption-side: bottom;
+    width: 100%;
+    /*Ejercicio 2.c*/
+    border-collapse: collapse;
+}
+/*Ejercicio 2.b*/
+td, th{
+    border: 1px solid #000;
+    padding: 5px;
+}
+tr:nth-child(even){
+    background: #efeff0;
+}
+form{
+    width: 50%;
+    padding: 50px;
+    background-color: #efeff0;
+}
+form *{
+    border-style: none;
+    margin: 10px;
+    padding: 10px;
+    width: 60%;
+    display: block;
+}
+form button{
+    color: white;
+    background-color: #0275d8;
+    padding: 1rem, 1rem, ;
+    width: 30%;
+}

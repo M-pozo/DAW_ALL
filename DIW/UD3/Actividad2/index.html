@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Ejercicio 1.a-->
+    <link rel="stylesheet" href="assets/styles/styles.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="main-container">
+        <h1>Header 1</h1>
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="#s">Home</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Services</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section id="section1">
+                <h2>Section 1</h2>
+                <span class="post-author">Alba Prieto</span> | <span class="post-date">Sept 7, 2023</span>
+                <p>This is the content of the first section. Lorem ipsum dolor sit
+                    amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                    dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                    proident, sunt in culpa qui officia deserunt mollit anim id est
+                    laborum.</p>
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                    accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
+                    illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+                    explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                    odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+                    voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum
+                    quia dolor sit amet, consectetur</p>
+            </section>
+            <section id="section2">
+                <h2>Section 2</h2>
+                <span class="post-author">María Ruíz</span> | <span class="post-date">Feb 28, 2023</span>
+                <p>This is the content of the second section.</p>
+                <table>
+                    <caption><b>Table 1:</b> Services offered</caption>
+                    <tr>
+                        <th>Service</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Duration</th>
+                    </tr>
+                    <tr>
+                        <td>Hardware repair</td>
+                        <td>Diagnosis and repair of problems in computer hardware
+                            components.</td>
+                        <td>50 € per hour</td>
+                        <td>Variable</td>
+                    </tr>
+                    <tr>
+                        <td>Software installation</td>
+                        <td>Installation and configuration of programs and operating
+                            systems.</td>
+                        <td>30 € per installation</td>
+                        <td>1 hour</td>
+                    </tr>
+                    <tr>
+                        <td>Virus and malware cleaning</td>
+                        <td>Removal of viruses, malware and unwanted programs from
+                            computers.</td>
+                        <td>40 € per hour</td>
+                        <td>Variable</td>
+                    </tr>
+                    <tr>
+                        <td>Network configuration</td>
+                        <td>Configuration of home or business networks, including routers
+                            and devices.</td>
+                        <td>80 € per project</td>
+                        <td>Variable</td>
+                    </tr>
+                    <tr>
+                        <td>Data recovery</td>
+                        <td>Recovery of data lost or accidentally deleted on storage
+                            devices.</td>
+                        <td>100 € per project</td>
+                        <td>Variable</td>
+                    </tr>
+                </table>
+            </section>
+            <section id="section3">
+                <h2>Section 3</h2>
+                <span class="post-author">Ricardo Oliva</span> | <span class="post-date">Sep 7, 2022</span>
+                <p>This is the content of the third section.</p>
+                <form action="formulario-contacto.php" method="post">
+                    <input name="name" type="text" placeholder="Name" required autofocus />
+                    <input name="email" type="email" placeholder="Email" required />
+                    <textarea name="inquiry" placeholder="What is the
+                reason for your inquiry?" rows="6" required></textarea>
+                    <button id="enviar" name="enviar" type="submit" class="btn">SUBMIT</button>
+                </form>
+            </section>
+        </main>
+        <aside>
+            <h3>Options Menu</h3>
+            <ul>
+                <li><a href="#section1">Section 1</a></li>
+                <li><a href="#section2">Section 2</a></li>
+                <li><a href="#section3">Section 3</a></li>
+            </ul>
+        </aside>
+    </div>
+</body>
+</html>
