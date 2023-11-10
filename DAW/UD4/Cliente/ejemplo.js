@@ -144,7 +144,7 @@ mi_objeto.sacar_asignatura = function(){
     let retorno;
 }*/
 
-const miTemperatura={
+/*const miTemperatura={
     temperatura:0,
     get kelvin(){
         return this.temperatura 
@@ -158,15 +158,39 @@ const miTemperatura={
         return this.temperatura - 273.15;
     },
     set celsius(nuevaTemperaturna){
-        this.temperatura = nuevaTemperaturna + 273.15;   
+        if (nuevaTemperaturna > -273.15 && nuevaTemperaturna < 1.41710000000000006e+32) {
+            this.temperatura = nuevaTemperaturna + 273.15;   
+        }
         
     },
     get farenheit(){
-        return (this.temperatura-273)*9/5+32;
+        return (this.temperatura-273.15)*9/5+32;
     },
     set farenheit(nuevaTemperaturna){
-        this.temperatura = (nuevaTemperaturna -32)*5/9+273.15;   
+        if (nuevaTemperaturna > -459.67 && nuevaTemperaturna < 2.55078e+32) {
+            this.temperatura = (nuevaTemperaturna -32)*5/9+273.15;   
+        }
     },
 }
-console.log(miTemperatura.temperatura)
-console.log(miTemperatura.Celsius)
+
+miTemperatura.kelvin = 46;
+miTemperatura.celsius = 100;
+console.log(miTemperatura.farenheit);
+*/
+
+function Persona(nombre, apellidos, edad, genero){
+    this.nombre = nombre;
+    this.apellidos = apellidos;
+    this.edad = edad;
+    this.genero = genero;
+
+    this.nombreCompleto = function(){
+        return this.nombre + " " + this.apellidos;
+    }
+}
+
+const persona = new Persona("Miguel", "Pozo", 33, "nano");
+persona.nombreCompleto = function(){
+    return this.nombre + " " + this.apellidos;
+}
+console.log(persona.nombreCompleto());
