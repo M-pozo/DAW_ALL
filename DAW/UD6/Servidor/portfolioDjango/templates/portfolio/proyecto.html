@@ -1,0 +1,18 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>{{proyecto.titulo}}</h2>
+    <div class="row">
+        {% if proyecto.imagen %}
+        <div class="col-sm">
+            <img src="{{ proyecto.imagen.url }}" alt="{{proyecto.titulo}}" class="img-fluid rounded">
+            <br>
+        </div>
+        {% endif %}
+        <div class="col-sm">
+            {{proyecto.descripcion|safe}}
+        </div>
+    </div>
+</div>
+{% endblock %}
