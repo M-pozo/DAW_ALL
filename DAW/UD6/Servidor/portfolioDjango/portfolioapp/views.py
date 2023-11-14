@@ -14,9 +14,10 @@ def home_view(request):
 class HomeView(TemplateView):
     template_name = 'portfolio/home.html'
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, *args, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
-        context['proyectos'] = Proyecto.objects.all()
+        cat_id = kwargs.get('cat_id')
+        context['proyectos'] = Proyecto.objects.filter(categorias__id=cat_id) if cat_id else Proyecto.objects.all()
         return context
 
 def proyecto_view(request,pk):
@@ -30,4 +31,16 @@ class ProyectoView(TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super(ProyectoView, self).get_context_data(**kwargs)
         context['proyecto'] = get_object_or_404(Proyecto, id=kwargs['pk'])
+        return context
+
+def contacto_view(request):
+    context = {'full_name': 'Miguel Pozo'}
+    return render(request,'portfolio/contacto.html',context)
+
+class ContactoView(TemplateView):
+    template_name = 'portfolio/contacto.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ContactoView, self).get_context_data(**kwargs)
+        context['full_name'] ='Miguel Pozo'
         return context

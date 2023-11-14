@@ -24,9 +24,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #path('home_fbv', views.home_view, name='home_fbv'),
     path('', views.HomeView.as_view(), name='home'),
+    path('<int:cat_id>/', views.HomeView.as_view(), name='home'),
     #path('proyecto/<int:pk>/', views.ProyectoView.as_view(), name='proyecto'),
     path('proyecto/<int:pk>/', views.ProyectoView.as_view(), name='proyecto'),
-
+    #path('contacto/', views.contacto_view, name='contacto'),
+    path('contacto/', views.ContactoView.as_view(), name='contacto'),
 ]
 
 if settings.DEBUG:
