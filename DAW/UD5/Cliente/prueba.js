@@ -25,3 +25,6 @@ let date = new Date(); // Crea objeto Date almacena la fecha actual
 console.log(typeof date); // Imprime object
 console.log(date instanceof Date); // Imprime true
 console.log(date); // Imprime fecha actual
+
+let miExp = /\s[A-Za-z0-9]*\s[0-9]/;
+document.write()

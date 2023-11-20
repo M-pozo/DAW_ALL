@@ -14,7 +14,7 @@ function DiccionarioDeSinonimos() {
         this.sinonimos.set(palabra, this.sinonimos.has(palabra) ? this.sinonimos.get(palabra).push(sinonimo) : [sinonimo])
     },
     this.obtenerSinonimos = function (palabraConsultar) {
-        this.sinonimos.get(palabraConsultar)
+        document.write(this.sinonimos.get(palabraConsultar))
     },
     this.eliminarSinonimo = function (palabraEliminarSinonimo, sinonimoAEliminar) {
         /*
@@ -22,7 +22,7 @@ function DiccionarioDeSinonimos() {
         filtro el array de la palabra asociada y elimino el sinonimo del array.
         */
         //this.sinonimos.get(palabraEliminarSinonimo).filter(function(valor){ return valor == sinonimoAEliminar ? true : false;});
-        this.sinonimos.set(palabraEliminarSinonimo, this.sinonimos.get(palabraEliminarSinonimo).filter(function (valor) { return valor == sinonimoAEliminar; }))
+        //this.sinonimos.set(palabraEliminarSinonimo, this.sinonimos.get(palabraEliminarSinonimo).filter(function (valor) { return valor == sinonimoAEliminar; }))
         this.sinonimos.set(palabraEliminarSinonimo, this.sinonimos.get(palabraEliminarSinonimo).filter(valor => valor == sinonimoAEliminar))
     },
     this.eliminarPalabra = function (palabraEliminar) {
@@ -32,7 +32,7 @@ function DiccionarioDeSinonimos() {
 whileSt:
 while (true) {
     const opcion = prompt(
-        "Selecciona una opción:\n1. Agregar sinónimo\n2. Obtener sinónimos\n3. Eliminarsinónimo\n4. Eliminar palabra\n5. Salir"
+        "Selecciona una opción:\n1. Agregar sinónimo\n2. Obtener sinónimos\n3. Eliminar sinónimo\n4. Eliminar palabra\n5. Salir"
     );
     switch (opcion) {
         case "1":
@@ -61,3 +61,4 @@ while (true) {
             alert("Opción no válida. Por favor, elige una opción válida.");
     }
 }
+console.log(diccionario.sinonimos)
