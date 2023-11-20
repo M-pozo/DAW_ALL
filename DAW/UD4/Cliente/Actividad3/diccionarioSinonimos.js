@@ -4,33 +4,37 @@ function DiccionarioDeSinonimos() {
     this.sinonimos = new Map([]);
     
     this.agregarSinonimo = function (palabra, sinonimo) {
-        /*
-        Primero: TERNARIO
-        si existe palabra con el sinonimo hacemos push del nuevo sinonimo al array
-        si no existe agregamos el array con el nuevo sinonimo
-        Segundo: SET
-        Hacemos set de la palabra con el array de sinonimos 
-        */
-        this.sinonimos.set(palabra, this.sinonimos.has(palabra) ? this.sinonimos.get(palabra).push(sinonimo) : [sinonimo])
+        if (this.sinonimos.has(palabra)) {
+            //Obtengo el array de la palabra y agrego un nuevo sinónimo al array
+            let sinonimosArray = this.sinonimos.get(palabra);
+            sinonimosArray.push(sinonimo);
+            this.sinonimos.set(palabra, sinonimosArray);
+        } else {
+            this.sinonimos.set(palabra, [sinonimo]);
+        }
     },
+
     this.obtenerSinonimos = function (palabraConsultar) {
-        document.write(this.sinonimos.get(palabraConsultar))
+        //Devuelvo el array de la palabra
+        return this.sinonimos.get(palabraConsultar);
     },
+
     this.eliminarSinonimo = function (palabraEliminarSinonimo, sinonimoAEliminar) {
-        /*
-        Primero FILTER
-        filtro el array de la palabra asociada y elimino el sinonimo del array.
-        */
-        //this.sinonimos.get(palabraEliminarSinonimo).filter(function(valor){ return valor == sinonimoAEliminar ? true : false;});
-        //this.sinonimos.set(palabraEliminarSinonimo, this.sinonimos.get(palabraEliminarSinonimo).filter(function (valor) { return valor == sinonimoAEliminar; }))
-        this.sinonimos.set(palabraEliminarSinonimo, this.sinonimos.get(palabraEliminarSinonimo).filter(valor => valor == sinonimoAEliminar))
+        if (this.sinonimos.has(palabraEliminarSinonimo)) {
+            //Obtengo el array de sinonimos y lo filtro para agregar un nuevo array sin la palabra a eliminar.
+            let sinonimosArray = this.sinonimos.get(palabraEliminarSinonimo);
+            let nuevoArray = sinonimosArray.filter(valor => valor !== sinonimoAEliminar);
+            this.sinonimos.set(palabraEliminarSinonimo, nuevoArray);
+        }
     },
+
     this.eliminarPalabra = function (palabraEliminar) {
-        this.sinonimos.delete(palabraEliminar) 
+        this.sinonimos.delete(palabraEliminar);
     }
 }
-whileSt:
-while (true) {
+
+let condicion = true;
+while (condicion) {
     const opcion = prompt(
         "Selecciona una opción:\n1. Agregar sinónimo\n2. Obtener sinónimos\n3. Eliminar sinónimo\n4. Eliminar palabra\n5. Salir"
     );
@@ -56,7 +60,8 @@ while (true) {
             break;
         case "5":
             alert("Saliendo del programa");
-            break whileSt;
+            condicion = false;
+            break;
         default:
             alert("Opción no válida. Por favor, elige una opción válida.");
     }
