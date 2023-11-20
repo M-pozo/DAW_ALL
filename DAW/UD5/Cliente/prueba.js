@@ -26,5 +26,5 @@ console.log(typeof date); // Imprime object
 console.log(date instanceof Date); // Imprime true
 console.log(date); // Imprime fecha actual
 
-let miExp = /\s[A-Za-z0-9]*\s[0-9]/;
-document.write()
+let miExp = /[0-9]{8}[-][A-Z]{1}/;
+document.write("15236987K")
