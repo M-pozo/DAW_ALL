@@ -22,10 +22,11 @@ function DiccionarioDeSinonimos() {
         filtro el array de la palabra asociada y elimino el sinonimo del array.
         */
         //this.sinonimos.get(palabraEliminarSinonimo).filter(function(valor){ return valor == sinonimoAEliminar ? true : false;});
-        this.sinonimos.delete(palabraEliminarSinonimo, this.sinonimos.get(palabraEliminarSinonimo).filter(function (valor) { return valor == sinonimoAEliminar ? true : false; }))
+        this.sinonimos.set(palabraEliminarSinonimo, this.sinonimos.get(palabraEliminarSinonimo).filter(function (valor) { return valor == sinonimoAEliminar; }))
+        this.sinonimos.set(palabraEliminarSinonimo, this.sinonimos.get(palabraEliminarSinonimo).filter(valor => valor == sinonimoAEliminar))
     },
     this.eliminarPalabra = function (palabraEliminar) {
-        this.sinonimos.delete(palabraEliminar)
+        this.sinonimos.delete(palabraEliminar) 
     }
 }
 whileSt:
