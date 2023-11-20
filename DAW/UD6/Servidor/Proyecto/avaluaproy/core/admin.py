@@ -24,7 +24,7 @@ class CritEvaluacionAdmin(admin.ModelAdmin):
     list_filter = ('resultado_aprendizaje', 'minimo')
     search_fields = ['codigo', 'resultado_aprendizaje', 'descripcion']
     preserve_filters = True
-    ordering = ['resultado_aprendizaje__codigo', 'criterio_evaluacion__codigo']
+    ordering = ['resultado_aprendizaje__codigo', 'codigo']
 
 #UD6.4.f END
 admin.site.register(Modulo, ModuloAdmin)
