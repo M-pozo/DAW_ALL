@@ -28,3 +28,7 @@ console.log(date); // Imprime fecha actual
 
 let miExp = /[0-9]{8}[-][A-Z]{1}/;
 document.write("15236987K")
+
+let dateRgex = /^\d{2}\/\d{2}\/(\d{2}|\d{4})$/
+let telefonoRegex = /^\(\+([0-9]){3}\)(([0-9]{3})[-]){2}([0-9]){3}$/
+let gmailRegex = /^\w\@*.*$/
