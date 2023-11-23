@@ -33,7 +33,7 @@ class CritEvaluacion(models.Model):
     minimo = models.BooleanField(verbose_name="Mínimo")
 
     def __str__(self):
-        return self.resultado_aprendizaje + '.' + self.codigo + ' - ' + self.descripcion[:100]
+        return self.resultado_aprendizaje.codigo + '.' + self.codigo + ' - ' + self.descripcion[:100]
     #UD6.3.c
     class Meta:
         unique_together = ["resultado_aprendizaje", "codigo"]

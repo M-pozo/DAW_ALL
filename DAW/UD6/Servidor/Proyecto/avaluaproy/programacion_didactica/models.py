@@ -41,7 +41,7 @@ class PondCriterio(models.Model):
     porcentaje = models.DecimalField(decimal_places=2, max_digits=5, verbose_name="Porcentaje")
 
     def __str__(self):
-        return str(self.criterio_evaluacion) + ' - ' + self.porcentaje
+        return str(self.criterio_evaluacion) + ' - ' + str(self.porcentaje)
     
     class Meta:
         verbose_name_plural = 'Ponderación Criterios'
@@ -52,7 +52,7 @@ class PondCritUD(models.Model):
     porcentaje = models.DecimalField(decimal_places=2, max_digits=5, verbose_name="Porcentaje")
 
     def __str__(self):
-        return str(self.unidad) + ' - ' + str(self.criterio_evaluacion) + ' - (' + self.porcentaje + ')'
+        return str(self.unidad) + ' - ' + str(self.criterio_evaluacion) + ' - (' + str(self.porcentaje) + ')'
     #UD6.3.c
     class Meta:
         unique_together = ["criterio_evaluacion", "unidad"]
