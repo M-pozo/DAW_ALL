@@ -1,0 +1,250 @@
+14-
+Software Maintenance: is the process of adapting or modifying a software system to correct faults or improve performance.
+
+Corrective Maintenance: is the practice of repairing faults in software systems.
+
+Insufficient: If something is insufficient, it is not suitable or strong enough for a particular purpose.
+
+Adaptive Maintenance: is the practice of updating software according to changes in environment, such as upgrades to hardware or operating systems, without changing the functionality of the software.
+
+Law of continuing change: is a principle that states that a system in use should undergo continuing change until it becomes more cost-effective to restructure the system.
+
+Enhance: To enhance something is to improve its function.
+
+Release: is an updated version of an existing software program.
+
+Perfective maintenance: is the practice of updating software in order to accommodate new user requirements.
+
+Repair: To repair something is to fix parts of it that are not functioning correctly.
+
+Law of increasing complexity: is a principle that states that a structure becomes more complex with every change that is made to it.
+
+Unstructured code: is the code for a system that is designed poorly or coded without a clear structure or order.
+
+Preventive maintenance: is the practice of improving the structure of a system in order to make it easier to maintain.
+
+15-
+Legacy systems: is an old software system that continues to be updated and used.
+
+Modernize: To modernize something is to make it compatible with new technology or update its appearance and functionality.
+
+Reverse engineering: is the process of analyzing an existing software system and creating a new version of the system at a higher level of abstraction.
+
+Web-based: If something is web-based, it is used on the Internet.
+
+Revamping: is the process of updating the user interface of a program without changing the program's structure.
+
+Redocumentation: is the process of improving or simplifying a program's code without changing its function or level of abstraction.
+
+Design recovery: is the process of creating a program that is identical to an existing program in function but is better organized in abstraction.
+
+Functional equivalence: is a measure of how similar two programs are in purpose and function, even though they may be coded differently.
+
+Reengineering: Reengineering, also called renovation, is the process of making functional changes to a system.
+
+Renovation: Renovation, also called reengineering, is the process of making functional changes to a system.
+
+Restructuring: is the process of updating a system while keeping the same functionality and level of abstraction.
+
+1-
+Conceptual models: is a technically-accurate model of a computer system that is rendered in terms of a system's reactions to user actions.
+
+User interface: is a collection of attributes that governs the way a user interacts with a system.
+
+Mental model: is a user's understanding of a computer system.
+
+Cognitive view: is a means of understanding a system that considers what a user needs to understand about a system in order to operate it.
+
+Linguistic view: is a conceptual model that describes the interactions between a human and a system.
+
+Design view: is a conceptual model that focuses on the user interface design.
+
+CLG(Command Language Grammar): is a specific grammatical structure that describes the user interface aspects of a computer system.
+
+Conceptual component: is a view of a system that concerns the functions that the system will perform for users.
+
+Communication component: is a view of a system that concerns the dialog between systems and users.
+
+Material component: is a view of a system that concerns the graphics of the user interface and the hardware that the user will interact with.
+
+Semantic level: is a view of a conceptual component that describes system objects and general task delegation.
+
+Task level: is a view of the conceptual component that concerns the tasks performed both by the machine and by the user.
+
+Spatial layout level: is a view of a material component which specifies the graphic elements that are displayed on screen.
+
+Apparatus level: is a view of the material component that specifies the shape and feel of buttons, keys, and other hardware that the user will interact with.
+
+Keystroke level: is a view of the communication component that describes the physical actions of a user, such as keystrokes or mouse clicks.
+
+Syntax level: is a view of a communication component that describes the dialog style by specifying all user and system interactions.
+
+2-
+Artistic Design: is the practice of using graphic design to draw a user's attention to important parts of an interface.
+
+Ergonomics:  is the study of designing hardware that is intended to be operated physically by users.
+
+Seeheim model: is a model of software design that separates the application from the user interface.
+
+MVC Paradigm(model-view-controller):  paradigm is a design pattern for user interfaces that splits the application into three areas: the model, the view, and the controller.
+
+Layers: is a level of operation of a system.
+
+HCI(human-computer interaction): is the study and design of interactions between users and computers.
+
+Task analysis: is the act of evaluating a complex system in terms of its users, tasks, hardware, social environment, and physical environment.
+
+Presentation: is the collective aspects of a system that are perceptible to the user, such as the screen layout or the keyboard layout.
+
+End User: is a consumer who becomes the intended or primary user of a product.
+
+Dialog: is a reciprocal communication between a computer and a user.
+
+Functionality: is the range of operations that a computer or software system can perform.
+
+Humanities: is the study of or focus on how people perceive, learn, think, and feel.
+
+User-centered design: is a design process that places great emphasis on the experience of end users.
+
+groupware: is software designed to assist a group of people achieve a common goal or complete a collaborative task.
+
+UVM(user virtual machine): is the hardware and software of a given system.
+
+3-
+Software crisis: is a problem in the software industry caused by the fact that the demand for new software applications is higher than what software developers can fulfill.
+
+Software reuse: is the practice of incorporating modified or unmodified pieces of source code from existing software into the creation of new software.
+
+Scope: is the extent of something or the area that it includes.
+
+Ad hoc: If something is ad hoc, it is unsystematic and done for one particular instance only.
+
+White-box reuse: is a method of software reuse in which software elements are modified before they are incorporated into new software.
+
+Techniques: is a skill or specific method of doing or creating something.
+
+Source codes: is a listing of commands to be executed in a computer program.
+
+Products: is something that is available for purchase.
+
+COTS(commercial, off-the-shelf): If a software is COTS, it is unmodified from its original state and the contents of the software are generally unknown.
+
+Black-box reuse: is a method of software reuse in which software elements are reused without modification.
+
+Substance: is the components, concepts, and procedures of something.
+
+Approach: is a way or strategy for doing or creating something.
+
+Compositional: If technology is compositional, its existing components can easily be reused in new systems.
+
+Generative: If technology is generative, its components are used to create programs that generate new programs.
+
+Usage: is the way that something is utilized.
+
+4-
+Code scavenging: is the process of reusing code that has been previously written, if it happens to solve current problems.
+
+Program library: is a collection of ready to use pieces of code.
+
+Intermediate Products: is a piece of code that is ready to be used in the development of a more complicated application.
+
+Instantiate: To instantiate something is to complete it or give it substance.
+
+Template: is a skeleton component that does not have all of the details of a complete program.
+
+Application generator: is a tool that helps engineers write programs on a large scale.
+
+Domain analysis: is a process which identifies, captures, structures, and reorganizes information for software development.
+
+Transformation system: is an application that assists engineers in transforming systems from sets of specifications to executable programs.
+
+ADL(architecture description language): is a system that formally describes the architectural configuration of a software system.
+
+MIL(Module Interconnection Language): is a formal description of the overall structure of a software system.
+
+Skeleton: If a component is skeleton, not all of its details have been filled in.
+
+Middleware: is software that connects a computer's operating system to individual applications and ensures that programs can run together smoothly.
+
+VHLL(very high level language): is a programming language with a high level of abstraction that is used primarily by programmers for assistance in creating new programs.
+
+5-
+Software reliability model: is a statistical model that aims to predict and prevent software failures.
+
+reliability: s the quality of being consistent and free of errors.
+
+Robust programming: is the practice of ensuring that software components function correctly regardless of their context.
+
+exception domain: is the set of incorrect inputs to a software component.
+
+software errors
+
+expected exception domains: is the incorrect input that is anticipated and recognized by software.
+
+Threshold: is a limit that must be exceeded for a certain reaction to take place.
+
+Fault-tolerant: If a disk is fault-tolerant, it contains backup data in case of software failure.
+
+Recovery blocks: is an automatically saved file of data that is used as backup in case an operation causes a software failure.
+
+N-version programming: is a technique for software fault tolerance in which multiple functionally-equivalent programs are generated from the same initial specifications.
+
+BM(basic execution time model)
+
+LPM(logarithmic poisson execution time model): is a software reliability model in which the decrease in failure intensity is constant.
+
+Redundancy: is the inclusion of components that are not necessary or are copies of existing components to ensure proper function of software in case of error or failure.
+
+Probability: is the extent to which something is likely to happen.
+
+6-
+CASE(Computer Aided Software Engineering): is the application of various support systems in the software development process.
+
+Tools
+
+Language-centered environments:  A language-centered environment, also called a programming environment, is an interactive development environment that contains tools for development in a particular programming language.
+
+Integrated environments: is a development environment that contains the specifications of a final product.
+
+Process-centered environment: is a development environment that focuses on the process of software development.
+
+Process scale: is a software development feature that specifies whether a product supports code development or general human activities.
+
+environments: is an application that supports the complete software development
+
+toolkit: is a development environment in which tools are independent of each other, and are not well integrated.
+
+workbench: is a set of related tools that support the software development process in a limited scope.
+
+user scale: is a system that measures the number of users a product is capable of supporting.
+
+family: If a value on the user scale is family, it indicates that a product is designed to facilitate interactions between developers.
+
+city: If a value on the user scale is city, it indicates that a product supports the development of a system larger than a family.
+
+state: If a value on the user scale is state, it indicates that a product focuses on commonality and standardization across a very large system.
+
+individual: If a value on the user scale is individual, it indicates that a product is designed to assist in software construction by individual developers.
+
+Plus-
+Instruction
+
+stored-program concept
+
+instructions
+
+register
+
+bits
+
+word
+
+data
+
+data transfer instruction
+
+address
+
+basic block
+
+conditional branches
