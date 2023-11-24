@@ -61,40 +61,5 @@ def create_ie12():
 def create_ud15_pon():
         PondRA.objects.create(criterio_evaluacion=CritEvaluacion.objects.create(codigo='0633.3', descripcion='Prueba'), unidad=Unidad.objects.create(codigo='UT33', nombre='Prueba'), porcentaje=20)
 
-#16
-def update_last_ud():
-    last_ud = Unidad.objects.last()
-    last_ud.nombre += " (última)"
-    last_ud.save()
-
-#17
-def update_ce_RA2_x2():
-    ce_list = CritEvaluacion.objects.filter(
-        resultado_aprendizaje__codigo__endswith='2',
-        resultado_aprendizaje__modulo__codigo='0613'
-    )
-    for ce in ce_list:
-        ce.ponderacion *= 2
-        ce.save()
-
-#18
-def update_pon_ce_RA1_div2():
-    ce_list = CritEvaluacion.objects.filter(
-        resultado_aprendizaje__codigo__endswith='1',
-        resultado_aprendizaje__modulo__codigo='0613',
-        ponderacion__par=True
-    )
-    for ce in ce_list:
-        ce.ponderacion /= 2
-        ce.save()
-
-#19
-def delete_pon_ce_lt_5():
-    PondCriterio.objects.filter(porcentaje__lt=5).delete()
-
-#20
-def delete_pon_ce_UD15():
-    unidad = Unidad.objects.get(nombre__icontains='UD3')
-    PondCritUD.objects.filter(unidad=unidad).delete()
 #UD6.6 END
 
