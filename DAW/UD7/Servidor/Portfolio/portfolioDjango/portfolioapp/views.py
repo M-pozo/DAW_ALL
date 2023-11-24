@@ -1,5 +1,7 @@
 
 # Create your views here.
+from django.contrib.messages.views import SuccessMessageMixin
+from .mixins import ProyectoMixin
 from django.shortcuts import render # Para FBV
 from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView # Para CBV
 from django.shortcuts import get_object_or_404
@@ -50,7 +52,25 @@ class ProyectoCreateView(CreateView):
     fields = ['titulo', 'descripcion', 'fecha_creacion', 'year', 'categorias', 'imagen']
     success_url = reverse_lazy('home')
 
-class ProyectoUpdateView(UpdateView):
+class ProyectoUpdateView(ProyectoMixin, UpdateView):
     model = Proyecto
     fields = ['titulo', 'descripcion', 'fecha_creacion', 'year', 'categorias', 'imagen']
     success_url = reverse_lazy('home')
+    success_message = "Proyecto actulaizado exitosamente"
+    
+    def get_success_message(self, cleaned_data):
+        return "Proyecto '{}' actualizado exitosamente".format(str(self.object))
+
+class ProyectoDeleteView(DeleteView):
+    model = Proyecto
+    success_url = reverse_lazy('home')
+
+class ProyectoCreateView(ProyectoMixin, CreateView):
+    model = Proyecto
+    fields = ['titulo', 'descripcion', 'fecha_creacion', 'year', 'categorias', 'imagen']
+    success_message = "Proyecto creado exitosamente"
+    
+
+
+    def get_success_message(self, cleaned_data):
+        return "Proyecto '{}' actualizado exitosamente".format(str(self.object))

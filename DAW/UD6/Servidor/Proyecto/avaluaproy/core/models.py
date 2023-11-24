@@ -12,7 +12,10 @@ class Modulo(models.Model):
     def __str__(self):
         return self.nombre
     class Meta:
+        #verbose_name todas y ordering todas
+        verbose_name = 'Modulo' 
         verbose_name_plural = 'Modulos'
+        ordering = ['codigo']
 
 class ResAprendizaje(models.Model):
     modulo = models.ForeignKey(Modulo, on_delete=models.PROTECT, verbose_name="Módulo")
@@ -24,7 +27,9 @@ class ResAprendizaje(models.Model):
     #UD6.3.c
     class Meta:
         unique_together = ["modulo", "codigo"]
+        verbose_name = 'Resultado Aprendizaje'
         verbose_name_plural = 'Resultados Aprendizaje'
+        ordering = ['codigo']
 
 class CritEvaluacion(models.Model):
     resultado_aprendizaje = models.ForeignKey(ResAprendizaje, on_delete=models.PROTECT, verbose_name="Resultado de aprendizaje")
@@ -37,7 +42,9 @@ class CritEvaluacion(models.Model):
     #UD6.3.c
     class Meta:
         unique_together = ["resultado_aprendizaje", "codigo"]
+        verbose_name = 'Criterio Evaluación'
         verbose_name_plural = 'Criterios Evaluación'
+        ordering = ['resultado_aprendizaje__codigo', 'codigo']
 
 #UD6.4.e END
 #UD6.3.b END

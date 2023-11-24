@@ -31,6 +31,7 @@ urlpatterns = [
     path('contacto/', views.ContactoView.as_view(), name='contacto'),
     path('proyecto_create/', views.ProyectoCreateView.as_view(), name='proyecto_create'),
     path('proyecto_update/<int:pk>/', views.ProyectoUpdateView.as_view(), name='proyecto_update'),
+    path('proyecto_delete/<int:pk>/', views.ProyectoDeleteView.as_view(), name='proyecto_delete'),
 ]
 
 if settings.DEBUG:

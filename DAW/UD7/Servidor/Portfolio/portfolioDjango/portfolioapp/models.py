@@ -12,3 +12,6 @@ class Proyecto(models.Model) :
     year = models.IntegerField(verbose_name='Año', null=False, blank=False)
     fecha_creacion = models.DateTimeField(verbose_name='Fecha creación', default=now)
     imagen = models.ImageField(verbose_name = 'Imagen', null=True, blank=True)
+
+    def __str__(self):
+        return self.titulo

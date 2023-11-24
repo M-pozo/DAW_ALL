@@ -13,7 +13,9 @@ class Unidad(models.Model):
         return self.codigo + ' - ' + self.nombre
     
     class Meta:
-        verbose_name_plural = 'Unidad'
+        verbose_name = 'Unidad'
+        verbose_name_plural = 'Unidades'
+        ordering = ['id']
     
 class InstEvaluacion(models.Model):
     codigo = models.CharField(max_length = 4, verbose_name="Código", unique=True)
@@ -24,7 +26,9 @@ class InstEvaluacion(models.Model):
         return self.codigo + ' - ' + self.nombre
     
     class Meta:
+        verbose_name = 'Instrumento Evaluación'
         verbose_name_plural = 'Instrumentos Evaluación'
+        ordering = ['codigo']
 
 class PondRA(models.Model):
     resultado_aprendizaje = models.ForeignKey('core.ResAprendizaje', on_delete=models.PROTECT, verbose_name="Resultados Apredizaje")
@@ -34,7 +38,9 @@ class PondRA(models.Model):
         return str(self.resultado_aprendizaje) + ' - ' + str(self.porcentaje)
     
     class Meta:
-        verbose_name_plural = 'Ponderación RA'
+        verbose_name = 'Ponderación RA'
+        verbose_name_plural = 'Ponderaciones RA'
+        ordering = ['resultado_aprendizaje__codigo']
 
 class PondCriterio(models.Model):
     criterio_evaluacion = models.ForeignKey('core.CritEvaluacion', on_delete=models.PROTECT, verbose_name="Criterios Evaluacion")
@@ -44,7 +50,10 @@ class PondCriterio(models.Model):
         return str(self.criterio_evaluacion) + ' - ' + str(self.porcentaje)
     
     class Meta:
-        verbose_name_plural = 'Ponderación Criterios'
+        verbose_name = 'Ponderación Criterios'
+        verbose_name_plural = 'Ponderaciones de Criterios'
+        ordering = ['criterio_evaluacion__codigo']
+
 
 class PondCritUD(models.Model):
     criterio_evaluacion = models.ForeignKey('core.CritEvaluacion', on_delete=models.PROTECT, verbose_name="Criterios Evaluacion")
@@ -56,7 +65,10 @@ class PondCritUD(models.Model):
     #UD6.3.c
     class Meta:
         unique_together = ["criterio_evaluacion", "unidad"]
-        verbose_name_plural = 'Ponderación Criterios Unidad'
+        verbose_name = 'Ponderación Criterios Unidad'
+        verbose_name_plural = 'Ponderaciones de Criterios Unidad'
+        ordering = ['unidad__nombre', 'criterio_evaluacion__codigo']
+
 
 #UD6.4.e END
 #UD6.3.b END
