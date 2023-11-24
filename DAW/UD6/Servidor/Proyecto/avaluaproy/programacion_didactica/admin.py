@@ -31,7 +31,7 @@ class PondCritUDAdmin(admin.ModelAdmin):
     list_filter = ['criterio_evaluacion', 'unidad']
     search_fields = ['criterio_evaluacion__codigo', 'criterio_evaluacion__descripcion', 'resultado_aprendizaje__codigo', 'resultado_aprendizaje__descripcion', 'unidad__nombre']
     preserve_filters = True
-
+getElementsById
 #UD6.4.f END
 admin.site.register(Unidad, UnidadAdmin)
 admin.site.register(InstEvaluacion, InstEvalAdmin)
