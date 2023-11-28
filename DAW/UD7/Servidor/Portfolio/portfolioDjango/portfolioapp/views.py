@@ -7,6 +7,11 @@ from django.views.generic import TemplateView, CreateView, UpdateView, DeleteVie
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from .models import Proyecto
+from notificaciones.models import NotificaProyecto
+from .form import ProyectoForm
+from django.contrib import messages
+from django.db import transaction
+from django.utils import timezone
 
 def home_view(request):
     proyectos = Proyecto.objects.all()
@@ -53,24 +58,22 @@ class ProyectoCreateView(CreateView):
     success_url = reverse_lazy('home')
 
 class ProyectoUpdateView(ProyectoMixin, UpdateView):
-    model = Proyecto
-    fields = ['titulo', 'descripcion', 'fecha_creacion', 'year', 'categorias', 'imagen']
-    success_url = reverse_lazy('home')
-    success_message = "Proyecto actulaizado exitosamente"
-    
-    def get_success_message(self, cleaned_data):
-        return "Proyecto '{}' actualizado exitosamente".format(str(self.object))
+    form_class = ProyectoForm
+    success_message = "Proyecto actualizado exitosamente"
 
 class ProyectoDeleteView(DeleteView):
     model = Proyecto
     success_url = reverse_lazy('home')
 
 class ProyectoCreateView(ProyectoMixin, CreateView):
-    model = Proyecto
-    fields = ['titulo', 'descripcion', 'fecha_creacion', 'year', 'categorias', 'imagen']
+    form_class = ProyectoForm
     success_message = "Proyecto creado exitosamente"
     
-
-
-    def get_success_message(self, cleaned_data):
-        return "Proyecto '{}' actualizado exitosamente".format(str(self.object))
+    def form_valid(self, form):
+        if form.instance.fecha_creacion < timezone.now():
+            messages.error(self.request, "La fecha/hora del proyecto no puede ser anterior a la actual.")
+            return super(ProyectoCreateView, self).form_invalid(form)
+        else:
+            proyecto = form.save()
+            NotificaProyecto.objects.create(proyecto=proyecto)
+            return super(ProyectoCreateView, self).form_valid(form)
