@@ -11,25 +11,24 @@ class ModuloListView(ListView):
     model = Modulo
     template_name = 'core/modulo_list.html'
 
-
 class ModuloDetailView(DetailView):
     model = Modulo
     template_name = 'core/modulo_detail.html'
 
 class ModCreateView(CreateView):
     model = Modulo
-    template_name = 'base_create_update.html'
+    template_name = 'avaluaproy/base_create_update.html'
     success_url = reverse_lazy('modulo_create')
 
 class ModUpdateView(UpdateView):
     model = Modulo
-    template_name = 'base_create_update.html'
+    template_name = 'avaluaproy/base_create_update.html'
     success_url = reverse_lazy('modulo_update')
 
 class ModDeleteView(DeleteView):
     model = Modulo
     template_name = 'base_create_update.html'
-    success_url = reverse_lazy('modulo_delete')
+    success_url = reverse_lazy('modulo_list')
     #Verificacion dependencias
     def delete(self, request, *args, **kwargs):
         try:
@@ -61,7 +60,7 @@ class RAUpdateView(UpdateView):
 class RADeleteView(DeleteView):
     model = ResAprendizaje
     template_name = 'base_create_update.html'
-    success_url = reverse_lazy('ra_delete')
+    success_url = reverse_lazy('ra_list')
     #Verificacion dependencias
     def delete(self, request, *args, **kwargs):
         try:
@@ -94,7 +93,7 @@ class CEUpdateView(UpdateView):
 class CEDeleteView(DeleteView):
     model = CritEvaluacion
     template_name = 'base_create_update.html'
-    success_url = reverse_lazy('ce_delete')
+    success_url = reverse_lazy('ce_list')
     #Verificacion dependencias
     def delete(self, request, *args, **kwargs):
         try:

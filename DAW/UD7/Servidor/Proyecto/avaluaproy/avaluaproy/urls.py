@@ -37,20 +37,20 @@ urlpatterns = [
             path('modulo_list/', core_views.ModuloListView.as_view(), name='modulo_list'),
             path('modulo_detail/<int:pk>/', core_views.ModuloDetailView.as_view(), name='modulo_detail'),
             path('modulo_create/', core_views.ModCreateView.as_view(), name='modulo_create'),
-            path('modulo_update/', core_views.ModUpdateView.as_view(), name='modulo_update'),
-            path('modulo_delete/', core_views.ModDeleteView.as_view(), name='modulo_delete'),
+            path('modulo_update/<int:pk>/', core_views.ModUpdateView.as_view(), name='modulo_update'),
+            path('modulo_delete/<int:pk>/', core_views.ModDeleteView.as_view(), name='modulo_delete'),
         #ResAprendizaje
             path('ra_list/', core_views.RAListView.as_view(), name='ra_list'),
             path('ra_detail/<int:pk>/', core_views.RADetailView.as_view(), name='ra_detail'),
             path('ra_create/', core_views.RACreateView.as_view(), name='ra_create'),
-            path('ra_update/', core_views.RAUpdateView.as_view(), name='ra_update'),
-            path('ra_delete/', core_views.RADeleteView.as_view(), name='ra_delete'),
+            path('ra_update/<int:pk>/', core_views.RAUpdateView.as_view(), name='ra_update'),
+            path('ra_delete/<int:pk>/', core_views.RADeleteView.as_view(), name='ra_delete'),
         #CritEvaluacion
             path('ce_list/', core_views.CEListView.as_view(), name='ce_list'),
             path('ce_detail/<int:pk>/', core_views.CEDetailView.as_view(), name='ce_detail'),
             path('ce_create/', core_views.CECreateView.as_view(), name='ce_create'),
-            path('ce_update/', core_views.CEUpdateView.as_view(), name='ce_update'),
-            path('ce_delete/', core_views.CEDeleteView.as_view(), name='ce_delete'),
+            path('ce_update/<int:pk>/', core_views.CEUpdateView.as_view(), name='ce_update'),
+            path('ce_delete/<int:pk>/', core_views.CEDeleteView.as_view(), name='ce_delete'),
     #core END
 
     #prg_didactica BEGIN
@@ -58,32 +58,32 @@ urlpatterns = [
             path('unidad_list/', programacion_didactica_views.UDListView.as_view(), name='unidad_list'),
             path('unidad_detail/<int:pk>/', programacion_didactica_views.UDDetailView.as_view(), name='unidad_detail'),
             path('unidad_create/', programacion_didactica_views.UDCreateView.as_view(), name='unidad_create'),
-            path('unidad_update/', programacion_didactica_views.UDUpdateView.as_view(), name='unidad_update'),
-            path('unidad_delete/', programacion_didactica_views.UDDeleteView.as_view(), name='unidad_delete'),
+            path('unidad_update/<int:pk>/', programacion_didactica_views.UDUpdateView.as_view(), name='unidad_update'),
+            path('unidad_delete/<int:pk>/', programacion_didactica_views.UDDeleteView.as_view(), name='unidad_delete'),
         #InstEvaluacion
             path('ie_list/', programacion_didactica_views.InstEvListView.as_view(), name='ie_list'),
             path('ie_detail/<int:pk>/', programacion_didactica_views.InstEvDetailView.as_view(), name='ie_detail'),
             path('ie_create/', programacion_didactica_views.InstEvUpdateView.as_view(), name='ie_update'),
-            path('ie_update/', programacion_didactica_views.InstEvCreateView.as_view(), name='ie_create'),
-            path('ie_delete/', programacion_didactica_views.InstEvDeleteView.as_view(), name='ie_delete'),
+            path('ie_update/<int:pk>/', programacion_didactica_views.InstEvCreateView.as_view(), name='ie_create'),
+            path('ie_delete/<int:pk>/', programacion_didactica_views.InstEvDeleteView.as_view(), name='ie_delete'),
         #PondRA
             path('pond_ra_list/', programacion_didactica_views.PondRAListView.as_view(), name='pond_ra_list'),
             path('pond_ra_detail/<int:pk>/', programacion_didactica_views.PondRADetailView.as_view(), name='pond_ra_detail'),
             path('pond_ra_create/', programacion_didactica_views.PondRACreateView.as_view(), name='pond_ra_create'),
-            path('pond_ra_update/', programacion_didactica_views.PondRAUpdateView.as_view(), name='pond_ra_update'),
-            path('pond_ra_delete/', programacion_didactica_views.PondRADeleteView.as_view(), name='pond_ra_delete'),
+            path('pond_ra_update/<int:pk>/', programacion_didactica_views.PondRAUpdateView.as_view(), name='pond_ra_update'),
+            path('pond_ra_delete/<int:pk>/', programacion_didactica_views.PondRADeleteView.as_view(), name='pond_ra_delete'),
         #PondCriterio
             path('pond_ce_list/', programacion_didactica_views.PondCritListView.as_view(), name='pond_ce_list'),
             path('pond_ce_detail/<int:pk>/', programacion_didactica_views.PondCritDetailView.as_view(), name='pond_ce_detail'),
             path('pond_ce_create/', programacion_didactica_views.PondCritCreateView.as_view(), name='pond_ce_create'),
-            path('pond_ce_update/', programacion_didactica_views.PondCritUpdateView.as_view(), name='pond_ce_update'),
-            path('pond_ce_delete/', programacion_didactica_views.PondCritDeleteView.as_view(), name='pond_ce_delete'),
+            path('pond_ce_update/<int:pk>/', programacion_didactica_views.PondCritUpdateView.as_view(), name='pond_ce_update'),
+            path('pond_ce_delete/<int:pk>/', programacion_didactica_views.PondCritDeleteView.as_view(), name='pond_ce_delete'),
         #PondCritUD
             path('pond_ce_ud_list/', programacion_didactica_views.PondCritUDListView.as_view(), name='pond_ce_ud_list'),
             path('pond_ce_ud_detail/<int:pk>/', programacion_didactica_views.PondCritUDDetailView.as_view(), name='pond_ce_ud_detail'),
             path('pond_ce_ud_create/', programacion_didactica_views.PondCritUDCreateView.as_view(), name='pond_ce_ud_create'),
-            path('pond_ce_ud_update/', programacion_didactica_views.PondCritUDUpdateView.as_view(), name='pond_ce_ud_update'),
-            path('pond_ce_ud_delete/', programacion_didactica_views.PondCritUDDeleteView.as_view(), name='pond_ce_ud_delete'),
+            path('pond_ce_ud_update/<int:pk>/', programacion_didactica_views.PondCritUDUpdateView.as_view(), name='pond_ce_ud_update'),
+            path('pond_ce_ud_delete/<int:pk>/', programacion_didactica_views.PondCritUDDeleteView.as_view(), name='pond_ce_ud_delete'),
     #prg_didactica END
 ]
 

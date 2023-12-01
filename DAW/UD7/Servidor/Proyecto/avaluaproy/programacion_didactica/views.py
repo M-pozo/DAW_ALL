@@ -30,7 +30,7 @@ class UDUpdateView(UpdateView):
 class UDDeleteView(DeleteView):
     model = Unidad
     template_name = 'base_create_update.html'
-    success_url = reverse_lazy('unidad_delete')
+    success_url = reverse_lazy('unidad_list')
     #Verificacion dependencias
     def delete(self, request, *args, **kwargs):
         try:
@@ -62,7 +62,7 @@ class InstEvUpdateView(UpdateView):
 class InstEvDeleteView(DeleteView):
     model = InstEvaluacion
     template_name = 'base_create_update.html'
-    success_url = reverse_lazy('ie_delete')
+    success_url = reverse_lazy('ie_list')
     #Verificacion dependencias
     def delete(self, request, *args, **kwargs):
         try:
@@ -94,7 +94,7 @@ class PondRAUpdateView(UpdateView):
 class PondRADeleteView(DeleteView):
     model = PondRA
     template_name = 'base_create_update.html'
-    success_url = reverse_lazy('pond_ra_delete')
+    success_url = reverse_lazy('pond_ra_list')
 #PondRA END
 
 #PondCriterio BEGIN
@@ -119,7 +119,7 @@ class PondCritUpdateView(UpdateView):
 class PondCritDeleteView(DeleteView):
     model = PondCriterio
     template_name = 'base_create_update.html'
-    success_url = reverse_lazy('pond_ce_delete')
+    success_url = reverse_lazy('pond_ce_list')
 #PondCriterio END
 
 #PondCritUD BEGIN
@@ -144,7 +144,7 @@ class PondCritUDUpdateView(UpdateView):
 class PondCritUDDeleteView(DeleteView):
     model = PondCritUD
     template_name = 'base_create_update.html'
-    success_url = reverse_lazy('pond_ce_ud_delete')
+    success_url = reverse_lazy('pond_ce_ud_list')
 #PondCritUD END
 
 #UD7.2.a END
