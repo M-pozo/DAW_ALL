@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
+from django.contrib.messages import constants as messages
+from django.http import HttpResponseRedirect
 from programacion_didactica.models import Unidad, InstEvaluacion, PondRA, PondCriterio, PondCritUD
 
 
@@ -30,6 +32,12 @@ class UDDeleteView(DeleteView):
     template_name = 'base_create_update.html'
     success_url = reverse_lazy('unidad_delete')
     #Verificacion dependencias
+    def delete(self, request, *args, **kwargs):
+        try:
+            super().delete(*args, **kwargs)
+        except:
+            messages.error(self.request, "Existen dependencias para el objeto {}. Elimine antes dichas dependencias".format(self))
+        return HttpResponseRedirect(reverse('home'))
 #Unidad END
 
 #InstEvauacion BEGIN
@@ -56,6 +64,12 @@ class InstEvDeleteView(DeleteView):
     template_name = 'base_create_update.html'
     success_url = reverse_lazy('ie_delete')
     #Verificacion dependencias
+    def delete(self, request, *args, **kwargs):
+        try:
+            super().delete(*args, **kwargs)
+        except:
+            messages.error(self.request, "Existen dependencias para el objeto {}. Elimine antes dichas dependencias".format(self))
+        return HttpResponseRedirect(reverse('home'))
 #InstEvauacion END
 
 #PondRA BEGIN
