@@ -1,0 +1,20 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: content-box;
+}
+:root {
+    --width-logo: 200px;
+    --primary-button-backround: aqua;
+}
+.contenedorTextoPequeno {
+    /*width: 300px;*/
+    color: var(--primary-button-backround);
+    width: calc(100% - 200px);
+    height: 300px;
+    overflow-y: auto;
+    overflow: hidden;
+    overflow: visible;
+    float: right;
+}
+

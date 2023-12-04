@@ -1,0 +1,23 @@
+header {
+    float: left;
+    width: var(--width-logo);
+    width: 20%;
+}
+
+header img {
+    width: 100%;
+}
+
+.btn-primary {
+    background-color:var(--primary-button-backround);
+    font-size: 25px;
+    color: white;
+    width: 200px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+img[src$=".gif"] {
+    border: 2px solid red;
+}
