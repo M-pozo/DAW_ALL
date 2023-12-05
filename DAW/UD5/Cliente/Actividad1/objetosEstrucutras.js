@@ -44,14 +44,14 @@ for (let i = 0; i < imagenes.length; i++) {
 }
 
 //5. Fechas
-let fecha1 = new Date('2023-01-01');
-let fecha2 = new Date('2023-12-31');
-
-const diasPasados = (fecha2 - fecha1);
-console.log(diasPasados);
+let fecha1 = new Date('2023-09-01');
+let fecha2 = new Date('2023-09-06');
+let resta = (fecha2 - fecha1)
+console.log( resta / 1000 / 60 / 60 / 24);
 
 //6. 
-const tiempoX = prompt('Ingrese el tiempo en segundos para el temporizador:');
+let tics = 1;
+const temporizador = prompt('Tiempo en segundos (temporizador):');
   setInterval(() => {
-    console.log('tics');
-  }, tiempoX * 1000); // Multiplicar por 1000 para convertir segundos a milisegundos
+    console.log('tic: '+ tics++);
+  }, temporizador * 1000);
