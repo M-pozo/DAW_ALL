@@ -4,7 +4,8 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.messages import constants as messages
 from django.http import HttpResponseRedirect
 from core.models import Modulo, ResAprendizaje, CritEvaluacion
-from common.mixins import DeleteViewMixin, OrderingMixin
+from common.mixins import DeleteViewMixin, OrderingMixin, BaseCreateUpdateMixin
+from .form import ModuloForm, ResAprendizajeForm, CritEvaluacionForm
 
 #UD7.2.a BEGIN
 #Modulo BEGIN
@@ -12,22 +13,21 @@ class ModuloListView(OrderingMixin, ListView):
     model = Modulo
     template_name = 'core/modulo_list.html'
 
-
 class ModuloDetailView(DetailView):
     model = Modulo
     template_name = 'core/modulo_detail.html'
 
-class ModCreateView(CreateView):
+class ModCreateView(BaseCreateUpdateMixin, CreateView):
     model = Modulo
+    form_class = ModuloForm
     template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('modulo_create')
-    fields = [];
 
-class ModUpdateView(UpdateView):
+class ModUpdateView(BaseCreateUpdateMixin, UpdateView):
     model = Modulo
+    form_class = ModuloForm
     template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('modulo_update')
-    fields = [];
 
 class ModDeleteView(DeleteView, DeleteViewMixin):
     model = Modulo
@@ -48,11 +48,13 @@ class RADetailView(DetailView):
 
 class RACreateView(CreateView):
     model = ResAprendizaje
+    form_class = ResAprendizajeForm
     template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('ra_create')
 
 class RAUpdateView(UpdateView):
     model = ResAprendizaje
+    form_class = ResAprendizajeForm
     template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('ra_update')
 
@@ -81,11 +83,13 @@ class CEDetailView(DetailView):
 
 class CECreateView(CreateView):
     model = CritEvaluacion
+    form_class = CritEvaluacionForm
     template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('ce_create')
 
 class CEUpdateView(UpdateView):
     model = CritEvaluacion
+    form_class = CritEvaluacionForm
     template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('ce_update')
 

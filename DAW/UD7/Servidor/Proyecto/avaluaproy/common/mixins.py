@@ -2,16 +2,20 @@ from django.contrib.messages import constants as messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+#UD7.2.c
+#UD7.2.d BEGIN
 class BaseCreateUpdateMixin():
     template_name = 'common/base_create_udpate.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['titulo_creacion'] = "Crear"
-        context['titulo_actualizacion'] = "Actualizar"
+        context['titulo_creacion'] = f"Crear {self.model.nombre}"
+        context['titulo_actualizacion'] = f"Actualizar {self.object}"
         context['url_borrado'] = "delete_url"
         return context
-    
+#UD7.2.d END
+
+#UD7.2.d BEGIN
 class BaseConfirmDeleteMixin():
     template_name = 'common/base_confirm_delete.html'
 
