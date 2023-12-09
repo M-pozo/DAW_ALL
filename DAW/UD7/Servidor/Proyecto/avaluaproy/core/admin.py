@@ -7,7 +7,7 @@ from .models import Modulo, ResAprendizaje, CritEvaluacion
 
 class ModuloAdmin(admin.ModelAdmin):
     list_display = ('id', 'codigo', 'nombre')
-    list_display_link = ('codigo', 'nombre')
+    list_display_links = ('codigo', 'nombre')
     search_fields = ['codigo', 'nombre']
     readonly_fields = ['id']
 

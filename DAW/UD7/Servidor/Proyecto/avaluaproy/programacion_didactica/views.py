@@ -19,17 +19,17 @@ class UDDetailView(DetailView):
 
 class UDCreateView(CreateView):
     model = Unidad
-    template_name = 'base_create_update.html'
+    template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('unidad_create')
 
 class UDUpdateView(UpdateView):
     model = Unidad
-    template_name = 'base_create_update.html'
+    template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('unidad_update')
 
 class UDDeleteView(DeleteView):
     model = Unidad
-    template_name = 'base_create_update.html'
+    template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('unidad_list')
     #Verificacion dependencias
     def delete(self, request, *args, **kwargs):
@@ -51,17 +51,17 @@ class InstEvDetailView(DetailView):
 
 class InstEvCreateView(CreateView):
     model = InstEvaluacion
-    template_name = 'base_create_update.html'
+    template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('ie_create')
 
 class InstEvUpdateView(UpdateView):
     model = InstEvaluacion
-    template_name = 'base_create_update.html'
+    template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('ie_update')
 
 class InstEvDeleteView(DeleteView):
     model = InstEvaluacion
-    template_name = 'base_create_update.html'
+    template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('ie_list')
     #Verificacion dependencias
     def delete(self, request, *args, **kwargs):
@@ -83,17 +83,17 @@ class PondRADetailView(DetailView):
 
 class PondRACreateView(CreateView):
     model = PondRA
-    template_name = 'base_create_update.html'
+    template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('pond_ra_create')
 
 class PondRAUpdateView(UpdateView):
     model = PondRA
-    template_name = 'base_create_update.html'
+    template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('pond_ra_update')
 
 class PondRADeleteView(DeleteView):
     model = PondRA
-    template_name = 'base_create_update.html'
+    template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('pond_ra_list')
 #PondRA END
 
@@ -108,17 +108,17 @@ class PondCritDetailView(DetailView):
 
 class PondCritCreateView(CreateView):
     model = PondCriterio
-    template_name = 'base_create_update.html'
+    template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('pond_ce_create')
 
 class PondCritUpdateView(UpdateView):
     model = PondCriterio
-    template_name = 'base_create_update.html'
+    template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('pond_ce_update')
 
 class PondCritDeleteView(DeleteView):
     model = PondCriterio
-    template_name = 'base_create_update.html'
+    template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('pond_ce_list')
 #PondCriterio END
 
@@ -133,17 +133,17 @@ class PondCritUDDetailView(DetailView):
 
 class PondCritUDCreateView(CreateView):
     model = PondCritUD
-    template_name = 'base_create_update.html'
+    template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('pond_ce_ud_create')
 
 class PondCritUDUpdateView(UpdateView):
     model = PondCritUD
-    template_name = 'base_create_update.html'
+    template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('pond_ce_ud_update')
 
 class PondCritUDDeleteView(DeleteView):
     model = PondCritUD
-    template_name = 'base_create_update.html'
+    template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('pond_ce_ud_list')
 #PondCritUD END
 

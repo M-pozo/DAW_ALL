@@ -4,12 +4,14 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.messages import constants as messages
 from django.http import HttpResponseRedirect
 from core.models import Modulo, ResAprendizaje, CritEvaluacion
+from common.mixins import DeleteViewMixin, OrderingMixin
 
 #UD7.2.a BEGIN
 #Modulo BEGIN
-class ModuloListView(ListView):
+class ModuloListView(OrderingMixin, ListView):
     model = Modulo
     template_name = 'core/modulo_list.html'
+
 
 class ModuloDetailView(DetailView):
     model = Modulo
@@ -17,25 +19,22 @@ class ModuloDetailView(DetailView):
 
 class ModCreateView(CreateView):
     model = Modulo
-    template_name = 'avaluaproy/base_create_update.html'
+    template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('modulo_create')
+    fields = [];
 
 class ModUpdateView(UpdateView):
     model = Modulo
-    template_name = 'avaluaproy/base_create_update.html'
+    template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('modulo_update')
+    fields = [];
 
-class ModDeleteView(DeleteView):
+class ModDeleteView(DeleteView, DeleteViewMixin):
     model = Modulo
-    template_name = 'base_create_update.html'
+    template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('modulo_list')
-    #Verificacion dependencias
-    def delete(self, request, *args, **kwargs):
-        try:
-            super().delete(*args, **kwargs)
-        except:
-            messages.error(self.request, "Existen dependencias para el objeto {}. Elimine antes dichas dependencias".format(self))
-        return HttpResponseRedirect(reverse('home'))
+    fields = [];
+
 #Modulo END
 
 #ResAprendizaje BEGIN
@@ -49,17 +48,17 @@ class RADetailView(DetailView):
 
 class RACreateView(CreateView):
     model = ResAprendizaje
-    template_name = 'base_create_update.html'
+    template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('ra_create')
 
 class RAUpdateView(UpdateView):
     model = ResAprendizaje
-    template_name = 'base_create_update.html'
+    template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('ra_update')
 
 class RADeleteView(DeleteView):
     model = ResAprendizaje
-    template_name = 'base_create_update.html'
+    template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('ra_list')
     #Verificacion dependencias
     def delete(self, request, *args, **kwargs):
@@ -82,17 +81,17 @@ class CEDetailView(DetailView):
 
 class CECreateView(CreateView):
     model = CritEvaluacion
-    template_name = 'base_create_update.html'
+    template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('ce_create')
 
 class CEUpdateView(UpdateView):
     model = CritEvaluacion
-    template_name = 'base_create_update.html'
+    template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('ce_update')
 
 class CEDeleteView(DeleteView):
     model = CritEvaluacion
-    template_name = 'base_create_update.html'
+    template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('ce_list')
     #Verificacion dependencias
     def delete(self, request, *args, **kwargs):
