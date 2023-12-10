@@ -34,6 +34,12 @@ class ModDeleteView(BaseConfirmDeleteMixin, DeleteView):
     model = Modulo
     template_name = 'common/base_confirm_delete.html'
     success_url = reverse_lazy('modulo_list')
+    def delete(self, request, *args, **kwargs):
+        try:
+            super().delete(*args, **kwargs)
+        except:
+            messages.error(self.request, "Existen dependencias para el objeto {}. Elimine antes dichas dependencias".format(self))
+        return HttpResponseRedirect(reverse('home'))
 
 #Modulo END
 

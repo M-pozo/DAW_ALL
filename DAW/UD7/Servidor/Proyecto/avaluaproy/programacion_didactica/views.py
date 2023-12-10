@@ -95,14 +95,6 @@ class PondRACreateView(BaseCreateUpdateMixin, PonderacionRAMixin, CreateView):
     template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('pond_ra_create')
 
-    def form_valid(self, form):
-        modulo = PondRA
-        nueva_ponderacion_ra = form.cleaned_data['porcentaje']
-        
-        if not self.validacion(modulo, nueva_ponderacion_ra):
-            return self.form_invalid(form)
-
-        return super().form_valid(form)
 
 class PondRAUpdateView(BaseCreateUpdateMixin, PonderacionRAMixin, UpdateView):
     model = PondRA

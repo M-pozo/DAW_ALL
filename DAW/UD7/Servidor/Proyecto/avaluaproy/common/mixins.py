@@ -1,6 +1,7 @@
 from django.contrib.messages import constants as messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
+from django.db.models.deletion import ProtectedError
 
 #UD7.2.c
 #UD7.2.d BEGIN
@@ -10,7 +11,7 @@ class BaseCreateUpdateMixin:
 
         model_name = self.model.__name__
         url_mapping = {
-            'Modelo': 'modulo_delete',
+            'Modulo': 'modulo_delete',
             'ResAprendizaje': 'ra_delete',
             'CritEvaluacion': 'ce_delete',
             'Unidad': 'unidad_delete',
@@ -38,7 +39,7 @@ class BaseConfirmDeleteMixin():
         context = super().get_context_data(**kwargs)
         model_name = self.model.__name__
         url_mapping = {
-            'Modelo': 'modulo_list',
+            'Modulo': 'modulo_list',
             'ResAprendizaje': 'ra_list',
             'CritEvaluacion': 'ce_list',
             'Unidad': 'unidad_list',
@@ -56,7 +57,7 @@ class BaseConfirmDeleteMixin():
 
 #UD7.2.f BEGIN
 class DeleteViewMixin():
-    def delete(self, *args, **kwargs):
+    def delete(self, request, *args, **kwargs):
         try:
             super().delete(*args, **kwargs)
         except:
