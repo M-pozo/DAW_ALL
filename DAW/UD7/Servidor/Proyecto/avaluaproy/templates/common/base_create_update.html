@@ -1,11 +1,16 @@
 <!--UD7.2.c-->
 {% extends 'common/base.html' %}
+{% load crispy_forms_tags %}
+
 {% block content %}
 <div class="container">
-    <h2>{{ titulo_actualizacion }}</h2>
-    <form method="post" enctype="multipart/form-data">{% csrf_token %}
-        {{ form.as_p }}
+    <h2>{{ object|yesno:{{object.nombre}}|default:{{object.nombre}} }}</h2>
+    <form method="post" enctype="multipart/form-data" novalidate>
+        {% crispy form %}
         <input type="submit" value="{{object|yesno:'Actualizar,Crear'}}">
     </form>
+    {% if object %}
+    <a class="btn btn-danger" href="{% url 'url_borrado' object.id %}"> Eliminar </a>
+    {% endif %}
 </div>
 {% endblock %}

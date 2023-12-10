@@ -9,9 +9,8 @@ class BaseCreateUpdateMixin():
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['titulo_creacion'] = f"Crear {self.model.nombre}"
-        context['titulo_actualizacion'] = f"Actualizar {self.object}"
-        context['url_borrado'] = "delete_url"
+        context['titulo_creacion'] = f"Crear {self.model}"
+        context['titulo_actualizacion'] = f"Actualizar {self.model}"
         return context
 #UD7.2.d END
 
