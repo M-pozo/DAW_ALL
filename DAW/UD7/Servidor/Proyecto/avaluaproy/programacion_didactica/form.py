@@ -2,6 +2,7 @@ from django import forms
 from .models import Unidad, InstEvaluacion, PondRA, PondCriterio, PondCritUD
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Div, Field, ButtonHolder, Submit, HTML, Row
+from django.contrib.messages import constants as messages
 
 #UD7.3.a/UD7.3.b/UD7.5.c/UD7.5.d BEGIN
 class UnidadForm(forms.ModelForm):

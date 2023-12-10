@@ -1,13 +1,12 @@
-<!--UD7.2.e BEGIN-->
 {% extends 'common/base.html' %}
-
 {% block content %}
-    <h2>{{ titulo }}</h2>
-    <p>{{ mensaje_confirmacion }}</p>
-        <form method="post" action="">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-danger">Confirmar eliminación</button>
-        </form>
-        <a class="btn btn-secondary" href="{{ url_cancelado }}"> Cancelar </a>
+<div class="container">
+ <h2>Eliminar {{ object }}</h2>
+ <form method="post">{% csrf_token %}
+ <p>¿Está seguro que quiere eliminar "{{ object}}"?</p>
+ {{ form }}
+ <input type="submit" value="Confirmar" class="btn btn-danger">
+ </form>
+ <a href="/">Cancelar</a>
+</div>
 {% endblock %}
-<!--UD7.2.e END-->

@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from programacion_didactica.models import Unidad, InstEvaluacion, PondRA, PondCriterio, PondCritUD
 from common.mixins import DeleteViewMixin, OrderingMixin, BaseCreateUpdateMixin, BaseConfirmDeleteMixin
 from .form import UnidadForm, InstEvaluacionForm, PondRAForm, PondCriterioForm, PondCritUDForm
-from .mixins import  PonderacionRAMixin, PonderacionCEMixin, PonderacionCEUDMixin
+from django.contrib.messages.views import SuccessMessageMixin
 
 
 #UD6.7.a BEGIN
@@ -20,19 +20,23 @@ class UDDetailView(DetailView):
     model = Unidad
     template_name = 'programacion_didactica/unidad_detail.html'
 
-class UDCreateView(BaseCreateUpdateMixin, CreateView):
+class UDCreateView(BaseCreateUpdateMixin, CreateView, SuccessMessageMixin):
     model = Unidad
     form_class = UnidadForm
     template_name = 'common/base_create_update.html'
-    success_url = reverse_lazy('unidad_create')
+    def get_success_url(self):
+        object = self.object
+        return reverse_lazy('unidad_update', kwargs={'pk': object.id})
 
-class UDUpdateView(BaseCreateUpdateMixin, UpdateView):
+class UDUpdateView(BaseCreateUpdateMixin, UpdateView, SuccessMessageMixin):
     model = Unidad
     form_class = UnidadForm
     template_name = 'common/base_create_update.html'
-    success_url = reverse_lazy('unidad_update')
+    def get_success_url(self):
+        object = self.object
+        return reverse_lazy('unidad_update', kwargs={'pk': object.id})
 
-class UDDeleteView(BaseConfirmDeleteMixin, DeleteView):
+class UDDeleteView(BaseConfirmDeleteMixin, DeleteView, SuccessMessageMixin):
     model = Unidad
     template_name = 'common/base_confirm_delete.html'
     success_url = reverse_lazy('unidad_list')
@@ -54,17 +58,21 @@ class InstEvDetailView(DetailView):
     model = InstEvaluacion
     template_name = 'programacion_didactica/ie_detail.html'
 
-class InstEvCreateView(BaseCreateUpdateMixin, CreateView):
+class InstEvCreateView(BaseCreateUpdateMixin, CreateView, SuccessMessageMixin):
     model = InstEvaluacion
     form_class = InstEvaluacionForm
     template_name = 'common/base_create_update.html'
-    success_url = reverse_lazy('ie_create')
+    def get_success_url(self):
+        object = self.object
+        return reverse_lazy('ie_update', kwargs={'pk': object.id})
 
-class InstEvUpdateView(BaseCreateUpdateMixin, UpdateView):
+class InstEvUpdateView(BaseCreateUpdateMixin, UpdateView, SuccessMessageMixin):
     model = InstEvaluacion
     form_class = InstEvaluacionForm
     template_name = 'common/base_create_update.html'
-    success_url = reverse_lazy('ie_update')
+    def get_success_url(self):
+        object = self.object
+        return reverse_lazy('ie_update', kwargs={'pk': object.id})
 
 class InstEvDeleteView(BaseConfirmDeleteMixin, DeleteView):
     model = InstEvaluacion
@@ -88,19 +96,23 @@ class PondRADetailView(DetailView):
     model = PondRA
     template_name = 'programacion_didactica/pond_ra_detail.html'
 
-class PondRACreateView(BaseCreateUpdateMixin, PonderacionRAMixin, CreateView):
+class PondRACreateView(BaseCreateUpdateMixin, CreateView, SuccessMessageMixin):
     model = PondRA
     form_class = PondRAForm
     success_message = "Proyecto creado exitosamente"
     template_name = 'common/base_create_update.html'
-    success_url = reverse_lazy('pond_ra_create')
+    def get_success_url(self):
+        object = self.object
+        return reverse_lazy('pond_ra_update', kwargs={'pk': object.id})
 
 
-class PondRAUpdateView(BaseCreateUpdateMixin, PonderacionRAMixin, UpdateView):
+class PondRAUpdateView(BaseCreateUpdateMixin, UpdateView, SuccessMessageMixin):
     model = PondRA
     form_class = PondRAForm
     template_name = 'common/base_create_update.html'
-    success_url = reverse_lazy('pond_ra_update')
+    def get_success_url(self):
+        object = self.object
+        return reverse_lazy('pond_ra_update', kwargs={'pk': object.id})
 
 class PondRADeleteView(BaseConfirmDeleteMixin, DeleteView):
     model = PondRA
@@ -117,17 +129,21 @@ class PondCritDetailView(DetailView):
     model = PondCriterio
     template_name = 'programacion_didactica/pond_ce_detail.html'
 
-class PondCritCreateView(BaseCreateUpdateMixin, CreateView):
+class PondCritCreateView(BaseCreateUpdateMixin, CreateView, SuccessMessageMixin):
     model = PondCriterio
     form_class = PondCriterioForm
     template_name = 'common/base_create_update.html'
-    success_url = reverse_lazy('pond_ce_create')
+    def get_success_url(self):
+        object = self.object
+        return reverse_lazy('pond_ce_update', kwargs={'pk': object.id})
 
-class PondCritUpdateView(BaseCreateUpdateMixin, UpdateView):
+class PondCritUpdateView(BaseCreateUpdateMixin, UpdateView, SuccessMessageMixin):
     model = PondCriterio
     form_class = PondCriterioForm
     template_name = 'common/base_create_update.html'
-    success_url = reverse_lazy('pond_ce_update')
+    def get_success_url(self):
+        object = self.object
+        return reverse_lazy('pond_ce_update', kwargs={'pk': object.id})
 
 class PondCritDeleteView(BaseConfirmDeleteMixin, DeleteView):
     model = PondCriterio
@@ -144,23 +160,26 @@ class PondCritUDDetailView(DetailView):
     model = PondCritUD
     template_name = 'programacion_didactica/pond_ce_ud_detail.html'
 
-class PondCritUDCreateView(BaseCreateUpdateMixin, CreateView):
+class PondCritUDCreateView(BaseCreateUpdateMixin, CreateView, SuccessMessageMixin):
     model = PondCritUD
     form_class = PondCritUDForm
     template_name = 'common/base_create_update.html'
-    success_url = reverse_lazy('pond_ce_ud_create')
+    def get_success_url(self):
+        object = self.object
+        return reverse_lazy('pond_ce_ud_update', kwargs={'pk': object.id})
 
-class PondCritUDUpdateView(BaseCreateUpdateMixin, UpdateView):
+class PondCritUDUpdateView(BaseCreateUpdateMixin, UpdateView, SuccessMessageMixin):
     model = PondCritUD
     form_class = PondCritUDForm
     template_name = 'common/base_create_update.html'
-    success_url = reverse_lazy('pond_ce_ud_update')
+    def get_success_url(self):
+        object = self.object
+        return reverse_lazy('pond_ce_ud_update', kwargs={'pk': object.id})
 
 class PondCritUDDeleteView(BaseConfirmDeleteMixin, DeleteView):
     model = PondCritUD
     template_name = 'common/base_confirm_delete.html'
     success_url = reverse_lazy('pond_ce_ud_list')
 #PondCritUD END
-
 #UD7.2.a END
 #UD6.7.a END

@@ -3,8 +3,10 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.db.models.deletion import ProtectedError
 
+
 #UD7.2.c
 #UD7.2.d BEGIN
+
 class BaseCreateUpdateMixin:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

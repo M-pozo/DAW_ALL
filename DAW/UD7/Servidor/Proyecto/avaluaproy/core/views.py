@@ -3,9 +3,13 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.urls import reverse_lazy, reverse
 from django.contrib.messages import constants as messages
 from django.http import HttpResponseRedirect, response
+from django.contrib import messages
 from core.models import Modulo, ResAprendizaje, CritEvaluacion
 from common.mixins import DeleteViewMixin, OrderingMixin, BaseCreateUpdateMixin, BaseConfirmDeleteMixin
 from .form import ModuloForm, ResAprendizajeForm, CritEvaluacionForm
+from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models.deletion import ProtectedError
+
 
 #UD7.2.a BEGIN
 #Modulo BEGIN
@@ -17,30 +21,28 @@ class ModuloDetailView(DetailView):
     model = Modulo
     template_name = 'core/modulo_detail.html'
 
-class ModCreateView(BaseCreateUpdateMixin, CreateView):
+class ModCreateView(BaseCreateUpdateMixin, CreateView, SuccessMessageMixin):
     model = Modulo
     form_class = ModuloForm
     template_name = 'common/base_create_update.html'
-    success_url = reverse_lazy('modulo_create')
+    def get_success_url(self):
+        object = self.object
+        return reverse_lazy('modulo_update', kwargs={'pk': object.id})
 
-class ModUpdateView(BaseCreateUpdateMixin, UpdateView):
+class ModUpdateView(BaseCreateUpdateMixin, UpdateView, SuccessMessageMixin):
     model = Modulo
     form_class = ModuloForm
     template_name = 'common/base_create_update.html'
-    success_url = reverse_lazy('modulo_update')
+    def get_success_url(self):
+        object = self.object
+        return reverse_lazy('modulo_update', kwargs={'pk': object.id})
 
 
-class ModDeleteView(BaseConfirmDeleteMixin, DeleteView):
+class ModDeleteView(BaseConfirmDeleteMixin, DeleteViewMixin, DeleteView):
     model = Modulo
     template_name = 'common/base_confirm_delete.html'
     success_url = reverse_lazy('modulo_list')
-    def delete(self, request, *args, **kwargs):
-        try:
-            super().delete(*args, **kwargs)
-        except:
-            messages.error(self.request, "Existen dependencias para el objeto {}. Elimine antes dichas dependencias".format(self))
-        return HttpResponseRedirect(reverse('home'))
-
+    
 #Modulo END
 
 #ResAprendizaje BEGIN
@@ -52,22 +54,26 @@ class RADetailView(DetailView):
     model = ResAprendizaje
     template_name = 'core/ra_detail.html'
 
-class RACreateView(BaseCreateUpdateMixin, CreateView):
+class RACreateView(BaseCreateUpdateMixin, CreateView, SuccessMessageMixin):
     model = ResAprendizaje
     form_class = ResAprendizajeForm
     template_name = 'common/base_create_update.html'
-    success_url = reverse_lazy('ra_create')
+    def get_success_url(self):
+        object = self.object
+        return reverse_lazy('ra_update', kwargs={'pk': object.id})
 
-class RAUpdateView(BaseCreateUpdateMixin, UpdateView):
+class RAUpdateView(BaseCreateUpdateMixin, UpdateView, SuccessMessageMixin):
     model = ResAprendizaje
     form_class = ResAprendizajeForm
     template_name = 'common/base_create_update.html'
-    success_url = reverse_lazy('ra_update')
+    def get_success_url(self):
+        object = self.object
+        return reverse_lazy('ra_update', kwargs={'pk': object.id})
 
 class RADeleteView(BaseConfirmDeleteMixin, DeleteView):
     model = ResAprendizaje
     template_name = 'common/base_confirm_delete.html'
-    success_url = reverse_lazy('ra_delete')
+    success_url = reverse_lazy('ra_list')
     #Verificacion dependencias
     def delete(self, request, *args, **kwargs):
         try:
@@ -87,22 +93,26 @@ class CEDetailView(DetailView):
     model = CritEvaluacion
     template_name = 'core/ce_detail.html'
 
-class CECreateView(BaseCreateUpdateMixin, CreateView):
+class CECreateView(BaseCreateUpdateMixin, CreateView, SuccessMessageMixin):
     model = CritEvaluacion
     form_class = CritEvaluacionForm
     template_name = 'common/base_create_update.html'
-    success_url = reverse_lazy('ce_create')
+    def get_success_url(self):
+        object = self.object
+        return reverse_lazy('ce_update', kwargs={'pk': object.id})
 
-class CEUpdateView(BaseCreateUpdateMixin, UpdateView):
+class CEUpdateView(BaseCreateUpdateMixin, UpdateView, SuccessMessageMixin):
     model = CritEvaluacion
     form_class = CritEvaluacionForm
     template_name = 'common/base_create_update.html'
-    success_url = reverse_lazy('ce_update')
+    def get_success_url(self):
+        object = self.object
+        return reverse_lazy('ce_update', kwargs={'pk': object.id})
 
 class CEDeleteView(BaseConfirmDeleteMixin, DeleteView):
     model = CritEvaluacion
     template_name = 'common/base_confirm_delete.html'
-    success_url = reverse_lazy('ce_delete')
+    success_url = reverse_lazy('ce_list')
     #Verificacion dependencias
     def delete(self, request, *args, **kwargs):
         try:

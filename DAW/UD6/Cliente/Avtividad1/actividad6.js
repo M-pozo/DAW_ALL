@@ -2,21 +2,19 @@
 
 'use strict';
 
-// Función para modificar elementos
 function modifica() {
-    // Solicitar al usuario la posición y el nuevo contenido
-    let posicion = prompt("Introduce el número de película a modificar:");
-    let nuevoContenido = prompt("Introduce el nuevo texto:");
+    let posicion = prompt("Introduce el número de película a modificar");
+    let titulo = prompt("Introduce el nuevo título");
 
     // Validación de entrada
-    if (posicion && nuevoContenido) {
+    if (posicion && titulo) {
         let lista = document.getElementById('lista');
-        let elementos = lista.getElementsByTagName('li');
+        let elemento = lista.getElementsByTagName('li');
 
-        // Validación de posición válida
+        // Si la posción es mayor a 0 y menos igual a elementos de la lista
         if (posicion > 0 && posicion <= elementos.length) {
-            // Modificar el contenido del elemento en la posición especificada
-            elementos[posicion - 1].textContent = nuevoContenido;
+            // Modificar el contenido
+            elementos[posicion - 1].textContent = titulo;
         } else {
             alert("Posición no válida. Introduce un número entre 1 y " + elementos.length);
         }
@@ -29,10 +27,10 @@ function modifica() {
 function anyade() {
     // Solicitar al usuario la posición y el nuevo contenido
     let posicion = prompt("En qué posición vas a insertar:");
-    let nuevoContenido = prompt("Introduce el título de la nueva película:");
+    let titulo = prompt("Introduce el título de la nueva película:");
 
     // Validación de entrada
-    if (posicion && nuevoContenido) {
+    if (posicion && titulo) {
         let lista = document.getElementById('lista');
         let elementos = lista.getElementsByTagName('li');
 
@@ -40,7 +38,7 @@ function anyade() {
         if (posicion > 0 && posicion <= elementos.length + 1) {
             // Crear un nuevo elemento y agregarlo a la lista en la posición especificada
             let nuevoElemento = document.createElement('li');
-            nuevoElemento.textContent = nuevoContenido;
+            nuevoElemento.textContent = titulo;
 
             // Insertar en la posición deseada
             if (posicion === elementos.length + 1) {
