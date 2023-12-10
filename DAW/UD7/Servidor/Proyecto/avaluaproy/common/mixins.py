@@ -63,7 +63,7 @@ class DeleteViewMixin():
         try:
             super().delete(*args, **kwargs)
         except:
-            messages.error(self.request, "Existen dependencias para el objeto {}. Elimine antes dichas dependencias".format(self))
+            messages.error(self.request, f"Existen dependencias para el objeto {object}. Elimine antes dichas dependencias".format(self))
         return HttpResponseRedirect(reverse('home'))
 #UD7.2.f END
 
