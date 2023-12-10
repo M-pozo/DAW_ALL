@@ -4,6 +4,9 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.messages import constants as messages
 from django.http import HttpResponseRedirect
 from programacion_didactica.models import Unidad, InstEvaluacion, PondRA, PondCriterio, PondCritUD
+from common.mixins import DeleteViewMixin, OrderingMixin, BaseCreateUpdateMixin, BaseConfirmDeleteMixin
+from .form import UnidadForm, InstEvaluacionForm, PondRAForm, PondCriterioForm, PondCritUDForm
+from .mixins import  PonderacionRAMixin, PonderacionCEMixin, PonderacionCEUDMixin
 
 
 #UD6.7.a BEGIN
@@ -17,17 +20,19 @@ class UDDetailView(DetailView):
     model = Unidad
     template_name = 'programacion_didactica/unidad_detail.html'
 
-class UDCreateView(CreateView):
+class UDCreateView(BaseCreateUpdateMixin, CreateView):
     model = Unidad
+    form_class = UnidadForm
     template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('unidad_create')
 
-class UDUpdateView(UpdateView):
+class UDUpdateView(BaseCreateUpdateMixin, UpdateView):
     model = Unidad
+    form_class = UnidadForm
     template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('unidad_update')
 
-class UDDeleteView(DeleteView):
+class UDDeleteView(BaseConfirmDeleteMixin, DeleteView):
     model = Unidad
     template_name = 'common/base_confirm_delete.html'
     success_url = reverse_lazy('unidad_list')
@@ -49,17 +54,19 @@ class InstEvDetailView(DetailView):
     model = InstEvaluacion
     template_name = 'programacion_didactica/ie_detail.html'
 
-class InstEvCreateView(CreateView):
+class InstEvCreateView(BaseCreateUpdateMixin, CreateView):
     model = InstEvaluacion
+    form_class = InstEvaluacionForm
     template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('ie_create')
 
-class InstEvUpdateView(UpdateView):
+class InstEvUpdateView(BaseCreateUpdateMixin, UpdateView):
     model = InstEvaluacion
+    form_class = InstEvaluacionForm
     template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('ie_update')
 
-class InstEvDeleteView(DeleteView):
+class InstEvDeleteView(BaseConfirmDeleteMixin, DeleteView):
     model = InstEvaluacion
     template_name = 'common/base_confirm_delete.html'
     success_url = reverse_lazy('ie_list')
@@ -81,17 +88,29 @@ class PondRADetailView(DetailView):
     model = PondRA
     template_name = 'programacion_didactica/pond_ra_detail.html'
 
-class PondRACreateView(CreateView):
+class PondRACreateView(BaseCreateUpdateMixin, PonderacionRAMixin, CreateView):
     model = PondRA
+    form_class = PondRAForm
+    success_message = "Proyecto creado exitosamente"
     template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('pond_ra_create')
 
-class PondRAUpdateView(UpdateView):
+    def form_valid(self, form):
+        modulo = PondRA
+        nueva_ponderacion_ra = form.cleaned_data['porcentaje']
+        
+        if not self.validacion(modulo, nueva_ponderacion_ra):
+            return self.form_invalid(form)
+
+        return super().form_valid(form)
+
+class PondRAUpdateView(BaseCreateUpdateMixin, PonderacionRAMixin, UpdateView):
     model = PondRA
+    form_class = PondRAForm
     template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('pond_ra_update')
 
-class PondRADeleteView(DeleteView):
+class PondRADeleteView(BaseConfirmDeleteMixin, DeleteView):
     model = PondRA
     template_name = 'common/base_confirm_delete.html'
     success_url = reverse_lazy('pond_ra_list')
@@ -106,17 +125,19 @@ class PondCritDetailView(DetailView):
     model = PondCriterio
     template_name = 'programacion_didactica/pond_ce_detail.html'
 
-class PondCritCreateView(CreateView):
+class PondCritCreateView(BaseCreateUpdateMixin, CreateView):
     model = PondCriterio
+    form_class = PondCriterioForm
     template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('pond_ce_create')
 
-class PondCritUpdateView(UpdateView):
+class PondCritUpdateView(BaseCreateUpdateMixin, UpdateView):
     model = PondCriterio
+    form_class = PondCriterioForm
     template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('pond_ce_update')
 
-class PondCritDeleteView(DeleteView):
+class PondCritDeleteView(BaseConfirmDeleteMixin, DeleteView):
     model = PondCriterio
     template_name = 'common/base_confirm_delete.html'
     success_url = reverse_lazy('pond_ce_list')
@@ -131,17 +152,19 @@ class PondCritUDDetailView(DetailView):
     model = PondCritUD
     template_name = 'programacion_didactica/pond_ce_ud_detail.html'
 
-class PondCritUDCreateView(CreateView):
+class PondCritUDCreateView(BaseCreateUpdateMixin, CreateView):
     model = PondCritUD
+    form_class = PondCritUDForm
     template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('pond_ce_ud_create')
 
-class PondCritUDUpdateView(UpdateView):
+class PondCritUDUpdateView(BaseCreateUpdateMixin, UpdateView):
     model = PondCritUD
+    form_class = PondCritUDForm
     template_name = 'common/base_create_update.html'
     success_url = reverse_lazy('pond_ce_ud_update')
 
-class PondCritUDDeleteView(DeleteView):
+class PondCritUDDeleteView(BaseConfirmDeleteMixin, DeleteView):
     model = PondCritUD
     template_name = 'common/base_confirm_delete.html'
     success_url = reverse_lazy('pond_ce_ud_list')

@@ -1,16 +1,21 @@
-<!--UD7.2.c-->
+<!--UD7.2.c/UD7.5.c BEGIN-->
 {% extends 'common/base.html' %}
 {% load crispy_forms_tags %}
 
 {% block content %}
 <div class="container">
-    <h2>{{ object|yesno:{{object.nombre}}|default:{{object.nombre}} }}</h2>
+    {% if object %}
+        <h2>{{ titulo_actualizacion }}</h2>
+    {% else %}
+        <h2>{{ titulo_creacion }}</h2>
+    {% endif %}
     <form method="post" enctype="multipart/form-data" novalidate>
         {% crispy form %}
         <input type="submit" value="{{object|yesno:'Actualizar,Crear'}}">
     </form>
     {% if object %}
-    <a class="btn btn-danger" href="{% url 'url_borrado' object.id %}"> Eliminar </a>
+    <a class="btn btn-danger" href="{{ url_borrado }}"> Eliminar </a>
     {% endif %}
 </div>
 {% endblock %}
+<!--UD7.2.c/UD7.5.c END-->  

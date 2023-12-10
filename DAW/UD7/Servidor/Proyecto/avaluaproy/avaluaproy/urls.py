@@ -63,8 +63,8 @@ urlpatterns = [
         #InstEvaluacion
             path('ie_list/', programacion_didactica_views.InstEvListView.as_view(), name='ie_list'),
             path('ie_detail/<int:pk>/', programacion_didactica_views.InstEvDetailView.as_view(), name='ie_detail'),
-            path('ie_create/', programacion_didactica_views.InstEvUpdateView.as_view(), name='ie_update'),
-            path('ie_update/<int:pk>/', programacion_didactica_views.InstEvCreateView.as_view(), name='ie_create'),
+            path('ie_create/', programacion_didactica_views.InstEvCreateView.as_view(), name='ie_create'),
+            path('ie_update/<int:pk>/', programacion_didactica_views.InstEvUpdateView.as_view(), name='ie_update'),
             path('ie_delete/<int:pk>/', programacion_didactica_views.InstEvDeleteView.as_view(), name='ie_delete'),
         #PondRA
             path('pond_ra_list/', programacion_didactica_views.PondRAListView.as_view(), name='pond_ra_list'),
