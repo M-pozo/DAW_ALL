@@ -14,7 +14,7 @@ function modifica() {
             /* Modificar el contenido*/
             elementos[posicion - 1].textContent = titulo;
         } else {
-            alert("Posición no válida. Introduce un número entre 1 y " + elementos.length);
+            alert("Introduce un número entre 1 y " + elementos.length);
         }
     } else {
         alert("Introduce algo");

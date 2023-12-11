@@ -1,0 +1,6 @@
+.contenedorTextoPequeno {
+    width: 333px;
+    height: 333px;
+    overflow-y: auto;
+    text-overflow: ellipsis;
+}
