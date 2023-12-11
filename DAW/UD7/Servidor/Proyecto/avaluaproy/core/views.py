@@ -58,6 +58,7 @@ class RACreateView(BaseCreateUpdateMixin, CreateView, SuccessMessageMixin):
     model = ResAprendizaje
     form_class = ResAprendizajeForm
     template_name = 'common/base_create_update.html'
+
     def get_success_url(self):
         object = self.object
         return reverse_lazy('ra_update', kwargs={'pk': object.id})
@@ -66,6 +67,8 @@ class RAUpdateView(BaseCreateUpdateMixin, UpdateView, SuccessMessageMixin):
     model = ResAprendizaje
     form_class = ResAprendizajeForm
     template_name = 'common/base_create_update.html'
+    
+
     def get_success_url(self):
         object = self.object
         return reverse_lazy('ra_update', kwargs={'pk': object.id})
@@ -75,12 +78,12 @@ class RADeleteView(BaseConfirmDeleteMixin, DeleteView):
     template_name = 'common/base_confirm_delete.html'
     success_url = reverse_lazy('ra_list')
     #Verificacion dependencias
-    def delete(self, request, *args, **kwargs):
+    def form_valid(self, request, *args, **kwargs):
         try:
             super().delete(*args, **kwargs)
         except:
             messages.error(self.request, "Existen dependencias para el objeto {}. Elimine antes dichas dependencias".format(self))
-        return HttpResponseRedirect(reverse('home'))
+            return HttpResponseRedirect(reverse('home'))
 #ResAprendizaje end
 
 #CritEvaluacion BEGIN
@@ -119,6 +122,6 @@ class CEDeleteView(BaseConfirmDeleteMixin, DeleteView):
             super().delete(*args, **kwargs)
         except:
             messages.error(self.request, "Existen dependencias para el objeto {}. Elimine antes dichas dependencias".format(self))
-        return HttpResponseRedirect(reverse('home'))
+            return HttpResponseRedirect(reverse('home'))
 #CritEvaluacion END
 #UD7.2.a END

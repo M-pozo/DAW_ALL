@@ -1,0 +1,38 @@
+body {
+    background: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/fcf5d6dd-6a8a-41c1-b04b-ace1660809c6/dafhs2b-ee44645a-1b55-48f6-b028-156bb2c973ab.jpg/v1/fill/w_830,h_963,q_70,strp/dark_shadow_demon_by_hazy0077_dafhs2b-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTE4OSIsInBhdGgiOiJcL2ZcL2ZjZjVkNmRkLTZhOGEtNDFjMS1iMDRiLWFjZTE2NjA4MDljNlwvZGFmaHMyYi1lZTQ0NjQ1YS0xYjU1LTQ4ZjYtYjAyOC0xNTZiYjJjOTczYWIuanBnIiwid2lkdGgiOiI8PTEwMjQifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.ueKbanoYZmua8MTdbQAOWF-elFXEA10YhoZx9iptKfc");
+}
+h1{
+    font-size: 70px;
+    font-weight: bold;
+
+    /* posx posy blur color */
+    text-shadow: 6px 3px 5px purple;
+}
+
+.cajaSombreada{
+    /* posx posy blur extension color inset*/
+    background-color: white;
+    box-shadow: 3px 3px 4px 1px purple;
+}
+
+.cajaConBg{
+    background: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/fcf5d6dd-6a8a-41c1-b04b-ace1660809c6/dafhs2b-ee44645a-1b55-48f6-b028-156bb2c973ab.jpg/v1/fill/w_830,h_963,q_70,strp/dark_shadow_demon_by_hazy0077_dafhs2b-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTE4OSIsInBhdGgiOiJcL2ZcL2ZjZjVkNmRkLTZhOGEtNDFjMS1iMDRiLWFjZTE2NjA4MDljNlwvZGFmaHMyYi1lZTQ0NjQ1YS0xYjU1LTQ4ZjYtYjAyOC0xNTZiYjJjOTczYWIuanBnIiwid2lkdGgiOiI8PTEwMjQifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.ueKbanoYZmua8MTdbQAOWF-elFXEA10YhoZx9iptKfc");
+}
+
+.cajaConBg h1 {
+    text-shadow: 0 0 6px #fff;
+}
+
+.degradado{
+    width: 300px;
+    height: 300px;
+    /* dir colo_inicial <> color_final */
+    background: linear-gradient(to right, rgb(0, 0, 0), 20%, purple, 80%, rgb(204, 10, 107));
+}
+
+.degradadoRadial {
+    width: 300px;
+    height: 300px;
+    /* dir colo_inicial <> color_final */
+    background: radial-gradient(triangle, rgb(0, 0, 0), 20%, purple, 80%, rgb(204, 10, 107));
+}
