@@ -1,0 +1,12 @@
+
+UD7.2 5,5p + fallos generales (urgente)
+Sobreescritura del metodo delete() cambiar por form_valid() 2,5p
+Los 3 Mixin de porcnetaje 3p
+BaseCreateUpdateMixin cambiar mapping (no hace falta)
+Mirar la template de confirm_delete(boton de cancelar)
+
+UD7.3 Hecho todo
+
+UD7.4 3p
+a: Mensajes SuccessMessageMixin 2p
+b: Avisa: Requiremnet.txt(crispy_form) 1p
