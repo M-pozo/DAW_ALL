@@ -36,7 +36,7 @@ class ModUpdateView(SuccessMessageCreateUpdateMixin, BaseCreateUpdateMixin, Upda
 class ModDeleteView(DeleteViewMixin, DeleteView):
     model = Modulo
     template_name = 'common/base_confirm_delete.html'
-    success_url = 'modulo_list'
+    success_url = reverse_lazy('modulo_list')
 #Modulo END
 
 #ResAprendizaje BEGIN
