@@ -1,8 +1,10 @@
 'use strict'
-let element = document.getElementById("prueba")
+let contador = document.getElementById("contador")
 
-element.onclick = inputClick;
-
-function inputClick(element, event) {
-    alert("Un evento" + event.type + " ha sido detectado en:" + element.id);
+function inputClick(elemento, even) {
+    let a = 0
+    let p = contador.createElement("p")
+    p.textContent = parseInt(a+1)  
 }
+
+contador.addEventListener('click', console.log).inputClick
