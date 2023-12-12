@@ -1,5 +1,5 @@
 
-UD7.2 5,5p + fallos generales (urgente)
+UD7.2 3p + fallos generales (urgente)
 Sobreescritura del metodo delete() cambiar por form_valid() 2,5p hecho
 Los 3 Mixin de porcnetaje 3p
 BaseCreateUpdateMixin cambiar mapping (no hace falta) hecho

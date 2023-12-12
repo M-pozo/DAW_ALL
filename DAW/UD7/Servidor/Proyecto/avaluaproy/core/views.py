@@ -22,17 +22,16 @@ class ModuloDetailView(DetailView):
 class ModCreateView(SuccessMessageCreateUpdateMixin, BaseCreateUpdateMixin, CreateView):
     model = Modulo
     form_class = ModuloForm
-    template_name = 'common/base_create_update.html'
     success_message = "Modulo creado exitosamente"
+    template_name = 'common/base_create_update.html'
     success_url = 'modulo_update'
 
-class ModUpdateView(SuccessMessageCreateUpdateMixin, BaseCreateUpdateMixin, UpdateView, SuccessMessageMixin):
+class ModUpdateView(SuccessMessageCreateUpdateMixin, BaseCreateUpdateMixin, UpdateView):
     model = Modulo
     form_class = ModuloForm
-    template_name = 'common/base_create_update.html'
     success_message = "Modulo actualizado exitosamente"
+    template_name = 'common/base_create_update.html'
     success_url = 'modulo_update'
-
 
 class ModDeleteView(DeleteViewMixin, DeleteView):
     model = Modulo
@@ -49,74 +48,52 @@ class RADetailView(DetailView):
     model = ResAprendizaje
     template_name = 'core/ra_detail.html'
 
-class RACreateView(BaseCreateUpdateMixin, CreateView, SuccessMessageMixin):
+class RACreateView(SuccessMessageCreateUpdateMixin, BaseCreateUpdateMixin, CreateView):
     model = ResAprendizaje
     form_class = ResAprendizajeForm
+    success_message = "RA creado exitosamente"
     template_name = 'common/base_create_update.html'
+    success_url = 'ra_update'
 
-    def get_success_url(self):
-        object = self.object
-        return reverse_lazy('ra_update', kwargs={'pk': object.id})
-
-class RAUpdateView(BaseCreateUpdateMixin, UpdateView, SuccessMessageMixin):
+class RAUpdateView(SuccessMessageCreateUpdateMixin, BaseCreateUpdateMixin, UpdateView):
     model = ResAprendizaje
     form_class = ResAprendizajeForm
+    success_message = "RA creado exitosamente"
     template_name = 'common/base_create_update.html'
-    
+    success_url = 'ra_update'
 
-    def get_success_url(self):
-        object = self.object
-        return reverse_lazy('ra_update', kwargs={'pk': object.id})
-
-class RADeleteView(DeleteView):
+class RADeleteView(DeleteViewMixin, DeleteView):
     model = ResAprendizaje
     template_name = 'common/base_confirm_delete.html'
-    success_url = reverse_lazy('ra_list')
-    #Verificacion dependencias
-    def delete(self, request, *args, **kwargs):
-        try:
-            super().delete(*args, **kwargs)
-        except:
-            messages.error(self.request, "Existen dependencias para el objeto {}. Elimine antes dichas dependencias".format(self))
-            return HttpResponseRedirect(reverse('home'))
-#ResAprendizaje end
+    success_url = 'ra_list'
+#ResAprendizaje END
 
 #CritEvaluacion BEGIN
 class CEListView(ListView):
     model = CritEvaluacion
     template_name = 'core/ce_list.html'
 
-
 class CEDetailView(DetailView):
     model = CritEvaluacion
     template_name = 'core/ce_detail.html'
 
-class CECreateView(BaseCreateUpdateMixin, CreateView, SuccessMessageMixin):
+class CECreateView(SuccessMessageCreateUpdateMixin, BaseCreateUpdateMixin, CreateView):
     model = CritEvaluacion
     form_class = CritEvaluacionForm
+    success_message = "CE creado exitosamente"
     template_name = 'common/base_create_update.html'
-    def get_success_url(self):
-        object = self.object
-        return reverse_lazy('ce_update', kwargs={'pk': object.id})
+    success_url = 'ce_update'
 
-class CEUpdateView(BaseCreateUpdateMixin, UpdateView, SuccessMessageMixin):
+class CEUpdateView(SuccessMessageCreateUpdateMixin, BaseCreateUpdateMixin, UpdateView):
     model = CritEvaluacion
     form_class = CritEvaluacionForm
+    success_message = "CE creado exitosamente"
     template_name = 'common/base_create_update.html'
-    def get_success_url(self):
-        object = self.object
-        return reverse_lazy('ce_update', kwargs={'pk': object.id})
+    success_url = 'ce_update'
 
-class CEDeleteView(DeleteView):
+class CEDeleteView(DeleteViewMixin, DeleteView):
     model = CritEvaluacion
     template_name = 'common/base_confirm_delete.html'
-    success_url = reverse_lazy('ce_list')
-    #Verificacion dependencias
-    def delete(self, request, *args, **kwargs):
-        try:
-            super().delete(*args, **kwargs)
-        except:
-            messages.error(self.request, "Existen dependencias para el objeto {}. Elimine antes dichas dependencias".format(self))
-            return HttpResponseRedirect(reverse('home'))
+    success_url = 'ce_list'
 #CritEvaluacion END
 #UD7.2.a END
