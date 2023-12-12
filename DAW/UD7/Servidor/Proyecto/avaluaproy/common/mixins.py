@@ -36,15 +36,14 @@ class BaseCreateUpdateMixin:
 #UD7.2.d END
 
 #UD7.2.f BEGIN
-class DeleteViewMixin(DeleteView):
+class DeleteViewMixin():
     def form_valid(self, request, *args, **kwargs):
         try:
             super().delete(*args, request, **kwargs)
             messages.success(self.request, f"{self.model.__name__} eliminado correctamente".format(self))
-            return HttpResponseRedirect(reverse(self.success_url))
         except:
             messages.error(self.request, "Existen dependencias para el Modulo. Elimine antes dichas dependencias".format(self))
-            return HttpResponseRedirect(reverse(self.success_url))
+        return HttpResponseRedirect(reverse(self.success_url))
 #UD7.2.f END
 
 #UD7.2.j BEGIN
