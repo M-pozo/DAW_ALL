@@ -1,7 +1,9 @@
-from django.contrib.messages import constants as messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
-from django.db.models.deletion import ProtectedError
+from django.contrib.messages.views import SuccessMessageMixin
+from django.views.generic import DeleteView
+from django.contrib import messages
+
 
 
 #UD7.2.c
@@ -33,39 +35,16 @@ class BaseCreateUpdateMixin:
         return context
 #UD7.2.d END
 
-#UD7.2.e BEGIN
-class BaseConfirmDeleteMixin():
-    template_name = 'common/base_confirm_delete.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        model_name = self.model.__name__
-        url_mapping = {
-            'Modulo': 'modulo_list',
-            'ResAprendizaje': 'ra_list',
-            'CritEvaluacion': 'ce_list',
-            'Unidad': 'unidad_list',
-            'InstEvaluacion': 'ie_list',
-            'PondRA': 'pond_ra_list',
-            'PondCriterio': 'pond_ce_list',
-            'PondCritUD': 'pond_ce_ud_list',
-        }
-        url_name = url_mapping.get(model_name, 'default_list')
-        context['titulo'] = "Delete confirm"
-        context['mensaje_confirmacion'] = "Usted esta seguro que desea eliminar"
-        context['url_cancelado'] = reverse_lazy(f'{url_name}')
-        return context
-#UD7.2.e END
-
 #UD7.2.f BEGIN
-class DeleteViewMixin():
-    def delete(self, request, *args, **kwargs):
+class DeleteViewMixin(DeleteView):
+    def form_valid(self, request, *args, **kwargs):
         try:
-            print('DeleteViewMixin')
-            super().delete(*args, **kwargs)
+            super().delete(*args, request, **kwargs)
+            messages.success(self.request, f"{self.model.__name__} eliminado correctamente".format(self))
+            return HttpResponseRedirect(reverse(self.success_url))
         except:
-            messages.error(self.request, f"Existen dependencias para el objeto {object}. Elimine antes dichas dependencias".format(self))
-            return HttpResponseRedirect(reverse('home'))
+            messages.error(self.request, "Existen dependencias para el Modulo. Elimine antes dichas dependencias".format(self))
+            return HttpResponseRedirect(reverse(self.success_url))
 #UD7.2.f END
 
 #UD7.2.j BEGIN
@@ -83,5 +62,8 @@ class OrderingMixin():
 #UD7.2.j END
 
 #UD7.4.a BEGIN
-
+class SuccessMessageCreateUpdateMixin(SuccessMessageMixin):
+    def get_success_url(self):
+        object = self.object
+        return reverse_lazy(self.success_url, kwargs={'pk': object.id})
 #UD7.4.a BEGIN

@@ -1,14 +1,12 @@
-from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
 from django.contrib.messages import constants as messages
-from django.http import HttpResponseRedirect, response
+from django.http import HttpResponseRedirect
 from django.contrib import messages
 from core.models import Modulo, ResAprendizaje, CritEvaluacion
-from common.mixins import DeleteViewMixin, OrderingMixin, BaseCreateUpdateMixin, BaseConfirmDeleteMixin
+from common.mixins import DeleteViewMixin, OrderingMixin, BaseCreateUpdateMixin, SuccessMessageCreateUpdateMixin
 from .form import ModuloForm, ResAprendizajeForm, CritEvaluacionForm
 from django.contrib.messages.views import SuccessMessageMixin
-from django.db.models.deletion import ProtectedError
 
 
 #UD7.2.a BEGIN
@@ -21,28 +19,25 @@ class ModuloDetailView(DetailView):
     model = Modulo
     template_name = 'core/modulo_detail.html'
 
-class ModCreateView(BaseCreateUpdateMixin, CreateView, SuccessMessageMixin):
+class ModCreateView(SuccessMessageCreateUpdateMixin, BaseCreateUpdateMixin, CreateView):
     model = Modulo
     form_class = ModuloForm
     template_name = 'common/base_create_update.html'
-    def get_success_url(self):
-        object = self.object
-        return reverse_lazy('modulo_update', kwargs={'pk': object.id})
+    success_message = "Modulo creado exitosamente"
+    success_url = 'modulo_update'
 
-class ModUpdateView(BaseCreateUpdateMixin, UpdateView, SuccessMessageMixin):
+class ModUpdateView(SuccessMessageCreateUpdateMixin, BaseCreateUpdateMixin, UpdateView, SuccessMessageMixin):
     model = Modulo
     form_class = ModuloForm
     template_name = 'common/base_create_update.html'
-    def get_success_url(self):
-        object = self.object
-        return reverse_lazy('modulo_update', kwargs={'pk': object.id})
+    success_message = "Modulo actualizado exitosamente"
+    success_url = 'modulo_update'
 
 
-class ModDeleteView(BaseConfirmDeleteMixin, DeleteViewMixin, DeleteView):
+class ModDeleteView(DeleteViewMixin, DeleteView):
     model = Modulo
     template_name = 'common/base_confirm_delete.html'
-    success_url = reverse_lazy('modulo_list')
-    
+    success_url = 'modulo_list'
 #Modulo END
 
 #ResAprendizaje BEGIN
@@ -73,12 +68,12 @@ class RAUpdateView(BaseCreateUpdateMixin, UpdateView, SuccessMessageMixin):
         object = self.object
         return reverse_lazy('ra_update', kwargs={'pk': object.id})
 
-class RADeleteView(BaseConfirmDeleteMixin, DeleteView):
+class RADeleteView(DeleteView):
     model = ResAprendizaje
     template_name = 'common/base_confirm_delete.html'
     success_url = reverse_lazy('ra_list')
     #Verificacion dependencias
-    def form_valid(self, request, *args, **kwargs):
+    def delete(self, request, *args, **kwargs):
         try:
             super().delete(*args, **kwargs)
         except:
@@ -112,7 +107,7 @@ class CEUpdateView(BaseCreateUpdateMixin, UpdateView, SuccessMessageMixin):
         object = self.object
         return reverse_lazy('ce_update', kwargs={'pk': object.id})
 
-class CEDeleteView(BaseConfirmDeleteMixin, DeleteView):
+class CEDeleteView(DeleteView):
     model = CritEvaluacion
     template_name = 'common/base_confirm_delete.html'
     success_url = reverse_lazy('ce_list')
