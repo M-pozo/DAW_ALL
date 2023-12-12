@@ -7,6 +7,7 @@ from programacion_didactica.models import Unidad, InstEvaluacion, PondRA, PondCr
 from common.mixins import DeleteViewMixin, OrderingMixin, BaseCreateUpdateMixin
 from .form import UnidadForm, InstEvaluacionForm, PondRAForm, PondCriterioForm, PondCritUDForm
 from django.contrib.messages.views import SuccessMessageMixin
+from .mixins import PonderacionRAMixin
 
 
 #UD6.7.a BEGIN
@@ -96,7 +97,7 @@ class PondRADetailView(DetailView):
     model = PondRA
     template_name = 'programacion_didactica/pond_ra_detail.html'
 
-class PondRACreateView(BaseCreateUpdateMixin, CreateView, SuccessMessageMixin):
+class PondRACreateView(PonderacionRAMixin, BaseCreateUpdateMixin, CreateView):
     model = PondRA
     form_class = PondRAForm
     success_message = "Proyecto creado exitosamente"
