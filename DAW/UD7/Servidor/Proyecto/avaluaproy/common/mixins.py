@@ -50,7 +50,7 @@ class DeleteViewMixin():
 class OrderingMixin():
     def get_queryset(self):
         model = self.model
-        ordenar = self.request.GET.get('ordenar', 'desc')
+        ordenar = self.request.GET.get('ordenar', None)
 
         if ordenar == 'asc':
             return model.objects.all().order_by('id')
