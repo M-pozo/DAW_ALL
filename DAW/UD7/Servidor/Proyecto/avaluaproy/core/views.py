@@ -1,12 +1,12 @@
+#Django
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy, reverse
-from django.contrib.messages import constants as messages
-from django.http import HttpResponseRedirect
-from django.contrib import messages
+from django.urls import reverse_lazy
+#Models
 from core.models import Modulo, ResAprendizaje, CritEvaluacion
-from common.mixins import DeleteViewMixin, OrderingMixin, BaseCreateUpdateMixin, SuccessMessageCreateUpdateMixin
+#Form
 from .form import ModuloForm, ResAprendizajeForm, CritEvaluacionForm
-from django.contrib.messages.views import SuccessMessageMixin
+#Mixins
+from common.mixins import DeleteViewMixin, OrderingMixin, BaseCreateUpdateMixin, SuccessMessageCreateUpdateMixin, BaseDeleteMixin
 
 
 #UD7.2.a BEGIN
@@ -25,6 +25,7 @@ class ModCreateView(SuccessMessageCreateUpdateMixin, BaseCreateUpdateMixin, Crea
     success_message = "Modulo creado exitosamente"
     template_name = 'common/base_create_update.html'
     success_url = 'modulo_update'
+    titulo_creacion = 'Crear Modulo'
 
 class ModUpdateView(SuccessMessageCreateUpdateMixin, BaseCreateUpdateMixin, UpdateView):
     model = Modulo
@@ -32,15 +33,19 @@ class ModUpdateView(SuccessMessageCreateUpdateMixin, BaseCreateUpdateMixin, Upda
     success_message = "Modulo actualizado exitosamente"
     template_name = 'common/base_create_update.html'
     success_url = 'modulo_update'
+    titulo_actualizacion = 'Actualizar Modulo'
+    url_borrado = 'modulo_delete'
 
-class ModDeleteView(DeleteViewMixin, DeleteView):
+class ModDeleteView(BaseDeleteMixin, DeleteViewMixin, DeleteView):
     model = Modulo
     template_name = 'common/base_confirm_delete.html'
-    success_url = reverse_lazy('modulo_list')
+    success_url = 'modulo_list'
+    titulo = "Eliminar Modulo"
+    mensaje_confirmacion = "¿Está seguro que quiere eliminar este objeto?"
 #Modulo END
 
 #ResAprendizaje BEGIN
-class RAListView(ListView):
+class RAListView(OrderingMixin, ListView):
     model = ResAprendizaje
     template_name = 'core/ra_list.html'
 
@@ -54,6 +59,7 @@ class RACreateView(SuccessMessageCreateUpdateMixin, BaseCreateUpdateMixin, Creat
     success_message = "RA creado exitosamente"
     template_name = 'common/base_create_update.html'
     success_url = 'ra_update'
+    titulo_creacion = 'Crear Resultado de aprendizaje'
 
 class RAUpdateView(SuccessMessageCreateUpdateMixin, BaseCreateUpdateMixin, UpdateView):
     model = ResAprendizaje
@@ -61,15 +67,19 @@ class RAUpdateView(SuccessMessageCreateUpdateMixin, BaseCreateUpdateMixin, Updat
     success_message = "RA creado exitosamente"
     template_name = 'common/base_create_update.html'
     success_url = 'ra_update'
+    titulo_actualizacion = 'Actualizar Resultado de aprendizaje'
+    url_borrado = 'ra_delete'
 
-class RADeleteView(DeleteViewMixin, DeleteView):
+class RADeleteView(BaseDeleteMixin, DeleteViewMixin, DeleteView):
     model = ResAprendizaje
     template_name = 'common/base_confirm_delete.html'
     success_url = 'ra_list'
+    titulo = "Eliminar Resultado de aprendizaje"
+    mensaje_confirmacion = "¿Está seguro que quiere eliminar este Resultado de aprendizaje?"
 #ResAprendizaje END
 
 #CritEvaluacion BEGIN
-class CEListView(ListView):
+class CEListView(OrderingMixin, ListView):
     model = CritEvaluacion
     template_name = 'core/ce_list.html'
 
@@ -83,6 +93,7 @@ class CECreateView(SuccessMessageCreateUpdateMixin, BaseCreateUpdateMixin, Creat
     success_message = "CE creado exitosamente"
     template_name = 'common/base_create_update.html'
     success_url = 'ce_update'
+    titulo_creacion = 'Crear Criterio de evaluación'
 
 class CEUpdateView(SuccessMessageCreateUpdateMixin, BaseCreateUpdateMixin, UpdateView):
     model = CritEvaluacion
@@ -90,10 +101,14 @@ class CEUpdateView(SuccessMessageCreateUpdateMixin, BaseCreateUpdateMixin, Updat
     success_message = "CE creado exitosamente"
     template_name = 'common/base_create_update.html'
     success_url = 'ce_update'
+    titulo_actualizacion = 'Actualizar Criterio de evaluación'
+    url_borrado = 'ce_delete'
 
-class CEDeleteView(DeleteViewMixin, DeleteView):
+class CEDeleteView(BaseDeleteMixin, DeleteViewMixin, DeleteView):
     model = CritEvaluacion
     template_name = 'common/base_confirm_delete.html'
     success_url = 'ce_list'
+    titulo = "Eliminar Criterio de Evaluación"
+    mensaje_confirmacion = "¿Está seguro que quiere eliminar este Criterio de Evaluación?"
 #CritEvaluacion END
 #UD7.2.a END
