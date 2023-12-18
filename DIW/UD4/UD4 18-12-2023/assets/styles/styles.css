@@ -1,0 +1,52 @@
+img{
+    width: 100%;
+}
+
+.desenfocar{
+    filter: blur(10px);
+}
+
+.escala-grises {
+    filter: grayscale(20%);
+}
+
+.sepia {
+    filter: sepia(91%);
+}
+
+.brillo {
+    filter: brightness(190%);
+}
+
+.saturacion {
+    filter: saturate(190%);
+}
+
+.contrasete {
+    filter: contrast(33%);
+}
+
+.invertir {
+    filter: invert(33%);
+}
+
+.opacidad {
+    filter: opacity(33%);
+
+    opacity: 33%;
+}
+
+.transicion {
+    width: 100px;
+    height: 100px;
+    background: rebeccapurple;
+
+    /* Propiedad_a_modificar duracion tipo_animacion*/
+    transition: all 1s ease-out 1s;
+}
+
+.transicion:hover{
+    width: 150px;
+    height: 150px;
+    background: rgb(250, 27, 101);
+}
