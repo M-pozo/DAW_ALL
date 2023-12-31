@@ -1,0 +1,11 @@
+{% extends "common/base_intranet.html" %}
+
+
+{% block main_content %}
+<h1>Detalle de módulo</h1>
+<h6>{{object.nombre}}</h6>
+
+<a class="btn btn-primary" href="/modulo_update/{{object.id}}"> Actualizar </a>
+<a class="btn btn-danger" href="/modulo_delete/{{object.id}}"> Eliminar </a>
+
+{% endblock main_content %}

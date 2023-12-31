@@ -1,0 +1,21 @@
+{% extends "common/base_intranet.html" %}
+
+
+{% block main_content %}
+<a class="nav-link dropdown-toggle" id="dropdownMenu1" data-bs-toggle="dropdown" ariahaspopup="true">Ordenar<span class="caret"></span></a>
+<div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <a href="?ordenar=desc"><button href="" type="button" class="btn btn-outline-secondary">ID Desc</button></a>
+    <a href="?ordenar=asc"><button href="" type="button" class="btn btn-outline-secondary">ID Asc</button></a>
+</div>
+<div class="container">
+    <h1>Lista de resultados de aprendizaje</h1>
+    <ul class="list-group mt-3 ">
+    {% for ra in object_list %}
+        <a href="{% url 'ra_detail' ra.id %}" class="list-group-item list-group-item-action">{{ ra }}</a>
+    {% empty %}
+        <p>No existen resultados de aprendizaje.</p>
+    {% endfor %}
+    </ul>
+    <a class="btn btn-primary" href="/ra_create"> Crear </a>
+</div>
+{% endblock main_content %}

@@ -1,0 +1,21 @@
+{% extends "common/base_intranet.html" %}
+
+
+{% block main_content %}
+<a class="nav-link dropdown-toggle" id="dropdownMenu1" data-bs-toggle="dropdown" ariahaspopup="true">Ordenar<span class="caret"></span></a>
+<div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <a href="?ordenar=desc"><button href="" type="button" class="btn btn-outline-secondary">ID Desc</button></a>
+    <a href="?ordenar=asc"><button href="" type="button" class="btn btn-outline-secondary">ID Asc</button></a>
+</div>
+<div class="container">
+    <h1>Lista de criterios de evaluación</h1>
+    <ul class="list-group mt-3">
+    {% for ce in object_list %}
+        <a href="{% url 'ce_detail' ce.id %}" class="list-group-item list-group-item-action">{{ ce }}</a>
+    {% empty %}
+        <p>No existen criterios de evaluación.</p>
+    {% endfor %}
+    </ul>
+    <a class="btn btn-primary" href="/ce_create"> Crear </a>
+</div>
+{% endblock main_content %}
