@@ -27,7 +27,7 @@ function inputClick(event) {
         }
     }
 }*/
-document.body.style = "width:100%;height:100vh;margin:0;";
+/*document.body.style = "width:100%;height:100vh;margin:0;";
 function paint(event) {
     let cuadrado = document.createElement("div")
     cuadrado.style.width = "10px";
@@ -40,4 +40,19 @@ function paint(event) {
 }
 
 document.body.addEventListener('mousemove', paint)
+*/
+
+let boton = document.getElementById("boton")
+let botonSelect = document.getElementById("select")
+boton.addEventListener("click", function(){
+    let cuadrado = document.createElement("div");
+    cuadrado.id = botonSelect.value
+    cuadrado.style.height = "100px";
+    cuadrado.style.width = "100px"
+    cuadrado.style.backgroundColor = botonSelect.value
+    cuadrado.style.position = "absolute"
+    document.body.appendChild(cuadrado);
+})
+
+
 
