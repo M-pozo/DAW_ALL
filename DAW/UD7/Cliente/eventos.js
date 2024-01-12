@@ -53,6 +53,3 @@ boton.addEventListener("click", function(){
     cuadrado.style.position = "absolute"
     document.body.appendChild(cuadrado);
 })
-
-
-
