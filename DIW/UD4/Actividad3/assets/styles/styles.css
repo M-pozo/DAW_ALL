@@ -1,0 +1,15 @@
+.tooltip-text{
+    display: none;
+}
+.tooltip-container:hover .tooltip-text{
+    visibility: visible;
+    display: block;
+    position: absolute;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    margin-left: 33px;
+    width: 133px;
+    padding: 5px 0;
+    border-radius: 6px;
+}

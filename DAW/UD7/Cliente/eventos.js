@@ -1,5 +1,5 @@
 'use strict'
-let elemento = document.getElementById("contador")
+/*let elemento = document.getElementById("contador")
 
 function inputClick(event) {
     let iz=document.getElementById("iz")
@@ -26,5 +26,18 @@ function inputClick(event) {
             dr.textContent = (parseInt(dr.textContent) + 1)
         }
     }
+}*/
+document.body.style = "width:100%;height:100vh;margin:0;";
+function paint(event) {
+    let cuadrado = document.createElement("div")
+    cuadrado.style.width = "10px";
+    cuadrado.style.height = "10px";
+    cuadrado.style.position = "absolute"
+    cuadrado.style.backgroundColor = "red"
+    cuadrado.style.top = event.clientY+'px'
+    cuadrado.style.left = event.clientX+"px"
+    document.body.appendChild(cuadrado)
 }
+
+document.body.addEventListener('mousemove', paint)
 
