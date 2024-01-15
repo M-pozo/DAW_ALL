@@ -1,0 +1,18 @@
+body{
+    position: relative;
+}
+.fixed-container {
+    width: 300px;
+    background-color: #3498db;
+    box-sizing: border-box;
+    padding: 33px;
+    position: absolute;
+}
+.variable-container {
+    width: calc(100% - 300px);
+    background-color: #e74c3c;
+    box-sizing: border-box;
+    padding: 33px;
+    position: absolute;
+    left: 300px;
+}

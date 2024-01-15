@@ -1,0 +1,5 @@
+.content-box {
+    width: 333px;
+    height: 333px;
+    overflow-y: scroll;
+}

@@ -1,0 +1,16 @@
+:root {
+    --primary-color: #3498db;
+    --secondary-color: white;
+    --rounded-border: 10px;
+}
+
+.custom-box {
+    background-color: var(--primary-color);
+    border-radius: var(--rounded-border);
+    padding: 20px;
+}
+
+.custom-text {
+    color: var(--secondary-color);
+    font-size: 18px;
+}
