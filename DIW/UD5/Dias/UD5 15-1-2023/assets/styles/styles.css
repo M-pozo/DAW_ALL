@@ -1,0 +1,25 @@
+h1, p {
+    font-family: sans-serif;
+}
+
+.contenedorFlex{
+    display: flex;
+}
+
+.columnaIzquierda{
+    margin: 0 20px 0;
+    width: 20%;
+}
+
+.columnaDerecha{
+    width: 80%;
+}
+
+@media (min-width: 700px){
+    .contenedorFlex{
+        display: block;
+    }
+    .columnaIzquierda{
+        width: 100%;
+    }
+}

@@ -1,21 +1,19 @@
 nav ul {
     list-style: none;
-    padding: 0;
 }
 
 nav a {
+    margin-left: 15px;
     text-decoration: none;
     color: #fff;
     padding: 10px 15px;
-    border-radius: 5px;
-    float: left;
-    margin: 0 5px;
     transition: all 0.3s;
     background-color: #3498db;
+    border-radius: 5px;
+    float: left;
 }
 
-/* Estilos al pasar el mouse */
 nav a:hover {
     background-color: #1f587d;
-    transform: scale(1.1);
+    transform: scale(1.33);
 }

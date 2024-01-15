@@ -1,9 +1,8 @@
 li[data-type="fruta"] {
-    background-color: #8effab;
+    background-color: rgb(166, 245, 166);
     color: #fff;
 }
 
 li[data-type="verdura"] {
-    background-color: #ffa07a;
-    color: #000;
+    background-color: orange;
 }
