@@ -1,0 +1,13 @@
+{% extends "common/base_intranet.html" %}
+
+
+{% block main_content %}
+<h1>Detalle del resultado de aprendizaje</h1>
+
+<p>
+    {{object.codigo}} - {{object.descripcion|safe}}
+</p>
+
+<a class="btn btn-primary" href="/ra_update/{{object.id}}"> Actualizar </a>
+<a class="btn btn-danger" href="/ra_delete/{{object.id}}"> Eliminar </a>
+{% endblock main_content %}

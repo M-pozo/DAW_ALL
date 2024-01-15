@@ -1,0 +1,8 @@
+from django.apps import AppConfig
+
+
+class ProgramacionDidacticaConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'programacion_didactica'
+    #UD6.4.d
+    verbose_name = 'PROGRAMACIÓN DIDÁCTICA'

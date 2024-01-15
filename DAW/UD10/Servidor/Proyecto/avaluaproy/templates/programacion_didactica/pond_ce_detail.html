@@ -1,0 +1,12 @@
+{% extends "common/base_intranet.html" %}
+
+
+{% block main_content %}
+<h1>Detalle de la ponderación de CE</h1>
+
+<p>
+    {{object.criterio_evaluacion}} - {{object.porcentaje}}
+</p>
+<a class="btn btn-primary" href="/pond_ce_update/{{object.id}}"> Actualizar </a>
+<a class="btn btn-danger" href="/pond_ce_delete/{{object.id}}"> Eliminar </a>
+{% endblock main_content %}
