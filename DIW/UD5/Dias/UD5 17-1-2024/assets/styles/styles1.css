@@ -1,0 +1,15 @@
+.click:after{
+    content: "Desktop";
+}
+
+@media (min-width: 450px) and (max-width: 800px){
+    .click:after{
+        content: "Tablet";
+    }
+}
+
+@media (max-width: 449px) {
+    .click:after {
+        content: "Movil";
+    }
+}
