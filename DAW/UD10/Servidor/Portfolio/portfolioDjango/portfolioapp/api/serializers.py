@@ -31,3 +31,17 @@ class ProyectoSerializer(serializers.ModelSerializer):
     
     def get_categorias_serialized(self, obj):
         return CategoriaSerializer(obj.categorias, many=True, read_only=True).data
+    
+class ProyectoDetailSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Proyecto
+        fields = (
+            'id',
+            'titulo',
+            'descripcion',
+            'fecha_creacion',
+            'year',
+            'imagen',
+            'categoria'
+        )
