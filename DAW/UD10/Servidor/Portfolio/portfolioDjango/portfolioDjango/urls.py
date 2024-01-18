@@ -19,10 +19,15 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 from portfolioapp import views
+from portfolioapp.api import views as api_views
+from rest_framework import routers
 
+router = routers.DefaultRouter()
+router.register(r'categoria_list', api_views.CategoriaListViewSet, basename='categoria_list')
 urlpatterns = [
     #FRAMEWORK REST 
     path('api-auth/', include('rest_framework.urls')),
+    path('api/', include(router.urls)),
 
     path('admin/', admin.site.urls),
     #path('home_fbv', views.home_view, name='home_fbv'),
