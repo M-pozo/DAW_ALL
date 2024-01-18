@@ -24,6 +24,9 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register(r'categoria_list', api_views.CategoriaListViewSet, basename='categoria_list')
+router.register(r'categoria_crud', api_views.CategoriaCRUDViewSet, basename='categoria_crud')
+router.register(r'categoria_create_retrieve_update', api_views.CategoriaCreateRetriveUpdateViewSet, basename='categoria_create_retrieve_update')
+
 urlpatterns = [
     #FRAMEWORK REST 
     path('api-auth/', include('rest_framework.urls')),

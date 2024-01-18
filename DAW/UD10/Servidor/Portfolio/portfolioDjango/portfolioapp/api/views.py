@@ -10,3 +10,16 @@ class CategoriaListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
 
     def get_queryset(self):
         return Categoria.objects.all()
+    
+class CategoriaCRUDViewSet(viewsets.ModelViewSet):
+    serializer_class = CategoriaSerializer
+    queryset = Categoria.objects.all()
+
+class CategoriaCreateRetriveUpdateViewSet(mixins.CreateModelMixin,
+                                          mixins.RetrieveModelMixin,
+                                          mixins.UpdateModelMixin,
+                                          viewsets.GenericViewSet):
+    serializer_class = CategoriaSerializer
+
+    def get_queryset(self):
+        return Categoria.objects.all()
