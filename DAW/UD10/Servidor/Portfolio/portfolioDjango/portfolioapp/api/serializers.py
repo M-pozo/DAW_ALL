@@ -43,5 +43,5 @@ class ProyectoDetailSerializer(serializers.ModelSerializer):
             'fecha_creacion',
             'year',
             'imagen',
-            'categoria'
+            'categorias'
         )
