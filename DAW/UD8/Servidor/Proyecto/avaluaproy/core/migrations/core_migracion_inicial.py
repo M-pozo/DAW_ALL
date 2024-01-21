@@ -1,7 +1,7 @@
 from django.db import migrations
 from core.models import Modulo, ResAprendizaje, CritEvaluacion
 
-#UD9.3.a
+#UD9.3.a BEGIN
 def core(apps, schema_editor):
     modulo_servidor = Modulo.objects.create(codigo="0613",nombre="Desarrollo en entorno servidor")
 
@@ -118,3 +118,4 @@ class Migration(migrations.Migration):
     operations = [
         migrations.RunPython(core),
     ]
+#UD9.3.a END

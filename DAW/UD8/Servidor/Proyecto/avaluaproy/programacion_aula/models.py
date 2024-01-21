@@ -4,6 +4,7 @@ from programacion_didactica.models import Unidad
 from core.models import CritEvaluacion, ResAprendizaje, Modulo
 # Create your models here.
 
+#UD9.4 BEGIN
 class Alumno(Persona, Localizacion):
     pass
 
@@ -33,3 +34,5 @@ class CalificacionTotal(models.Model):
     alumno = models.ForeignKey(Alumno, on_delete=models.PROTECT, null=False, blank=False)
     modulo = models.ForeignKey(Modulo, on_delete=models.PROTECT, null=False, blank=False)
     calificacion = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+
+#UD9.4 END

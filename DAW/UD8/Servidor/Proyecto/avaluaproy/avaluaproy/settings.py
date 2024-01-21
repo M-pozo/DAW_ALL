@@ -96,7 +96,7 @@ WSGI_APPLICATION = 'avaluaproy.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
+#UD9.2.b BEGIN
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
@@ -107,7 +107,7 @@ DATABASES = {
         "PORT": 5432,  # default postgres port
     }
 }
-
+#UD9.2.b END
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
