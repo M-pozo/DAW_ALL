@@ -2,11 +2,13 @@ from rest_framework import mixins, viewsets, filters
 from rest_framework.exceptions import ValidationError
 from portfolioapp.api.serializers import CategoriaSerializer, ProyectoDetailSerializer
 from portfolioapp.models import Categoria, Proyecto
+from portfolioapp.api.pagination import LargeResultsSetPagination, StandardResultsSetPagination, ShortResultsSetPagination
 
-
-class CategoriaListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+class CategoriaListViewSet(mixins.ListModelMixin, 
+                        viewsets.GenericViewSet):
+    model = Categoria
     serializer_class = CategoriaSerializer
-    #pagination_class = ShortResultsSetPagination
+    pagination_class = ShortResultsSetPagination
 
     def get_queryset(self):
         return Categoria.objects.all()
@@ -26,9 +28,10 @@ class CategoriaCreateRetriveUpdateViewSet(mixins.CreateModelMixin,
 
 class ProyectoListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = ProyectoDetailSerializer
-    filter_backends = (filters.OrderingFilter, )
+    filter_backends = (filters.OrderingFilter, filters.SearchFilter)
     ordering = 'fecha_creacion'
     ordering_fields = ['fecha_creacion', 'titulo']
+    search_fields = ['titulo', 'descripcion', 'categorias__nombre']
 
     def get_queryset(self):
         year_from = self.request.query_params.get('year_from')

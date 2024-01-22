@@ -34,6 +34,7 @@ urlpatterns = [
     #FRAMEWORK REST 
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),
+    path(r'api/categoria_capitalize', api_views.CapitalizeCategoriaView.as_view(), name='categoria_capitalize'),
 
     path('admin/', admin.site.urls),
     #path('home_fbv', views.home_view, name='home_fbv'),

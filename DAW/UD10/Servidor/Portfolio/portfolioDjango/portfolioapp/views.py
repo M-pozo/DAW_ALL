@@ -1,17 +1,23 @@
 
 # Create your views here.
+import statistics
+from urllib import response
+from django import views
 from django.contrib.messages.views import SuccessMessageMixin
-from .mixins import ProyectoMixin
 from django.shortcuts import render # Para FBV
 from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView # Para CBV
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
-from .models import Proyecto
-from notificaciones.models import NotificaProyecto
-from .form import ProyectoForm
 from django.contrib import messages
 from django.db import transaction
 from django.utils import timezone
+
+from .mixins import ProyectoMixin
+from .models import Categoria, Proyecto
+from notificaciones.models import NotificaProyecto
+from .form import ProyectoForm
+from rest_framework import status
+
 
 def home_view(request):
     proyectos = Proyecto.objects.all()
@@ -77,3 +83,11 @@ class ProyectoCreateView(ProyectoMixin, CreateView):
             proyecto = form.save()
             NotificaProyecto.objects.create(proyecto=proyecto)
             return super(ProyectoCreateView, self).form_valid(form)
+
+class CapitalizeCategoriaView(views.APIView):
+    def get(self, request, format=None):
+        categorias = Categoria.objects.all()
+        for categoria in categorias:
+            categoria.nombre = categoria.nombre.capitalize()
+            categoria.save()
+        return response.Response(status=statistics.HTTP_200_OK)
