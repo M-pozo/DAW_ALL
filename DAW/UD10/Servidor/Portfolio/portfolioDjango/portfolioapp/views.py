@@ -83,11 +83,3 @@ class ProyectoCreateView(ProyectoMixin, CreateView):
             proyecto = form.save()
             NotificaProyecto.objects.create(proyecto=proyecto)
             return super(ProyectoCreateView, self).form_valid(form)
-
-class CapitalizeCategoriaView(views.APIView):
-    def get(self, request, format=None):
-        categorias = Categoria.objects.all()
-        for categoria in categorias:
-            categoria.nombre = categoria.nombre.capitalize()
-            categoria.save()
-        return response.Response(status=statistics.HTTP_200_OK)
