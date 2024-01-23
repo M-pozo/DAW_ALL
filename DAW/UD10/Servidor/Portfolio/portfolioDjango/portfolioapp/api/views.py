@@ -1,6 +1,6 @@
-from urllib import response
 from django import views
-from rest_framework import mixins, viewsets, filters, status
+from rest_framework import mixins, viewsets, filters, views, status, response
+from rest_framework.decorators import api_view
 from rest_framework.exceptions import ValidationError
 from portfolioapp.api.serializers import CategoriaSerializer, ProyectoDetailSerializer
 from portfolioapp.models import Categoria, Proyecto
@@ -65,9 +65,18 @@ class ProyectoCRUDViewSet(mixins.CreateModelMixin,
     def perform_update(self, serializer):
         self.validate_update_create(serializer)
         serializer.save()
-    
+
 class CapitalizeCategoriaView(views.APIView):
     def get(self, request, format=None):
+        categorias = Categoria.objects.all()
+        for categoria in categorias:
+            categoria.nombre = categoria.nombre.capitalize()
+            categoria.save()
+        return response.Response(status=status.HTTP_200_OK)
+    
+@api_view(['GET'])
+def capitalize_categora_view(request):
+    if request.method == 'GET':
         categorias = Categoria.objects.all()
         for categoria in categorias:
             categoria.nombre = categoria.nombre.capitalize()
