@@ -1,5 +1,4 @@
 let = conec = new XMLHttpRequest();
-
 let datos;
 let contador = 0;
 let pagina = 1;  
@@ -43,3 +42,4 @@ conec.send();
 //la respuesta del servidor.
 console.log("Voy después de la llamada, y los datos recibidos son: " + datos);
 
+//Si hacemos esto aquí, el resultado será UNDEFINE, poruqe aún no tenemos la respuesta del servidor.
