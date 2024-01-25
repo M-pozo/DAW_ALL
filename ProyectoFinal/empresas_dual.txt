@@ -1,0 +1,7 @@
+EMPRESAS:
+    - Garber (Aspe) - Asunto: Desarrollo IES Servero Ochoa
+    - (Parque Empresarial Torrellano)
+    - Teralco FCT y Dual
+    - Mondraker - 1 Febroro 16:00 (SAP)
+    - Soledad - Soluciona IT
+    - Siptize (Centro Elche)
