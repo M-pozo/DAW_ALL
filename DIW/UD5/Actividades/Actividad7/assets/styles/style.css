@@ -1,0 +1,49 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    display: block;
+    justify-content:center;
+    padding: 10px;
+}
+
+header h1 {
+    font-size: 1.2em;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+}
+
+header nav ul {
+    display: flex;
+    list-style: none;
+    margin: 3px 0;
+    width: 100%;
+    justify-content: space-around;
+    gap: 0.2rem;
+}
+
+header nav {
+    justify-content: center;
+    display: flex;
+}
+
+header nav ul li{
+    background-color: blueviolet;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+
+header nav ul li:hover{
+    background-color: rgb(188, 117, 255);
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    margin: 0px 5px;
+}

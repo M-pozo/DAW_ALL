@@ -1,0 +1,31 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.info-box{
+    background-color: rgb(32, 32, 32);
+    color: white;
+    padding: 50px;
+}
+
+.info-box h2{
+    text-align: center;
+}
+
+#flex-p{
+    display: flex;
+    justify-content: space-around;
+}
+
+.big{
+    width: 350px;
+    padding: 20px;
+    text-align: center;
+}
+
+.fas{
+    font-size: 33px;
+    padding: 33px;
+}
