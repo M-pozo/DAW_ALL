@@ -5,41 +5,53 @@
 }
 
 body {
-    font-family: 'Times New Roman', serif;
+    font-family: Arial, sans-serif;
 }
   
 h1 {
-font-size: 1.5em;
+    padding: 20px;
+    font-size: 1.5em;
 }
 
 h2 {
-font-size: 1.2em;
+    font-size: 1.2em;
+    padding-bottom: 10px;
+}
+.color li strong{
+    color: blueviolet;
+}
+section{
+    padding: 10px;
+    width: 30%;
+    float: left;
 }
 
-ul {
-list-style-type: none;
+@media (min-width: 600px) and (max-width: 1200px) {
+    #tres li strong{
+        text-decoration: underline;
+    }
+    #uno{
+        float: left;
+        width: 30%;
+    }
+    #dos, #tres{
+        float: right;
+        width: 70%;
+    }
+    
 }
 
-@media screen and (min-width: 600px) {
+@media (max-width: 600px) {
     body {
         font-family: 'Times New Roman', serif;
     }
 
-    h1 {
-        font-size: 1.5em;
+    h2{
+        padding: 0px;
+        border-bottom: 1px solid black;
     }
-
-    h2 {
-        font-size: 1.2em;
-    }
-}
-
-@media screen and (min-width: 1200px) {
-    body {
-        font-family: Arial, sans-serif;
-    }
-
-    h1, h2 {
-        font-size: initial;
+    section{
+        width: 100%;
+        float:none;
     }
 }
