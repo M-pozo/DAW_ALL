@@ -1,0 +1,18 @@
+Nombre:
+    Combinación de Bambalinas y Backstage
+    Bamstage
+
+Logo:
+    Beige: #bba47b
+    Negro: #000000
+
+Descripción:
+    Aplicación Web sobre información y punto de venta de eventos relacionados con la moda. 
+
+Tecnologías:
+    FrontEnd: React
+    BackEnd: Django
+    Api: Django REST framework
+    BaseDeDatos: PostgreSQL
+    Despliegue: AWS
+
