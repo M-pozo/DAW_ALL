@@ -1,0 +1,11 @@
+1-
+https://aprendeconalf.es/docencia/git/ejercicios/creacion-actualizacion-repositorios/
+2-
+https://aprendeconalf.es/docencia/git/ejercicios/historial-cambios/
+3-
+https://aprendeconalf.es/docencia/git/ejercicios/deshacer-cambios/
+4-
+https://aprendeconalf.es/docencia/git/ejercicios/ramas/
+5-
+https://aprendeconalf.es/docencia/git/ejercicios/repositorios-remotos/
+

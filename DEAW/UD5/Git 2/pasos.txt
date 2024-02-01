@@ -1,0 +1,99 @@
+--------------------------------------------------------------------
+https://aprendeconalf.es/docencia/git/ejercicios/creacion-actualizacion-repositorios/
+Ejercicio1 
+git config --global user.name "Nombre"
+git config --global user.email "@email.com"
+git config --global color.ui auto
+git config --global --list
+
+Ejercicio2
+Crear carpeta
+git init
+
+Ejercicio3
+git status
+hacer archivo
+git status
+gir add atchivo
+git status
+
+Ejercicio4
+git commit
+git status
+
+Ejercicio5
+modificar archivo
+git diff
+git add / git commit
+
+Ejercicio6
+git log -p -1
+cambiar ultimo commit
+git commit --amend
+git log -p -1
+
+-------------------------------------------------------------
+https://aprendeconalf.es/docencia/git/ejercicios/historial-cambios/
+Ejercicio1
+mkdir
+git add
+git commit
+git log
+
+Ejercicio2
+sane Ejercicio1
+
+Ejercicio3
+git add
+git commit
+Ver quien hizo cambios
+git log --follow -- indice.txt
+
+----------------------------------------------------------------
+Ejercicio1
+git status
+Desacer cambios
+git checkout -- indice.txt
+git status
+
+Ejercicio2
+git add
+git status
+git reset HEAD indice.txt
+git status
+git checkout -- indice.txt
+git status
+
+Ejercicio3
+git add
+git status
+git reset HEAD indice.txt capitulos/capitulo4.txt
+git status
+git checkout -- indice.txt capitulos/capitulo4.txt
+git stutus
+
+Ejercicio4
+git add / git commit
+git log
+git reset HEAD^
+git log / git status
+git commit
+git reset --hard HEAD^
+git log / git status
+
+------------------------------------------------------------------------
+https://aprendeconalf.es/docencia/git/ejercicios/ramas/
+Ejercicio1
+git branch adfga
+git checkout rama
+git branch
+
+Ejercicio2
+git add
+git commit
+git log --all --graph --decorate
+
+
+
+---------------------------------------------------------------------------------
+https://aprendeconalf.es/docencia/git/ejercicios/repositorios-remotos/
