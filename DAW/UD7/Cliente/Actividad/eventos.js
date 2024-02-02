@@ -1,5 +1,8 @@
 'use strict'
-/*
+let tarea1 = document.createElement("h1");
+tarea1.textContent = "Tarea1";
+document.body.appendChild(tarea1);
+
 //UD7 Tarea 1
 // Crear div y añadir stilos
 let contenedor = document.createElement("div");
@@ -18,10 +21,13 @@ document.body.appendChild(contenedor);
 contenedor.addEventListener("click", function () {
     window.alert("Pulsaste sobre el div");
 })
-*/
 
+/*----------------------------------------------------------*/
+let tarea2 = document.createElement("h1");
+tarea2.textContent = "Tarea2";
+document.body.appendChild(tarea2);
 //UD7 Tarea 2
-/*let div1 = document.createElement("div");
+let div1 = document.createElement("div");
 let contenidoDiv1 = document.createElement("p");
 contenidoDiv1.textContent = "Pasa por aqui";
 div1.style.height = "100px";
@@ -44,11 +50,35 @@ div1.addEventListener("mouseenter", function () {
 })
 div1.addEventListener("mouseleave", function () {
     div2.style.backgroundColor = "red";
-})*/
+})
 
+let tarea3 = document.createElement("h1");
+tarea3.textContent = "Tarea3";
+document.body.appendChild(tarea3);
 //UD7 Tarea 3
+let form = document.createElement("form");
+    document.body.appendChild(form);
 
+let input = document.createElement("input");
+    input.type = "number"
+    input.readonly = true;
+    document.body.appendChild(input);
 
+let input2 = document.createElement("input");
+    input2.type = "number"
+    input2.readonly = true
+    document.body.appendChild(input2);
+
+let textArea = document.createElement("input");
+    input2.type = "text"
+    document.body.appendChild(textArea);
+
+let button = document.createElement("button")
+    button.textContent = "Enviar"
+    document.body.appendChild(button);
+
+//UD7 Tarea 4
+//UD7 Tarea 8 Expreseiones Regulares
 
 
 
