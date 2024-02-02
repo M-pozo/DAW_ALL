@@ -28,6 +28,8 @@ from login import views as login_views
 
 #UD7.2.b
 urlpatterns = [
+    #API
+    #path('api/', include(router.urls)),
     #ADMIN
     path('admin/', admin.site.urls),
 

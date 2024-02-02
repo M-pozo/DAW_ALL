@@ -21,7 +21,7 @@ contenedor.addEventListener("click", function () {
 */
 
 //UD7 Tarea 2
-let div1 = document.createElement("div");
+/*let div1 = document.createElement("div");
 let contenidoDiv1 = document.createElement("p");
 contenidoDiv1.textContent = "Pasa por aqui";
 div1.style.height = "100px";
@@ -36,12 +36,18 @@ contenidoDiv2.textContent = "Efectos del movimiento";
 div2.style.backgroundColor = "red";
 div2.style.height = "100px";
 div2.style.width = "100px";
+div2.appendChild(contenidoDiv2);
 document.body.appendChild(div2);
-//[div1, div2].map(d => document.body.appendChild(d))
 
-div1.addEventListener("mouseover", function () {
+div1.addEventListener("mouseenter", function () {
     div2.style.backgroundColor = "green";
 })
+div1.addEventListener("mouseleave", function () {
+    div2.style.backgroundColor = "red";
+})*/
+
+//UD7 Tarea 3
+
 
 
 
