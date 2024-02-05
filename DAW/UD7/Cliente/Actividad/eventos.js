@@ -258,38 +258,38 @@ let animalList = ['perro', 'gato', 'pollo', 'pelícano', 'grulla', 'león', 'lie
 
 // Crear los divs de animales
 for (let i = 0; i < animalList.length; i++) {
-  let div = document.createElement('div');
-  div.classList.add('animal');
-  div.textContent = animalList[i];
-  divAnimal.appendChild(div);
+    let div = document.createElement('div');
+    div.classList.add('animal');
+    div.textContent = animalList[i];
+    divAnimal.appendChild(div);
 }
 
 // Añadir evento de entrada al campo de texto
 buscador.addEventListener('input', function() {
-  let resultado = buscador.value.toLowerCase();
-  //Encuentra todas las coincidencias con el class="animal" y lo almacena en un array
-  let divs = document.querySelectorAll('.animal');
-  //Creo una instancia para comparar el resultado con la búsqueda la "i" significa que dará true con las letras independiente 
-  let regex = new RegExp(resultado, 'i');
-  let coincidencias = false;
+    let resultado = buscador.value.toLowerCase();
+    //Encuentra todas las coincidencias con el class="animal" y lo almacena en un array
+    let divs = document.querySelectorAll('.animal');
+    //Creo una instancia para comparar el resultado con la búsqueda la "i" significa que dará true con las letras independiente 
+    let regex = new RegExp(resultado, 'i');
+    let coincidencias = false;
 
-  //Recorro las coincidencias, guardo su valor en una variable y utilizo la función test de la instancia Regex para determinar las coincidencias
-  divs.forEach(div => {
-    let animalNombre = div.textContent.toLowerCase();
+    //Recorro las coincidencias, guardo su valor en una variable y utilizo la función test de la instancia Regex para determinar las coincidencias
+    divs.forEach(div => {
+        let animalNombre = div.textContent.toLowerCase();
 
-    if (regex.test(animalNombre)) {
-      div.classList.remove('red');
-      div.classList.add('green');
-      coincidencias = true;
-    } else {
-      div.classList.remove('green');
-      div.classList.add('red');
+        if (regex.test(animalNombre)) {
+            div.classList.remove('red');
+            div.classList.add('green');
+            coincidencias = true;
+        } else {
+            div.classList.remove('green');
+            div.classList.add('red');
+        }
+    });
+
+    if (!coincidencias) {
+        alert('No hay coincidencias');
     }
-  });
-
-  if (!coincidencias) {
-    alert('No hay coincidencias');
-  }
 });
 
 let style2 = document.createElement('style');
@@ -317,8 +317,5 @@ style2.textContent = `
     }
 `;
 document.head.appendChild(style2);
-
-  
-
 
 
