@@ -25,9 +25,18 @@ from common import views as common_views
 from core import views as core_views
 from programacion_didactica import views as programacion_didactica_views
 from login import views as login_views
+from rest_framework import routers
+
+
+router = routers.DefaultRouter()
+#router.register(r'categoria_list', core_views.CategoriaListViewSet, basename='categoria_list')
 
 #UD7.2.b
 urlpatterns = [
+    #FRAMEWORK
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/', include(router.urls)),
+
     #ADMIN
     path('admin/', admin.site.urls),
 

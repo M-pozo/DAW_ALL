@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
     'crispy_forms',
     'crispy_bootstrap5',
+    'rest_framework',
     #UD8.4 BEGIN
     'allauth',
     'allauth.account',
