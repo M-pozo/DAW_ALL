@@ -10,6 +10,9 @@ class ModuloListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Modulo
         fields = ('id', 'descripcion_short')
+    
+    def get_descripcion_short(self, obj):
+        return obj.nombre
 
 class ModuloDetailSerializer(serializers.ModelSerializer):
 
@@ -26,6 +29,9 @@ class RAListSerializer(serializers.ModelSerializer):
     class Meta:
         model = ResAprendizaje
         fields = ('id', 'descripcion_short')
+    
+    def get_descripcion_short(self, obj):
+        return obj.descripcion[:50]
 
 class RADetailSerializer(serializers.ModelSerializer):
 
@@ -42,6 +48,9 @@ class CEListSerializer(serializers.ModelSerializer):
     class Meta:
         model = CritEvaluacion
         fields = ('id', 'minimo', 'descripcion_short')
+    
+    def get_descripcion_short(self, obj):
+        return obj.descripcion[:50]
 
 class CEDetailSerializer(serializers.ModelSerializer):
 

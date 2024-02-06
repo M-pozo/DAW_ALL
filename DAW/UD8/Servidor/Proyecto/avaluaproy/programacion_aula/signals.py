@@ -6,7 +6,6 @@ from .models import Alumno, CriterioEvalUD, CalificacionUDCE
 @receiver(post_save, sender=Alumno)
 def pregenerar_calificaciones(sender, instance, **kwargs):
     criterios_evaluacion = CriterioEvalUD.objects.all()
-    print(criterios_evaluacion)
     for criterio in criterios_evaluacion:
         CalificacionUDCE.objects.create(
             alumno=instance,

@@ -26,16 +26,64 @@ from core import views as core_views
 from programacion_didactica import views as programacion_didactica_views
 from login import views as login_views
 from rest_framework import routers
+from core.api.views import *
+from programacion_didactica.api.views import *
+from programacion_aula.api.views import *
 
 
+#UD10.3.a
 router = routers.DefaultRouter()
-#router.register(r'categoria_list', core_views.CategoriaListViewSet, basename='categoria_list')
+#MODULO
+router.register(r'modulo_list', ModuloListViewSet, basename='modulo_list')
+router.register(r'modulo_detail', ModuloDetailViewSet, basename='modulo_detail')
+#ResAprendizaje
+router.register(r'ra_list', RAListViewSet, basename='ra_list')
+router.register(r'ra_detail', RADetailViewSet, basename='ra_detail')
+#CritEvaluacion
+router.register(r'ce_list', CEListViewSet, basename='ce_list')
+router.register(r'ce_detail', CEDetailViewSet, basename='ce_detail')
+
+#Unidad
+router.register(r'unidad_list', UnidadListViewSet, basename='unidad_list')
+router.register(r'unidad_detail', UnidadDetailViewSet, basename='unidad_detail')
+#InsEvaluacion
+router.register(r'ie_list', IEListViewSet, basename='ie_list')
+router.register(r'ie_detail', IEDetailViewSet, basename='ie_detail')
+#PondRA
+router.register(r'pond_ra_list', PondRAListViewSet, basename='pond_ra_list')
+router.register(r'pond_ra_detail', PondRADetailViewSet, basename='pond_ra_detail')
+#PondCE
+router.register(r'pond_ce_list', PondCEListViewSet, basename='pond_ce_list')
+router.register(r'pond_ce_detail', PondCEDetailViewSet, basename='pond_ce_detail')
+#PondCEUD
+router.register(r'pond_ce_ud_list', PondCEUDListViewSet, basename='pond_ce_ud_list')
+router.register(r'pond_ce_ud_detail', PondCEUDDetailViewSet, basename='pond_ce_ud_detail')
+
+#Alumno
+router.register(r'alumno_list', AlumnoListViewSet, basename='alumno_list')
+router.register(r'alumno_detail', AlumnoDetailViewSet, basename='alumno_detail')
+#CriterioEvalUD
+router.register(r'ce_ud_list', CEUDListViewSet, basename='ce_ud_list')
+router.register(r'ce_ud_detail', CEUDDetailViewSet, basename='ce_ud_detail')
+#CalificacionUDCE
+router.register(r'cal_ud_ce_list', CalUDCEListViewSet, basename='cal_ud_ce_list')
+router.register(r'cal_ud_ce_detail', CalUDCEDetailViewSet, basename='cal_ud_ce_detail')
+#CalificacionCE
+router.register(r'cal_ce_list', CalCEListViewSet, basename='cal_ce_list')
+router.register(r'cal_ce_detail', CalCEDetailViewSet, basename='cal_ce_detail')
+#CalificacionRA
+router.register(r'cal_ra_list', CalRAListViewSet, basename='cal_ra_list')
+router.register(r'cal_ra_detail', CalRADetailViewSet, basename='cal_ra_detail')
+#CalificacionTotal
+router.register(r'cal_total_list', CalTotalListViewSet, basename='cal_total_list')
+router.register(r'cal_total_detail', CalTotalDetailViewSet, basename='cal_total_detail')
 
 #UD7.2.b
 urlpatterns = [
     #FRAMEWORK
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),
+    path(r'api/calcular_nota', CalcularNotasView.as_view(), name='api/calcular_nota'),
 
     #ADMIN
     path('admin/', admin.site.urls),

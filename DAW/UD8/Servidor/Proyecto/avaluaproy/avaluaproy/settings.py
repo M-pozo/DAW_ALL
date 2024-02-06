@@ -186,3 +186,8 @@ EMAIL_HOST_USER = 'm.pozo.2002@gmail.com'
 EMAIL_HOST_PASSWORD = "xngs eghe qqxz jmma"
 EMAIL_USE_TLS = True
 #UD8.5 END
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 100
+}
