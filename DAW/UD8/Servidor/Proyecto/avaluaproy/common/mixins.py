@@ -4,6 +4,8 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from rest_framework.exceptions import ValidationError
+
 
 #UD7.2.c / UD7.2.d BEGIN
 class BaseCreateUpdateMixin:
@@ -64,3 +66,14 @@ class DecoratorsMixin():
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 #UD8.3 END
+
+#UD10.3.c
+class ProtectedDeleteMixin:
+    def verificar_dependencias(self, instance):
+        if ValidationError:
+            raise ValidationError("No se puede realizar la operación de borrado porque existen dependencias.")
+    
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        self.verificar_dependencias(instance)
+        return super().destroy(request, *args, **kwargs)

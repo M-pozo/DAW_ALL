@@ -6,10 +6,15 @@ from programacion_aula.api.serializers import *
 from programacion_aula.models import *
 from common.api.pagination import LargeResultsSetPagination, StandardResultsSetPagination, ShortResultsSetPagination
 from programacion_aula.api.utils import *
+from collections import defaultdict
+
 
 #UD10.3.a BEGIN
 class AlumnoListViewSet(mixins.ListModelMixin,
                     viewsets.GenericViewSet):
+    """
+    Lista todos los Alumno por su id y una descripción 
+    """
     serializer_class = AlumnoListSerializer
     ordering = ['apellido', 'nombre']
     ordering_fields = ['apellido',
@@ -35,6 +40,9 @@ class AlumnoDetailViewSet(mixins.CreateModelMixin,
                         mixins.UpdateModelMixin,
                         mixins.DestroyModelMixin,
                         viewsets.GenericViewSet):
+    """
+    Poder Actualizar, Crear y Eliminar cualquier alumno, ademas cada vez que creas un alumno nuevo crea todas la Calificaciones UDCE
+    """
     serializer_class = AlumnoDetailSerializer
     def get_queryset(self):
         return Alumno.objects.all()
@@ -47,12 +55,15 @@ class AlumnoDetailViewSet(mixins.CreateModelMixin,
                 alumno=instance,
                 unidad=criterio.unidad,
                 crit_evaluacion=criterio.criterio_evaluacion,
-                calificacion=None
+                calificacion=1
             )
         return response.Response(serializer.data, status=status.HTTP_201_CREATED)
 
 class CEUDListViewSet(mixins.ListModelMixin,
                     viewsets.GenericViewSet):
+    """
+    Lista todos los CEUD por su id y una descripción 
+    """
     serializer_class = CEUDListSerializer
     ordering = ['criterio_evaluacion__resultado_aprendizaje__modulo__nombre',
                 'criterio_evaluacion__resultado_aprendizaje__codigo',
@@ -66,9 +77,9 @@ class CEUDListViewSet(mixins.ListModelMixin,
     
     search_fields = ['criterio_evaluacion__resultado_aprendizaje__modulo__nombre', 
                     'criterio_evaluacion__resultado_aprendizaje__codigo',
-                    "criterio_evaluacion__resultado_aprendizaje__nombre",
+                    "criterio_evaluacion__resultado_aprendizaje__descripcion",
                     "criterio_evaluacion__codigo",
-                    "criterio_evaluacion__nombre",
+                    "criterio_evaluacion__descripcion",
                     'unidad__nombre'
                     ]
     pagination_class = StandardResultsSetPagination
@@ -94,12 +105,18 @@ class CEUDDetailViewSet(mixins.CreateModelMixin,
                         mixins.UpdateModelMixin,
                         mixins.DestroyModelMixin,
                         viewsets.GenericViewSet):
+    """
+    Poder Actualizar, Crear y Eliminar cualquier CEUD
+    """
     serializer_class = CEUDDetailSerializer
     def get_queryset(self):
         return CriterioEvalUD.objects.all()
 
 class CalUDCEListViewSet(mixins.ListModelMixin,
                     viewsets.GenericViewSet):
+    """
+    Lista todas las Calificaciones por UD y CE por su id y una descripción 
+    """
     serializer_class = CalUDCEListSerializer
     ordering = ['unidad__nombre',
                 'crit_evaluacion__resultado_aprendizaje__modulo__nombre',
@@ -115,9 +132,9 @@ class CalUDCEListViewSet(mixins.ListModelMixin,
                 'alumno__nombre']
     search_fields = ['crit_evaluacion__resultado_aprendizaje__modulo__nombre', 
                     'crit_evaluacion__resultado_aprendizaje__codigo',
-                    "resultado_aprendizaje",
+                    "resultado_aprendizaje__descripcion",
                     "crit_evaluacion__codigo",
-                    "crit_evaluacion",
+                    "crit_evaluacion__descripcion",
                     "alumno__nombre",
                     'alumno__apellido'
                     ]
@@ -148,12 +165,18 @@ class CalUDCEDetailViewSet(mixins.CreateModelMixin,
                         mixins.UpdateModelMixin,
                         mixins.DestroyModelMixin,
                         viewsets.GenericViewSet):
+    """
+    Poder Actualizar, Crear y Eliminar cualquier Calificación por UDCE
+    """
     serializer_class = CalUDCEDetailSerializer
     def get_queryset(self):
         return CalificacionUDCE.objects.all()
 
 class CalCEListViewSet(mixins.ListModelMixin,
                     viewsets.GenericViewSet):
+    """
+    Lista todas las Calificaciones por CE por su id y una descripción 
+    """
     serializer_class = CalCEListSerializer
     ordering = ['crit_evaluacion__resultado_aprendizaje__modulo__nombre',
                 'crit_evaluacion__resultado_aprendizaje__codigo',
@@ -199,12 +222,18 @@ class CalCEDetailViewSet(mixins.CreateModelMixin,
                         mixins.UpdateModelMixin,
                         mixins.DestroyModelMixin,
                         viewsets.GenericViewSet):
+    """
+    Poder Actualizar, Crear y Eliminar cualquier Calificación por CE
+    """
     serializer_class = CalCEDetailSerializer
     def get_queryset(self):
         return CalificacionCE.objects.all()
 
 class CalRAListViewSet(mixins.ListModelMixin,
                     viewsets.GenericViewSet):
+    """
+    Lista todas las Calificaciones por RA por su id y una descripción 
+    """
     serializer_class = CalRAListSerializer
     ordering = ['res_aprendizaje__modulo__nombre',
                 'res_aprendizaje__codigo',
@@ -242,6 +271,9 @@ class CalRADetailViewSet(mixins.CreateModelMixin,
                         mixins.UpdateModelMixin,
                         mixins.DestroyModelMixin,
                         viewsets.GenericViewSet):
+    """
+    Poder Actualizar, Crear y Eliminar cualquier Calificación por RA
+    """
     serializer_class = CalRADetailSerializer
     def get_queryset(self):
         return CalificacionRA.objects.all()
@@ -250,6 +282,9 @@ class CalRADetailViewSet(mixins.CreateModelMixin,
 
 class CalTotalListViewSet(mixins.ListModelMixin,
                     viewsets.GenericViewSet):
+    """
+    Lista todas las Calificaciones Totales por su id y una descripción 
+    """
     serializer_class = CalTotalListSerializer
     ordering = ['modulo__nombre',
                 'alumno__apellido',
@@ -277,33 +312,41 @@ class CalTotalDetailViewSet(mixins.CreateModelMixin,
                         mixins.UpdateModelMixin,
                         mixins.DestroyModelMixin,
                         viewsets.GenericViewSet):
+    """
+    Poder Actualizar, Crear y Eliminar cualquier Calificación Total
+    """
     serializer_class = CalTotalDetailSerializer
     def get_queryset(self):
         return CalificacionTotal.objects.all()
 #UD10.3.d BEGIN    
 
 class CalcularNotasView(views.APIView):
-    def get(self, request, alumno__id=None, modulo__id=None):
+    """
+    Calcula la nota final de cada alumno dependiendo de lo que le pases
+    """
+    def get(self, request):
+        alumno_id = request.query_params.get('alumno__id')
+        modulo_id = request.query_params.get('modulo__id')
         try:
-            if alumno__id is not None:
-                alumno = Alumno.objects.get(id=alumno__id)
-                if modulo:
-                    calcular_nota_total_alumno_modulo(alumno.id, modulo.id)
+            if alumno_id is not None:
+                alumno = Alumno.objects.get(id=alumno_id)
+                if modulo_id is not None:
+                    CalcularNota(alumno.id, modulo_id)
                 else:
-                    modulos_alumno = alumno.modulos.all()
-                    for modulo in modulos_alumno:
-                        calcular_nota_total_alumno_modulo(alumno.id, modulo.id)
+                    for modulo in alumno.modulos.all():
+                        CalcularNota(alumno.id, modulo.id)
             else:
-                if modulo__id:
+                if modulo_id is not None:
                     for alumno in Alumno.objects.all():
-                        calcular_nota_total_alumno_modulo(alumno.id, modulo.id)
+                        CalcularNota(alumno.id, modulo_id)
                 else:
-                    alumnos = Alumno.objects.all()
-                    for alumno in alumnos:
+                    for alumno in Alumno.objects.all():
                         for modulo in alumno.modulos.all():
-                            calcular_nota_total_alumno_modulo(alumno.id, modulo.id)
+                            CalcularNota(alumno.id, modulo.id)
             return response.Response(status=status.HTTP_200_OK)
         except Exception as e:
             return response.Response(status=status.HTTP_400_BAD_REQUEST)
+
+
 #UD10.3.d END
 #UD10.3.a END

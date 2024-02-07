@@ -1,13 +1,23 @@
 from programacion_aula.models import *
+from programacion_didactica.models import *
+from programacion_aula.models import *
 
-def calcular_nota_total_alumno_modulo(alumno, modulo):
-    calificaciones_ce = CalificacionCE.objects.filter(alumno__id=alumno, crit_evaluacion__resultado_aprendizaje__modulo__id=modulo)
-    calificaciones_ra = CalificacionRA.objects.filter(alumno__id=alumno, res_aprendizaje__modulo__id=modulo)
-    total_ce = sum(calificacion.calificacion * calificacion.crit_evaluacion.pondcritud_set.first().porcentaje / 100 for calificacion in calificaciones_ce)
-    total_ra = sum(calificacion.calificacion * calificacion.res_aprendizaje.pondra_set.first().porcentaje / 100 for calificacion in calificaciones_ra)
-    
-    # Calcular la nota total sumando las notas ponderadas de CE y RA
-    nota_total = total_ce + total_ra
-    
-    # Guardar la nota total en la base de datos
-    CalificacionTotal.objects.update_or_create(alumno__id=alumno, modulo__id=modulo, defaults={'calificacion': nota_total})
+def CalcularNota(alumno_id):
+    # Obtener todas las calificaciones del alumno
+    calificaciones_udce = CalificacionUDCE.objects.filter(alumno_id=alumno_id)
+    calificaciones_ce = CalificacionCE.objects.filter(alumno_id=alumno_id)
+    calificaciones_ra = CalificacionRA.objects.filter(alumno_id=alumno_id)
+
+    # Calcular la calificación total por unidad de competencia (UDCE)
+    calificacion_udce_total = sum(calificacion.calificacion for calificacion in calificaciones_udce)
+
+    # Calcular la calificación total por criterio de evaluación (CE)
+    calificacion_ce_total = sum(calificacion.calificacion for calificacion in calificaciones_ce)
+
+    # Calcular la calificación total por resultado de aprendizaje (RA)
+    calificacion_ra_total = sum(calificacion.calificacion for calificacion in calificaciones_ra)
+
+    # Calcular la calificación total final (posiblemente aplicando ponderaciones)
+    calificacion_total_final = calificacion_udce_total + calificacion_ce_total + calificacion_ra_total
+
+    return calificacion_total_final

@@ -5,11 +5,15 @@ from rest_framework.exceptions import ValidationError
 from programacion_didactica.api.serializers import *
 from programacion_didactica.models import *
 from common.api.pagination import LargeResultsSetPagination, StandardResultsSetPagination, ShortResultsSetPagination
+from programacion_didactica.mixins import *
 
 
 #UD10.3.a BEGIN
 class UnidadListViewSet(mixins.ListModelMixin,
                     viewsets.GenericViewSet):
+    """
+    Lista todas las Unidades por su id y una descripción 
+    """
     serializer_class = UnidadListSerializer
     ordering = 'nombre'
     search_fields = ['nombre']
@@ -22,12 +26,18 @@ class UnidadDetailViewSet(mixins.CreateModelMixin,
                         mixins.UpdateModelMixin,
                         mixins.DestroyModelMixin,
                         viewsets.GenericViewSet):
+    """
+    Poder Actualizar, Crear y Eliminar cualquier Unidad
+    """
     serializer_class = UnidadDetailSerializer
     def get_queryset(self):
         return Unidad.objects.all()
 
 class IEListViewSet(mixins.ListModelMixin,
                     viewsets.GenericViewSet):
+    """
+    Lista todos los Instrumentos de Evaluación por su id y una descripción 
+    """
     serializer_class = IEListSerializer
     ordering = 'codigo'
     ordering_fields = ['codigo', 'nombre']
@@ -45,23 +55,29 @@ class IEDetailViewSet(mixins.CreateModelMixin,
                         mixins.UpdateModelMixin,
                         mixins.DestroyModelMixin,
                         viewsets.GenericViewSet):
+    """
+    Poder Actualizar, Crear y Eliminar cualquier Instrumento de Evaluación
+    """
     serializer_class = IEDetailSerializer
     def get_queryset(self):
         return InstEvaluacion.objects.all()
 
 class PondRAListViewSet(mixins.ListModelMixin,
                     viewsets.GenericViewSet):
+    """
+    Lista todas las Ponderaciones por RA por su id y una descripción 
+    """
     serializer_class = PondRAListSerializer
     ordering = ['resultado_aprendizaje__modulo__nombre',
                 'resultado_aprendizaje__codigo']
     
     ordering_fields = ['resultado_aprendizaje__modulo__nombre',
                        'resultado_aprendizaje__codigo',
-                       "resultado_aprendizaje__nombre"]
+                       "resultado_aprendizaje__descripcion"]
     
     search_fields = ['resultado_aprendizaje__modulo__nombre', 
                     'resultado_aprendizaje__codigo',
-                    "resultado_aprendizaje__nombre",
+                    "resultado_aprendizaje__descripcion",
                     ]
     pagination_class = StandardResultsSetPagination
     filter_backends = (filters.OrderingFilter, filters.SearchFilter)
@@ -76,13 +92,20 @@ class PondRADetailViewSet(mixins.CreateModelMixin,
                         mixins.RetrieveModelMixin,
                         mixins.UpdateModelMixin,
                         mixins.DestroyModelMixin,
-                        viewsets.GenericViewSet):
+                        viewsets.GenericViewSet,
+                        PonderacionRAMixin):
+    """
+    Poder Actualizar, Crear y Eliminar cualquier Ponderación por RA
+    """
     serializer_class = PondRADetailSerializer
     def get_queryset(self):
         return PondRA.objects.all()
 
 class PondCEListViewSet(mixins.ListModelMixin,
                     viewsets.GenericViewSet):
+    """
+    Lista todas las Ponderaciones por CE por su id y una descripción 
+    """
     serializer_class = PondCEListSerializer
     ordering = ['criterio_evaluacion__resultado_aprendizaje__modulo__nombre',
                 'criterio_evaluacion__resultado_aprendizaje__codigo',
@@ -91,11 +114,11 @@ class PondCEListViewSet(mixins.ListModelMixin,
     ordering_fields = ['criterio_evaluacion__resultado_aprendizaje__modulo__nombre',
                        'criterio_evaluacion__resultado_aprendizaje__codigo',
                        'criterio_evaluacion__codigo',
-                       'criterio_evaluacion__nombre']
+                       'criterio_evaluacion__descripcion']
     search_fields = ['criterio_evaluacion__resultado_aprendizaje__modulo__nombre',
                      'criterio_evaluacion__resultado_aprendizaje__codigo',
                      'criterio_evaluacion__codigo',
-                     'criterio_evaluacion__nombre']
+                     'criterio_evaluacion__descripcion']
     
     pagination_class = StandardResultsSetPagination
     filter_backends = (filters.OrderingFilter, filters.SearchFilter)
@@ -113,13 +136,20 @@ class PondCEDetailViewSet(mixins.CreateModelMixin,
                         mixins.RetrieveModelMixin,
                         mixins.UpdateModelMixin,
                         mixins.DestroyModelMixin,
-                        viewsets.GenericViewSet):
+                        viewsets.GenericViewSet,
+                        PonderacionCEMixin):
+    """
+    Poder Actualizar, Crear y Eliminar cualquier Ponderación por CE
+    """
     serializer_class = PondCEDetailSerializer
     def get_queryset(self):
         return PondCriterio.objects.all()
 
 class PondCEUDListViewSet(mixins.ListModelMixin,
                           viewsets.GenericViewSet):
+    """
+    Lista todas las Ponderaciones por CE y UD por su id y una descripción 
+    """
     serializer_class = PondCEUDListSerializer
     ordering = ['unidad__nombre',
                 'criterio_evaluacion__resultado_aprendizaje__modulo__nombre',
@@ -130,13 +160,13 @@ class PondCEUDListViewSet(mixins.ListModelMixin,
                        'criterio_evaluacion__resultado_aprendizaje__modulo__nombre'
                        'criterio_evaluacion__resultado_aprendizaje__codigo',
                        'criterio_evaluacion__codigo',
-                       'criterio_evaluacion__nombre']
+                       'criterio_evaluacion__descripcion']
     
     search_fields = ['criterio_evaluacion__resultado_aprendizaje__modulo__nombre', 
                     'criterio_evaluacion__resultado_aprendizaje__codigo',
-                    "criterio_evaluacion__resultado_aprendizaje__nombre",
+                    "criterio_evaluacion__resultado_aprendizaje__descripcion",
                     "criterio_evaluacion__codigo",
-                    "criterio_evaluacion__nombre",
+                    "criterio_evaluacion__descripcion",
                     "unidad__nombre"
                     ]
     pagination_class = StandardResultsSetPagination
@@ -161,7 +191,11 @@ class PondCEUDDetailViewSet(mixins.CreateModelMixin,
                         mixins.RetrieveModelMixin,
                         mixins.UpdateModelMixin,
                         mixins.DestroyModelMixin,
-                        viewsets.GenericViewSet):
+                        viewsets.GenericViewSet,
+                        PonderacionCEUDMixin):
+    """
+    Poder Actualizar, Crear y Eliminar cualquier Ponderación por CEUD
+    """
     serializer_class = PondCEUDDetailSerializer
     def get_queryset(self):
         return PondCritUD.objects.all()

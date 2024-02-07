@@ -83,7 +83,7 @@ urlpatterns = [
     #FRAMEWORK
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),
-    path(r'api/calcular_nota', CalcularNotasView.as_view(), name='api/calcular_nota'),
+    path('api/calcular_nota/', CalcularNotasView.as_view(), name='api/calcular_nota'),
 
     #ADMIN
     path('admin/', admin.site.urls),
