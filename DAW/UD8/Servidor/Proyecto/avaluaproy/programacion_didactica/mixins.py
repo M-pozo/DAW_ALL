@@ -7,7 +7,8 @@ from rest_framework import serializers
 
 #UD7.2.g, UD7.2.h, UD7.2.i BEGIN
 #UD7.2.g
-class PonderacionRAMixin(FormMixin):
+"""
+class PonderacionRAMixin():
 
     def validate(self, data): 
         resultado_aprendizaje = data['resultado_aprendizaje']
@@ -18,7 +19,7 @@ class PonderacionRAMixin(FormMixin):
 
 
             if self.object:
-                porcentajes = PondRA.objects.filter(resultado_aprendizaje__modulo=modulo).exclude(pk=self.get_object().pk).values_list('porcentaje', flat=True) or 0
+                porcentajes = PondRA.objects.filter(resultado_aprendizaje__modulo=modulo).exclude(pk=self.instance.pk).values_list('porcentaje', flat=True) or 0
             else:
                 porcentajes = PondRA.objects.filter(resultado_aprendizaje__modulo=modulo).values_list('porcentaje', flat=True) or 0
 
@@ -28,9 +29,10 @@ class PonderacionRAMixin(FormMixin):
 
             if total_nuevo > 100:
                 raise serializers.ValidationError("La suma de los porcentajes de los RAs para el módulo {modulo} supera el 100%.")
+            
             return data
 #UD7.2.h
-class PonderacionCEMixin(FormMixin):
+class PonderacionCEMixin():
 
     def validate(self, data):
         resultado_aprendizaje = data['criterio_evaluacion'].resultado_aprendizaje
@@ -40,7 +42,7 @@ class PonderacionCEMixin(FormMixin):
 
 
             if self.object:
-                porcentajes = PondCriterio.objects.filter(criterio_evaluacionresultado_aprendizaje=resultado_aprendizaje).exclude(pk=self.get_object().pk).values_list('porcentaje', flat=True) or 0
+                porcentajes = PondCriterio.objects.filter(criterio_evaluacionresultado_aprendizaje=resultado_aprendizaje).exclude(pk=self.instance.pk).values_list('porcentaje', flat=True) or 0
             else:
                 porcentajes = PondCriterio.objects.filter(criterio_evaluacionresultado_aprendizaje=resultado_aprendizaje).values_list('porcentaje', flat=True) or 0
 
@@ -54,9 +56,9 @@ class PonderacionCEMixin(FormMixin):
 
             return data
 #UD7.2.i
-class PonderacionCEUDMixin(FormMixin):
+class PonderacionCEUDMixin():
 
-    def form_valid(self, data):
+    def validate(self, data):
         criterio_evaluacion = data['criterio_evaluacion']
         porcentaje = data['porcentaje']
         total_porcentaje = 0
@@ -64,7 +66,7 @@ class PonderacionCEUDMixin(FormMixin):
 
 
             if self.object:
-                porcentajes = PondCritUD.objects.filter(criterio_evaluacion=criterio_evaluacion).exclude(pk=self.get_object().pk).values_list('porcentaje', flat=True) or []
+                porcentajes = PondCritUD.objects.filter(criterio_evaluacion=criterio_evaluacion).exclude(pk=self.instance.pk).values_list('porcentaje', flat=True) or []
             else:
                 porcentajes = PondCritUD.objects.filter(criterio_evaluacion=criterio_evaluacion).values_list('porcentaje', flat=True) or []
 
@@ -79,3 +81,4 @@ class PonderacionCEUDMixin(FormMixin):
             return data
 #UD7.2.g, UD7.2.h, UD7.2.i END
 
+"""

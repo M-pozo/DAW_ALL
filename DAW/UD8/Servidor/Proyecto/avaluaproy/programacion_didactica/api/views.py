@@ -5,10 +5,9 @@ from rest_framework.exceptions import ValidationError
 from programacion_didactica.api.serializers import *
 from programacion_didactica.models import *
 from common.api.pagination import LargeResultsSetPagination, StandardResultsSetPagination, ShortResultsSetPagination
-from programacion_didactica.mixins import *
 
 
-#UD10.3.a BEGIN
+#UD10.3.a // UD10.4 BEGIN
 class UnidadListViewSet(mixins.ListModelMixin,
                     viewsets.GenericViewSet):
     """
@@ -88,12 +87,12 @@ class PondRAListViewSet(mixins.ListModelMixin,
             return PondRA.objects.filter(resultado_aprendizaje__modulo=modulo) 
         return PondRA.objects.all()
     
-class PondRADetailViewSet(mixins.CreateModelMixin,
+class PondRADetailViewSet(
+                        mixins.CreateModelMixin,
                         mixins.RetrieveModelMixin,
                         mixins.UpdateModelMixin,
                         mixins.DestroyModelMixin,
-                        viewsets.GenericViewSet,
-                        PonderacionRAMixin):
+                        viewsets.GenericViewSet):
     """
     Poder Actualizar, Crear y Eliminar cualquier Ponderación por RA
     """
@@ -137,7 +136,7 @@ class PondCEDetailViewSet(mixins.CreateModelMixin,
                         mixins.UpdateModelMixin,
                         mixins.DestroyModelMixin,
                         viewsets.GenericViewSet,
-                        PonderacionCEMixin):
+                        ):
     """
     Poder Actualizar, Crear y Eliminar cualquier Ponderación por CE
     """
@@ -192,11 +191,11 @@ class PondCEUDDetailViewSet(mixins.CreateModelMixin,
                         mixins.UpdateModelMixin,
                         mixins.DestroyModelMixin,
                         viewsets.GenericViewSet,
-                        PonderacionCEUDMixin):
+                        ):
     """
     Poder Actualizar, Crear y Eliminar cualquier Ponderación por CEUD
     """
     serializer_class = PondCEUDDetailSerializer
     def get_queryset(self):
         return PondCritUD.objects.all()
-#UD10.3.a END
+#UD10.3.a // UD10.4 END

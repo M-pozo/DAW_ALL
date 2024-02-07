@@ -26,6 +26,7 @@ from core import views as core_views
 from programacion_didactica import views as programacion_didactica_views
 from login import views as login_views
 from rest_framework import routers
+from programacion_aula.api import views as api_views
 from core.api.views import *
 from programacion_didactica.api.views import *
 from programacion_aula.api.views import *
@@ -83,7 +84,7 @@ urlpatterns = [
     #FRAMEWORK
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),
-    path('api/calcular_nota/', CalcularNotasView.as_view(), name='api/calcular_nota'),
+    path(r'api/calcular_nota/', api_views.calcular_nota, name='api/calcular_nota'),
 
     #ADMIN
     path('admin/', admin.site.urls),

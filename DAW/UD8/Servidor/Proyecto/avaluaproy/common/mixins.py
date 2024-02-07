@@ -67,7 +67,7 @@ class DecoratorsMixin():
         return super().dispatch(request, *args, **kwargs)
 #UD8.3 END
 
-#UD10.3.c
+#UD10.3.b BEGIN
 class ProtectedDeleteMixin:
     def verificar_dependencias(self, instance):
         if ValidationError:
@@ -77,3 +77,5 @@ class ProtectedDeleteMixin:
         instance = self.get_object()
         self.verificar_dependencias(instance)
         return super().destroy(request, *args, **kwargs)
+
+#UD10.3.b END

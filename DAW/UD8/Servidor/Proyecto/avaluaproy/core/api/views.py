@@ -8,7 +8,7 @@ from core.models import *
 from common.api.pagination import LargeResultsSetPagination, StandardResultsSetPagination, ShortResultsSetPagination
 from common.mixins import ProtectedDeleteMixin
 
-#UD10.3.a BEGIN
+#UD10.3.a // UD10.4 BEGIN
 class ModuloListViewSet(mixins.ListModelMixin,
                         viewsets.GenericViewSet):
     """
@@ -107,4 +107,4 @@ class CEDetailViewSet(ProtectedDeleteMixin,
     serializer_class = CEDetailSerializer
     def get_queryset(self):
         return CritEvaluacion.objects.all()
-#UD10.3.a END
+#UD10.3.a // UD10.4 END

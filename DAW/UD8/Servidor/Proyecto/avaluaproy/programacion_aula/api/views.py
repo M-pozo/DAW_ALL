@@ -9,7 +9,7 @@ from programacion_aula.api.utils import *
 from collections import defaultdict
 
 
-#UD10.3.a BEGIN
+#UD10.3.a // UD10.4 BEGIN
 class AlumnoListViewSet(mixins.ListModelMixin,
                     viewsets.GenericViewSet):
     """
@@ -46,7 +46,7 @@ class AlumnoDetailViewSet(mixins.CreateModelMixin,
     serializer_class = AlumnoDetailSerializer
     def get_queryset(self):
         return Alumno.objects.all()
-    #UD10.3.c
+    #UD10.3.c BEGIN
     def perform_create(self, serializer):
         instance = serializer.save()
         criterios_evaluacion = CriterioEvalUD.objects.all()
@@ -58,7 +58,7 @@ class AlumnoDetailViewSet(mixins.CreateModelMixin,
                 calificacion=1
             )
         return response.Response(serializer.data, status=status.HTTP_201_CREATED)
-
+#UD10.3.c END
 class CEUDListViewSet(mixins.ListModelMixin,
                     viewsets.GenericViewSet):
     """
@@ -320,33 +320,43 @@ class CalTotalDetailViewSet(mixins.CreateModelMixin,
         return CalificacionTotal.objects.all()
 #UD10.3.d BEGIN    
 
-class CalcularNotasView(views.APIView):
+@api_view(['GET'])
+def calcular_nota(request):
     """
     Calcula la nota final de cada alumno dependiendo de lo que le pases
     """
-    def get(self, request):
-        alumno_id = request.query_params.get('alumno__id')
-        modulo_id = request.query_params.get('modulo__id')
-        try:
-            if alumno_id is not None:
-                alumno = Alumno.objects.get(id=alumno_id)
-                if modulo_id is not None:
-                    CalcularNota(alumno.id, modulo_id)
-                else:
-                    for modulo in alumno.modulos.all():
-                        CalcularNota(alumno.id, modulo.id)
+    alumno_id = request.query_params.get('alumno_id')
+    modulo_id = request.query_params.get('modulo_id')  
+    try:
+        if alumno_id != None:
+            alumno = Alumno.objects.get(id=alumno_id)
+            modulo = Modulo.objects.get(id=modulo_id)
+            if modulo_id != None:
+                #Si recibe alumno y modulo solo la creara las calificaiones para ese alumno y ese modulo
+                eliminar_calificaciones(alumno_id)
+                crear_calificaciones(alumno_id, modulo_id)
             else:
-                if modulo_id is not None:
-                    for alumno in Alumno.objects.all():
-                        CalcularNota(alumno.id, modulo_id)
-                else:
-                    for alumno in Alumno.objects.all():
-                        for modulo in alumno.modulos.all():
-                            CalcularNota(alumno.id, modulo.id)
-            return response.Response(status=status.HTTP_200_OK)
-        except Exception as e:
-            return response.Response(status=status.HTTP_400_BAD_REQUEST)
+                #Si solo recibe alumno, creara las calificaciones de ese alumno para todos los módulos
+                for modulo in Modulo.objects.all():
+                    eliminar_calificaciones(alumno_id)
+                    crear_calificaciones(alumno_id, modulo.id)
+        else:
+            #Si solo recibe el modulo, Crea todas solo las calificaciones de ese modulo para todos los alumnos
+            if modulo_id != None:
+                for alumno in Alumno.objects.all():
+                    eliminar_calificaciones(alumno.id)
+                    crear_calificaciones(alumno.id, modulo_id)
+            else:
+                #Si no recibe ningún parámetro crea las calificaciones para todos los alumnos
+                for alumno in Alumno.objects.all():
+                    for modulo in Modulo.objects.all():
+                        eliminar_calificaciones(alumno.id)
+                        crear_calificaciones(alumno.id, modulo.id)
+        return response.Response("Notas calculadas y calificaciones creadas exitosamente.", status=status.HTTP_200_OK)
+    except Exception as e:
+        #str(e) para poder ver el error en pantalla
+        return response.Response("Error al calcular las notas y crear las calificaciones: " + str(e), status=status.HTTP_400_BAD_REQUEST)
 
 
 #UD10.3.d END
-#UD10.3.a END
+#UD10.3.a // UD10.4 END
