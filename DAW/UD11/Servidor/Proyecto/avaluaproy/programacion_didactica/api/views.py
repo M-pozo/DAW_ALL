@@ -5,7 +5,7 @@ from rest_framework.exceptions import ValidationError
 from programacion_didactica.api.serializers import *
 from programacion_didactica.models import *
 from common.api.pagination import LargeResultsSetPagination, StandardResultsSetPagination, ShortResultsSetPagination
-
+from rest_framework.permissions import IsAuthenticated
 
 #UD10.3.a // UD10.4 BEGIN
 class UnidadListViewSet(mixins.ListModelMixin,
@@ -13,6 +13,7 @@ class UnidadListViewSet(mixins.ListModelMixin,
     """
     Lista todas las Unidades por su id y una descripción 
     """
+    permission_classes = [IsAuthenticated]
     serializer_class = UnidadListSerializer
     ordering = 'nombre'
     search_fields = ['nombre']
@@ -28,6 +29,7 @@ class UnidadDetailViewSet(mixins.CreateModelMixin,
     """
     Poder Actualizar, Crear y Eliminar cualquier Unidad
     """
+    permission_classes = [IsAuthenticated]
     serializer_class = UnidadDetailSerializer
     def get_queryset(self):
         return Unidad.objects.all()
@@ -37,6 +39,7 @@ class IEListViewSet(mixins.ListModelMixin,
     """
     Lista todos los Instrumentos de Evaluación por su id y una descripción 
     """
+    permission_classes = [IsAuthenticated]
     serializer_class = IEListSerializer
     ordering = 'codigo'
     ordering_fields = ['codigo', 'nombre']
@@ -57,6 +60,7 @@ class IEDetailViewSet(mixins.CreateModelMixin,
     """
     Poder Actualizar, Crear y Eliminar cualquier Instrumento de Evaluación
     """
+    permission_classes = [IsAuthenticated]
     serializer_class = IEDetailSerializer
     def get_queryset(self):
         return InstEvaluacion.objects.all()
@@ -66,6 +70,7 @@ class PondRAListViewSet(mixins.ListModelMixin,
     """
     Lista todas las Ponderaciones por RA por su id y una descripción 
     """
+    permission_classes = [IsAuthenticated]
     serializer_class = PondRAListSerializer
     ordering = ['resultado_aprendizaje__modulo__nombre',
                 'resultado_aprendizaje__codigo']
@@ -96,6 +101,7 @@ class PondRADetailViewSet(
     """
     Poder Actualizar, Crear y Eliminar cualquier Ponderación por RA
     """
+    permission_classes = [IsAuthenticated]
     serializer_class = PondRADetailSerializer
     def get_queryset(self):
         return PondRA.objects.all()
@@ -105,6 +111,7 @@ class PondCEListViewSet(mixins.ListModelMixin,
     """
     Lista todas las Ponderaciones por CE por su id y una descripción 
     """
+    permission_classes = [IsAuthenticated]
     serializer_class = PondCEListSerializer
     ordering = ['criterio_evaluacion__resultado_aprendizaje__modulo__nombre',
                 'criterio_evaluacion__resultado_aprendizaje__codigo',
@@ -140,6 +147,7 @@ class PondCEDetailViewSet(mixins.CreateModelMixin,
     """
     Poder Actualizar, Crear y Eliminar cualquier Ponderación por CE
     """
+    permission_classes = [IsAuthenticated]
     serializer_class = PondCEDetailSerializer
     def get_queryset(self):
         return PondCriterio.objects.all()
@@ -149,6 +157,7 @@ class PondCEUDListViewSet(mixins.ListModelMixin,
     """
     Lista todas las Ponderaciones por CE y UD por su id y una descripción 
     """
+    permission_classes = [IsAuthenticated]
     serializer_class = PondCEUDListSerializer
     ordering = ['unidad__nombre',
                 'criterio_evaluacion__resultado_aprendizaje__modulo__nombre',
@@ -195,6 +204,7 @@ class PondCEUDDetailViewSet(mixins.CreateModelMixin,
     """
     Poder Actualizar, Crear y Eliminar cualquier Ponderación por CEUD
     """
+    permission_classes = [IsAuthenticated]
     serializer_class = PondCEUDDetailSerializer
     def get_queryset(self):
         return PondCritUD.objects.all()

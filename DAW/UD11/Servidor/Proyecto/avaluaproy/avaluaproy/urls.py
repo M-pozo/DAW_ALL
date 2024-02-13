@@ -81,6 +81,9 @@ router.register(r'cal_total_detail', CalTotalDetailViewSet, basename='cal_total_
 
 #UD7.2.b
 urlpatterns = [
+    #AUTH
+    path('api/auth/', include('djoser.urls')),
+    path('api/auth/', include('djoser.urls.jwt')),
     #FRAMEWORK
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),

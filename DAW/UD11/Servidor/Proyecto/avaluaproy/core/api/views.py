@@ -7,6 +7,7 @@ from core.api.serializers import *
 from core.models import *
 from common.api.pagination import LargeResultsSetPagination, StandardResultsSetPagination, ShortResultsSetPagination
 from common.mixins import ProtectedDeleteMixin
+from rest_framework.permissions import IsAuthenticated
 
 #UD10.3.a // UD10.4 BEGIN
 class ModuloListViewSet(mixins.ListModelMixin,
@@ -14,6 +15,7 @@ class ModuloListViewSet(mixins.ListModelMixin,
     """
     Lista todos los modulo por su id y una descripción 
     """
+    permission_classes = [IsAuthenticated]
     serializer_class = ModuloListSerializer
     ordering = 'codigo'
     ordering_fields = ['codigo', 'nombre']
@@ -32,6 +34,7 @@ class ModuloDetailViewSet(ProtectedDeleteMixin,
     """
     Poder Actualizar, Crear y Eliminar cualquier modulo
     """
+    permission_classes = [IsAuthenticated]
     perform_destroy_mensaje = "No se puede realizar la operación de borrado porque existen dependencias."
     serializer_class = ModuloDetailSerializer
     def get_queryset(self):
@@ -42,6 +45,7 @@ class RAListViewSet(mixins.ListModelMixin,
     """
     Lista todos los RA por su id y una descripción 
     """
+    permission_classes = [IsAuthenticated]
     serializer_class = RAListSerializer
     ordering = 'codigo'
     ordering_fields = ['codigo', 'descripcion']
@@ -64,6 +68,7 @@ class RADetailViewSet(ProtectedDeleteMixin,
     """
     Poder Actualizar, Crear y Eliminar cualquier RA
     """
+    permission_classes = [IsAuthenticated]
     serializer_class = RADetailSerializer
     def get_queryset(self):
         return ResAprendizaje.objects.all()
@@ -73,6 +78,7 @@ class CEListViewSet(mixins.ListModelMixin,
     """
     Lista todos los Criterios por su id y una descripción 
     """
+    permission_classes = [IsAuthenticated]
     serializer_class = CEListSerializer
     ordering = 'codigo'
     ordering_fields = ['codigo', 'descripcion']
@@ -104,6 +110,7 @@ class CEDetailViewSet(ProtectedDeleteMixin,
     """
     Poder Actualizar, Crear y Eliminar cualquier Criterio de Evaluación
     """
+    permission_classes = [IsAuthenticated]
     serializer_class = CEDetailSerializer
     def get_queryset(self):
         return CritEvaluacion.objects.all()

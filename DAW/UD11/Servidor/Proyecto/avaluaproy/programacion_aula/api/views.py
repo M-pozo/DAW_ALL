@@ -1,12 +1,13 @@
 from django import views
 from rest_framework import mixins, viewsets, filters, views, status, response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.exceptions import ValidationError
 from programacion_aula.api.serializers import *
 from programacion_aula.models import *
 from common.api.pagination import LargeResultsSetPagination, StandardResultsSetPagination, ShortResultsSetPagination
 from programacion_aula.api.utils import *
 from collections import defaultdict
+from rest_framework.permissions import IsAuthenticated
 
 
 #UD10.3.a // UD10.4 BEGIN
@@ -15,6 +16,7 @@ class AlumnoListViewSet(mixins.ListModelMixin,
     """
     Lista todos los Alumno por su id y una descripción 
     """
+    permission_classes = [IsAuthenticated]
     serializer_class = AlumnoListSerializer
     ordering = ['apellido', 'nombre']
     ordering_fields = ['apellido',
@@ -43,6 +45,7 @@ class AlumnoDetailViewSet(mixins.CreateModelMixin,
     """
     Poder Actualizar, Crear y Eliminar cualquier alumno, ademas cada vez que creas un alumno nuevo crea todas la Calificaciones UDCE
     """
+    permission_classes = [IsAuthenticated]
     serializer_class = AlumnoDetailSerializer
     def get_queryset(self):
         return Alumno.objects.all()
@@ -64,6 +67,7 @@ class CEUDListViewSet(mixins.ListModelMixin,
     """
     Lista todos los CEUD por su id y una descripción 
     """
+    permission_classes = [IsAuthenticated]
     serializer_class = CEUDListSerializer
     ordering = ['criterio_evaluacion__resultado_aprendizaje__modulo__nombre',
                 'criterio_evaluacion__resultado_aprendizaje__codigo',
@@ -108,6 +112,7 @@ class CEUDDetailViewSet(mixins.CreateModelMixin,
     """
     Poder Actualizar, Crear y Eliminar cualquier CEUD
     """
+    permission_classes = [IsAuthenticated]
     serializer_class = CEUDDetailSerializer
     def get_queryset(self):
         return CriterioEvalUD.objects.all()
@@ -117,6 +122,7 @@ class CalUDCEListViewSet(mixins.ListModelMixin,
     """
     Lista todas las Calificaciones por UD y CE por su id y una descripción 
     """
+    permission_classes = [IsAuthenticated]
     serializer_class = CalUDCEListSerializer
     ordering = ['unidad__nombre',
                 'crit_evaluacion__resultado_aprendizaje__modulo__nombre',
@@ -168,6 +174,7 @@ class CalUDCEDetailViewSet(mixins.CreateModelMixin,
     """
     Poder Actualizar, Crear y Eliminar cualquier Calificación por UDCE
     """
+    permission_classes = [IsAuthenticated]
     serializer_class = CalUDCEDetailSerializer
     def get_queryset(self):
         return CalificacionUDCE.objects.all()
@@ -177,6 +184,7 @@ class CalCEListViewSet(mixins.ListModelMixin,
     """
     Lista todas las Calificaciones por CE por su id y una descripción 
     """
+    permission_classes = [IsAuthenticated]
     serializer_class = CalCEListSerializer
     ordering = ['crit_evaluacion__resultado_aprendizaje__modulo__nombre',
                 'crit_evaluacion__resultado_aprendizaje__codigo',
@@ -225,6 +233,7 @@ class CalCEDetailViewSet(mixins.CreateModelMixin,
     """
     Poder Actualizar, Crear y Eliminar cualquier Calificación por CE
     """
+    permission_classes = [IsAuthenticated]
     serializer_class = CalCEDetailSerializer
     def get_queryset(self):
         return CalificacionCE.objects.all()
@@ -234,6 +243,7 @@ class CalRAListViewSet(mixins.ListModelMixin,
     """
     Lista todas las Calificaciones por RA por su id y una descripción 
     """
+    permission_classes = [IsAuthenticated]
     serializer_class = CalRAListSerializer
     ordering = ['res_aprendizaje__modulo__nombre',
                 'res_aprendizaje__codigo',
@@ -274,6 +284,7 @@ class CalRADetailViewSet(mixins.CreateModelMixin,
     """
     Poder Actualizar, Crear y Eliminar cualquier Calificación por RA
     """
+    permission_classes = [IsAuthenticated]
     serializer_class = CalRADetailSerializer
     def get_queryset(self):
         return CalificacionRA.objects.all()
@@ -285,6 +296,7 @@ class CalTotalListViewSet(mixins.ListModelMixin,
     """
     Lista todas las Calificaciones Totales por su id y una descripción 
     """
+    permission_classes = [IsAuthenticated]
     serializer_class = CalTotalListSerializer
     ordering = ['modulo__nombre',
                 'alumno__apellido',
@@ -315,12 +327,14 @@ class CalTotalDetailViewSet(mixins.CreateModelMixin,
     """
     Poder Actualizar, Crear y Eliminar cualquier Calificación Total
     """
+    permission_classes = [IsAuthenticated]
     serializer_class = CalTotalDetailSerializer
     def get_queryset(self):
         return CalificacionTotal.objects.all()
 #UD10.3.d BEGIN    
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def calcular_nota(request):
     """
     Calcula la nota final de cada alumno dependiendo de lo que le pases
