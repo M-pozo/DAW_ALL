@@ -8,6 +8,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework import serializers
 from django.db.models.deletion import ProtectedError
 
+
 #UD7.2.c / UD7.2.d BEGIN
 class BaseCreateUpdateMixin:
     def get_context_data(self, **kwargs):
@@ -75,5 +76,6 @@ class ProtectedDeleteMixin:
             return super().destroy(request, *args, **kwargs)
         except ProtectedError:
             raise serializers.ValidationError("Existen dependencias")
+
 
 #UD10.3.b END

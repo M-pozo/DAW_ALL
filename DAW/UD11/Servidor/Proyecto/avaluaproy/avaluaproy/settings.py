@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 from django.contrib.messages import constants as messages
-
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'rest_framework',
+    #UD11.1.a
     'djoser',
     #UD8.4 BEGIN
     'allauth',
@@ -201,5 +202,17 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
+    #UD11.3.a
     'AUTH_HEADER_TYPES': ('Bearer',),
+    #UD11.3.c
+    'LOGOUT_ON_PASSWORD_CHANGE': True,
+    #UD11.3.d
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=2),
+}
+
+#
+DJOSER = {
+    #UD11.3.b
+    'SEND_ACTIVATION_EMAIL': False,
 }

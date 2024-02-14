@@ -5,6 +5,7 @@ from rest_framework.exceptions import ValidationError
 from programacion_didactica.api.serializers import *
 from programacion_didactica.models import *
 from common.api.pagination import LargeResultsSetPagination, StandardResultsSetPagination, ShortResultsSetPagination
+#UD11.2
 from rest_framework.permissions import IsAuthenticated
 
 #UD10.3.a // UD10.4 BEGIN

@@ -7,6 +7,7 @@ from core.api.serializers import *
 from core.models import *
 from common.api.pagination import LargeResultsSetPagination, StandardResultsSetPagination, ShortResultsSetPagination
 from common.mixins import ProtectedDeleteMixin
+#UD11.2
 from rest_framework.permissions import IsAuthenticated
 
 #UD10.3.a // UD10.4 BEGIN

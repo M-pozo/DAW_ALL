@@ -7,8 +7,8 @@ from programacion_aula.models import *
 from common.api.pagination import LargeResultsSetPagination, StandardResultsSetPagination, ShortResultsSetPagination
 from programacion_aula.api.utils import *
 from collections import defaultdict
+#UD11.2
 from rest_framework.permissions import IsAuthenticated
-
 
 #UD10.3.a // UD10.4 BEGIN
 class AlumnoListViewSet(mixins.ListModelMixin,
@@ -243,7 +243,6 @@ class CalRAListViewSet(mixins.ListModelMixin,
     """
     Lista todas las Calificaciones por RA por su id y una descripción 
     """
-    permission_classes = [IsAuthenticated]
     serializer_class = CalRAListSerializer
     ordering = ['res_aprendizaje__modulo__nombre',
                 'res_aprendizaje__codigo',
