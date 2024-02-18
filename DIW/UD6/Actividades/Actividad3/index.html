@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad3</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Hipotenusa</h2>
+        <table class="table table-bordered table-striped table-hover table-responsive">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Correo Electrónico</th>
+                    <th>Consulta</th>
+                    <th>Terraplanista</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Miguel Pozo</td>
+                    <td>m.pozo@example.com</td>
+                    <td>hamimi hamud hamimi</td>
+                    <td>NO</td>
+                    <td><button class="btn btn-danger">BAN</button></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Pepe</td>
+                    <td>jd.pepe@example.com</td>
+                    <td>Nano sexo</td>
+                    <td>NO</td>
+                    <td><button class="btn btn-danger">BAN</button></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Mr. Empirico</td>
+                    <td>Talcual@example.com</td>
+                    <td>Primado negativo</td>
+                    <td>SI</td>
+                    <td><button class="btn btn-danger">BAN</button></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Mr.Tartaria</td>
+                    <td>popocatepel@example.com</td>
+                    <td>Salve al mundo con la lengua de fuego</td>
+                    <td>SI</td>
+                    <td><button class="btn btn-danger">BAN</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container mt-5">
+        <h2>Escríbenos</h2>
+        <form>
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombre" placeholder="Ingrese su nombre">
+            </div>
+            <div class="mb-3">
+                <label for="correo" class="form-label">Correo Electrónico</label>
+                <input type="email" class="form-control" id="correo" placeholder="Ingrese su correo electrónico">
+            </div>
+            <div class="mb-3">
+                <label for="consulta" class="form-label">Consulta</label>
+                <textarea class="form-control" id="consulta" rows="3" placeholder="Escriba su consulta"></textarea>
+            </div>
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" value="" id="aceptacion">
+                <label class="form-check-label" for="aceptacion">Acepto las condiciones</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+    <div class="container mt-5">
+        <h2>Breadcrumb</h2>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Inicio</li>
+                <li class="breadcrumb-item">Sección 1</li>
+                <li class="breadcrumb-item active" aria-current="page">Página Actual</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="container mt-5">
+        <h2>Paginación</h2>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" aria-label="Previous"><span aria-hidden="true"><</span></a></li>
+                <li class="page-item"><a class="page-link" >1</a></li>
+                <li class="page-item"><a class="page-link" >2</a></li>
+                <li class="page-item"><a class="page-link" >3</a></li>
+                <li class="page-item"><a class="page-link" aria-label="Next"><span aria-hidden="true">></span></a></li>
+            </ul>
+        </nav>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

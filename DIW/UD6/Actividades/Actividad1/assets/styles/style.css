@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#header{
+    background-color: #BCC6F4;
+}
+
+#section1{
+    background-color: #A9D18E;
+}
+
+#section2{
+    background-color: #F4B183;
+}
+
+#section3{
+    background-color: #9FC5E8;
+}
+
+#footer{
+    background-color: #CCB7E7;
+}
