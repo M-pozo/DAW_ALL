@@ -16,11 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from criptoapp.views import listar_criptomonedas
+from criptoapp.views import listar_criptomonedas, HomeView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('criptomonedas/', index, name='index'),
-    path('listar-criptomonedas/', listar_criptomonedas, name='listar_criptomonedas'),
+    path('listar_criptomonedas/', listar_criptomonedas, name='listar_criptomonedas'),
+    path('', HomeView.as_view(), name='home'),
+
 ]
