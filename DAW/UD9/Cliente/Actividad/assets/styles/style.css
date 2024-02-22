@@ -48,30 +48,28 @@ button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #4CAF50; /* Color verde */
+    background-color: #4CAF50;
     color: white;
     font-weight: bold;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #45a049; /* Color verde más oscuro al pasar el ratón */
+    background-color: #45a049;
 }
 
-/* Estilos para el botón con id "delete" */
 #delete {
-    background-color: #f44336; /* Color rojo */
+    background-color: #f44336;
 }
 
 #delete:hover {
-    background-color: #d32f2f; /* Color rojo más oscuro al pasar el ratón */
+    background-color: #d32f2f
 }
 
-/* Estilos para el botón con id "actualizar" */
 #actualizar {
-    background-color: #2196F3; /* Color azul */
+    background-color: #2196F3;
 }
 
 #actualizar:hover {
-    background-color: #1976D2; /* Color azul más oscuro al pasar el ratón */
+    background-color: #1976D2;
 }

@@ -51,7 +51,6 @@ class RAListViewSet(mixins.ListModelMixin,
     ordering = 'codigo'
     ordering_fields = ['codigo', 'descripcion']
     search_fields = ['codigo', 'descripcion']
-    pagination_class = StandardResultsSetPagination
     filter_backends = (filters.OrderingFilter, filters.SearchFilter)
 
     def get_queryset(self):
@@ -90,7 +89,6 @@ class CEListViewSet(mixins.ListModelMixin,
                     "modulo__codigo",
                     "modulo__nombre"
                     ]
-    pagination_class = StandardResultsSetPagination
     filter_backends = (filters.OrderingFilter, filters.SearchFilter)
     
     def get_queryset(self):
