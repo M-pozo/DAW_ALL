@@ -288,7 +288,7 @@ function createForm(list) {
     }
 
     document.getElementById(list+'_form').addEventListener('submit', function (event) {
-        event.preventDefault(); // Evitar que se envíe el formulario de forma tradicional
+        event.preventDefault();
 
         // Obtener los valores de los campos del formulario
         const formData = new FormData(this);
