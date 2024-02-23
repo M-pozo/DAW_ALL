@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad5</title>
+    <style>
+        .bouncing-ball {
+            width: 50px;
+            height: 50px;
+            background-color: #3498db;
+            border-radius: 50%;
+            margin: 100px auto;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0); /* Comienza y termina en la posición original */
+                animation-timing-function: ease-in; /* Inicia con aceleración */
+            }
+            50% {
+                transform: translateY(-100px); /* Llega a 100px hacia arriba */
+                animation-timing-function: ease-out; /* Desaceleración al alcanzar la altura máxima */
+            }
+        }
+
+        hr {
+            margin: -100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="bouncing-ball"></div>
+    <hr>
+</body>
+</html>

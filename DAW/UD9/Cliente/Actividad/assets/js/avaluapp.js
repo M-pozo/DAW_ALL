@@ -293,6 +293,7 @@ function createForm(list) {
         // Obtener los valores de los campos del formulario
         const formData = new FormData(this);
         const data = {};
+        //Recorre todos el formulario sacando el value de los imputs
         formData.forEach((value, key) => {
             data[key] = value;
         });
@@ -406,8 +407,10 @@ function actualizarRegistro(list, valorId, valores) {
 
     document.getElementById(list+'_form').addEventListener('submit', function (event) {
         event.preventDefault();
+        //Recoger todos los datos del formulario en pares clave/valor
         const formData = new FormData(this);
         const data = {};
+        //Recorre todos el formulario sacando el value de los imputs
         formData.forEach((value, key) => {
             data[key] = value;
         });
