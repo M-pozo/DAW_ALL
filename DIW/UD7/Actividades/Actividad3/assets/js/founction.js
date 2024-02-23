@@ -1,56 +1,51 @@
 function accionPlay() {
     if (!medio.paused && !medio.ended) {
         medio.pause();
-        play.textContent = '\u25BA'; // Cambia el icono a "play"
-        document.body.style.backgroundColor = '#fff'; // Cambia el color de fondo
+        play.value = '\u25BA';
+        document.body.style.backgroundColor = '#fff';
     } else {
         medio.play();
-        play.textContent = '||'; // Cambia el icono a "pausa"
-        document.body.style.backgroundColor = 'grey'; // Cambia el color de fondo
+        play.value = '||';
+        document.body.style.backgroundColor = 'grey';
     }
 }
 
 function accionReiniciar() {
-    medio.currentTime = 0; // Reinicia el vídeo al principio
-    medio.play(); // Comienza a reproducir el vídeo
-    play.textContent = '||'; // Cambia el icono a "pausa"
-    document.body.style.backgroundColor = 'grey'; // Cambia el color de fondo
+    medio.currentTime = 0;
+    medio.play();
+    play.value = '||';
+    document.body.style.backgroundColor = 'grey';
 }
 
 function accionRetrasar() {
     if (medio.currentTime >= 5) {
-        medio.currentTime -= 5; // Retrocede 5 segundos
+        medio.currentTime -= 5;
     } else {
-        medio.currentTime = 0; // Vuelve al inicio si ya está al principio
+        medio.currentTime = 0;
     }
 }
 
 function accionAdelantar() {
-    if (medio.currentTime < medio.duration - 5) {
-        medio.currentTime += 5; // Adelanta 5 segundos
+    if (medio.currentTime < medio.duration) {
+        medio.currentTime += 5;
     } else {
-        medio.currentTime = medio.duration; // Avanza al final si ya está al final
+        medio.currentTime = medio.duration;
     }
 }
 
 function accionSilenciar() {
-    medio.muted = !medio.muted; // Activa/desactiva el silencio
-    if (medio.muted) {
-        silenciar.textContent = 'Escuchar'; // Cambia el texto del botón a "Escuchar"
-    } else {
-        silenciar.textContent = 'Silenciar'; // Cambia el texto del botón a "Silenciar"
-    }
+    medio.muted = !medio.muted;
 }
 
 function accionMasVolumen() {
     if (medio.volume < 1) {
-        medio.volume += 0.1; // Incrementa el volumen en 0.1
+        medio.volume += 0.1;
     }
 }
 
 function accionMenosVolumen() {
     if (medio.volume > 0) {
-        medio.volume -= 0.1; // Decrementa el volumen en 0.1
+        medio.volume -= 0.1;
     }
 }
 
